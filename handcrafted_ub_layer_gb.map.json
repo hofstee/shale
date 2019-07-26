@@ -1,0 +1,18 @@
+{
+    "inputs": [
+        {
+            "instance": "gb_weight",
+            "location": "0"
+        },
+        {
+            "instance": "gb_input",
+            "location": "1"
+        }
+    ],
+    "outputs": [
+        {
+            "instance": "gb_output",
+            "location": "2"
+        }
+    ]
+}
