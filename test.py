@@ -1,3 +1,6 @@
+# TODO: flatten nested dimensions that still have linear access
+# TODO: handle multidimensional outputs
+
 import csv
 import json
 from commands import *
@@ -6,23 +9,13 @@ import ast
 import astor
 import textwrap
 
+import argparse
+
 def parse_ast(s):
     return ast.parse(textwrap.dedent(s))
 
 def print_ast(tree):
     print(astor.to_source(tree))
-
-import operator
-from functools import reduce
-def prod(iterable):
-    return reduce(operator.mul, iterable, 1)
-
-import itertools
-def grouper(iterable, n, fillvalue=None):
-    "Collect data into fixed-length chunks or blocks"
-    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
-    args = [iter(iterable)] * n
-    return itertools.zip_longest(*args, fillvalue=fillvalue)
 
 def process_inst(inst):
     args = inst['genargs']
@@ -50,9 +43,16 @@ def process_inst(inst):
     }
 
 
+parser = argparse.ArgumentParser(description="""
+A simple SoC stub to test application flow of the CGRA.
+""")
+
+parser.add_argument('--verify-trace', action='store_true')
+args = parser.parse_args()
+
 # app = "handcrafted_ub_conv_3_3"
-app = "handcrafted_ub_layer_gb"
-# app = "conv_3_3"
+# app = "handcrafted_ub_layer_gb"
+app = "conv_3_3"
 
 with open(app + ".json", "r") as f:
     js = json.load(f)
@@ -86,6 +86,12 @@ with open(app + ".json", "r") as f:
         _in['num_inactive'] = num_inactive
         _in['double_buffered'] = False
         _in['kind'] = 'input'
+
+        # TODO this is metadata for testing... not sure where to put it...
+        _in['file'] = i['file']
+        _in['trace'] = i['trace']
+        _in['name'] = name
+
         inputs.append(_in)
 
     outputs = []
@@ -96,6 +102,12 @@ with open(app + ".json", "r") as f:
         _out = process_inst(inst)
         _out['location'] = o['location']
         _out['kind'] = 'output'
+
+        # TODO this is metadata for testing... not sure where to put it...
+        _out['file'] = o['file']
+        _out['trace'] = o['trace']
+        _out['name'] = name
+
         outputs.append(_out)
 
     def allocate_gb(inputs, outputs):
@@ -149,7 +161,7 @@ with open(app + ".json", "r") as f:
         for k, dim in enumerate(_in['dims'][1:][::-1]):
             curr_body.append(parse_ast(f"""
             for x{k} in range({dim[0]}):
-                idx{k} = x{k} * {dim[1]}
+                idx{k} = x{k} * {dim[1]} * 2
             """).body[0])
             idxs.append(f"idx{k}")
             context.append(curr_body[-1].body)
@@ -195,7 +207,7 @@ with open(app + ".json", "r") as f:
         """).body[0])
 
         curr_body.append(parse_ast(f"""
-        yield start_done
+        yield start_done.wait()
         """).body[0])
 
 
@@ -258,36 +270,13 @@ with open(app + ".json", "r") as f:
 
         print_ast(temp)
 
+    print("start_done = Event()")
+    print(f"init_done = [{', '.join(['Event()' for _ in range(len(inputs) + len(outputs))])}]")
     for _in in inputs:
         process_input(_in)
 
     for _out in outputs:
         process_output(_out)
-
-    wt = np.fromfile(
-        "/home/teguhhofstee/aha/garnet/applications/conv_multichannel/weights.gray",
-        dtype=np.uint8
-    ).astype(np.uint16)
-    im = np.fromfile(
-        "/home/teguhhofstee/aha/garnet/applications/conv_multichannel/input.gray",
-        dtype=np.uint8
-    ).astype(np.uint16)
-    gold = np.fromfile(
-        "/home/teguhhofstee/aha/garnet/applications/conv_multichannel/gold.gray",
-        dtype=np.uint8
-    ).astype(np.uint16)
-
-    def index(dims, idx):
-        if len(dims) == 0:
-            yield idx
-        else:
-            for x in range(dims[0][0]):
-                for k in index(dims[1:], idx + x * dims[0][1] ):
-                    yield k
-
-    # print([ x for x in index([(256,1), (2,0)][::-1], 0)])
-    # print([ x for x in index(inputs[0]['dims'], 0) ])
-    # print(inputs[0]['dims'])
 
     def index(dims):
         xs = [ 0 for _ in range(len(dims)) ]
@@ -318,46 +307,38 @@ with open(app + ".json", "r") as f:
             for row in reader:
                 return list(map(int, row[:-1]))
 
-    wts_trace = read_csv("wt.trace")
-    ims_trace = read_csv("im.trace")
-    out_trace = read_csv("out.trace")
+    def validate(i):
+        data = np.fromfile(i['file'], dtype=np.uint8)
+        trace = np.array(read_csv(i['trace']), dtype=np.uint8)
+        gold = [data[k] for k in index(i['dims'])]
 
-    from itertools import chain, islice
+        print(f"Validating {i['name']}...")
+        if len(gold) != len(trace):
+            print(f"ERROR: Expected {len(gold)} values but got {len(trace)} instead.")
 
-    ims_grouped = list(grouper(ims_trace, inputs[0]['num_active']))
-    ims_padding = [ tuple(0 for _ in range(inputs[0]['num_inactive'])) for _ in range(len(ims_grouped)) ]
-    ims_padded = list(itertools.chain(*itertools.chain(*zip(ims_grouped, ims_padding))))
-    interleaved = list(itertools.chain(*zip(wts_trace, ims_padded)))
-    interleaved = np.array(interleaved, dtype=np.uint8)
-    interleaved.tofile('interleaved.raw')
-    print(interleaved)
-
-    def check(gold, trace):
         for k in range(len(trace)):
             if gold[k] != trace[k]:
                 print(f"ERROR ({k}): Expected {hex(gold[k])} but got {hex(trace[k])}.")
+        print("Done.")
 
-    wts = []
-    for k in index(inputs[1]['dims']):
-        wts.append(wt[k])
-    print("wts")
-    print(list(map(hex, wts))[0:16])
+    if args.verify_trace:
+        for i in inputs:
+            validate(i)
 
-    print(len(wts), len(wts_trace))
-    check(wts, wts_trace)
+        for o in outputs:
+            validate(o)
 
-    # print(list(index(inputs[1]['dims'])))
-    ims = []
-    for k in index(inputs[0]['dims']):
-        ims.append(im[k])
-    print("ims")
-    print(list(map(hex, ims))[0:16])
-    # print(list(map(hex, ims))[0::16])
-    print(len(ims), len(ims_trace))
-    check(ims, ims_trace)
+    # def index(dims, idx):
+    #     if len(dims) == 0:
+    #         yield idx
+    #     else:
+    #         for x in range(dims[0][0]):
+    #             for k in index(dims[1:], idx + x * dims[0][1] ):
+    #                 yield k
 
-    check(gold, np.array(out_trace, dtype=np.uint8))
-
+    # # print([ x for x in index([(256,1), (2,0)][::-1], 0)])
+    # # print([ x for x in index(inputs[0]['dims'], 0) ])
+    # # print(inputs[0]['dims'])
 
     # TODO: go through everything and figure out sizes to place in the global buffer
     # TODO: need to get location from gb_args
@@ -367,22 +348,6 @@ with open(app + ".json", "r") as f:
     # TODO: allocate into global buffer regions
     # TODO: which input ports are these going to?
     # TODO: is the input expected to be every single cycle?
-
-    # TODO: in the convnet layer there's an input of
-    # [(2304, 1), (36, 0)] and a second input with
-    # [(16, 1), (16, 0), (3, 16), (3, 128), (36, 16)].
-    # Something that's not clear is which pairs of inputs are
-    # supposed to go in with eachother. And if we have inputs
-    # that really are mismatched in rate, then how do we specify
-    # that and the difference between something like this?
-
-    # TODO: it should apparently look more like
-    # [(144, 16), (16, 1)] for the input image
-    # 8x8x16 input image
-    # [()]
-    # 3x3x16x16 input weights
-
-    # TODO: the 0th index of dims is the innermost loop
 
     # inputs = []
     # inputs.append({
