@@ -8,7 +8,7 @@
                 "num_active": "64",
                 "num_inactive": "0",
                 "file": "/home/teguhhofstee/aha/garnet/applications/conv_3_3/conv_3_3_input.raw",
-                "trace": "im.trace"
+                "trace": "in.trace"
             }
         ]
     ],
