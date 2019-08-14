@@ -1,0 +1,3 @@
+[submodule "deps/garnet"]
+	path = deps/garnet
+	url = https://github.com/StanfordAHA/garnet
