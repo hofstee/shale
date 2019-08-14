@@ -50,9 +50,9 @@ A simple SoC stub to test application flow of the CGRA.
 parser.add_argument('--verify-trace', action='store_true')
 args = parser.parse_args()
 
-# app = "handcrafted_ub_conv_3_3"
-# app = "handcrafted_ub_layer_gb"
-app = "conv_3_3"
+# app = "apps/handcrafted_ub_conv_3_3"
+# app = "apps/handcrafted_ub_layer_gb"
+app = "apps/conv_3_3/conv_3_3"
 
 with open(app + ".json", "r") as f:
     js = json.load(f)
