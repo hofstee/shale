@@ -24,10 +24,6 @@ jobs:
         docker cp ../shale garnet:/
         docker exec -i garnet bash -c "cd /shale && pip install -r deps/garnet/requirements.txt"
         docker exec -i garnet bash -c "cd /shale && pip install deps/*.whl"
-    - name: Generate Garnet
-      run: |
-        docker exec -i garnet bash -c "pip install genesis2"
-        docker exec -i garnet bash -c "cd /shale/deps/garnet && python garnet.py --width 32 --height 16 --verilog"
     - name: Create bitstream
       run: |
         docker exec -i garnet bash -c "cd /shale/deps/garnet && python garnet.py --width 32 --height 16 \
