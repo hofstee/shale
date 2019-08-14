@@ -22,8 +22,8 @@ jobs:
     - name: Install dependencies
       run: |
         docker cp ../shale garnet:/
-        docker exec -i garnet -c "cd /shale && pip install -r deps/garnet/requirements.txt"
-        docker exec -i garnet -c "cd /shale && pip install deps/*.whl"
+        docker exec -i garnet bash -c "cd /shale && pip install -r deps/garnet/requirements.txt"
+        docker exec -i garnet bash -c "cd /shale && pip install deps/*.whl"
     - name: Test with pytest
       run: |
         pip install pytest
