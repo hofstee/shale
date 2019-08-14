@@ -5,18 +5,12 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: keyiz/garnet-flow
     strategy:
       max-parallel: 4
-      matrix:
-        python-version: [3.7]
 
     steps:
     - uses: actions/checkout@master
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
         git submodule init
