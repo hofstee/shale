@@ -5,19 +5,25 @@ on: [push]
 jobs:
   build:
 
-    runs-on: keyiz/garnet-flow
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
 
     steps:
     - uses: actions/checkout@master
-    - name: Install dependencies
+    - name: Git submodule
       run: |
         git submodule init
         git submodule update
-        python -m pip install --upgrade pip
-        pip install -r deps/garnet/requirements.txt
-        pip install deps/*.whl
+    - name: Pull from docker
+      run: |
+        docker pull keyiz/garnet-flow
+        docker run -it -d --name garnet keyiz/garnet-flow bash
+    - name: Install dependencies
+      run: |
+        docker cp ../shale garnet:/
+        docker exec -i garnet -c "cd /shale && pip install -r deps/garnet/requirements.txt"
+        docker exec -i garnet -c "cd /shale && pip install deps/*.whl"
     - name: Test with pytest
       run: |
         pip install pytest
