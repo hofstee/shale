@@ -26,5 +26,5 @@ jobs:
         docker exec -i garnet bash -c "cd /shale && pip install deps/*.whl"
     - name: Test with pytest
       run: |
-        pip install pytest
+        pip install pytest wheel
         pytest
