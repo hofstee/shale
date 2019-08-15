@@ -5,6 +5,7 @@ cwd = os.getcwd()
 for entry in os.scandir("apps"):
     if entry.is_dir():
         subprocess.call([
+            "cd garnet && ",
             "python garnet.py",
             "--width 32",
             "--height 16",
