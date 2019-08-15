@@ -6,7 +6,8 @@ for entry in os.scandir("apps"):
     if entry.is_dir():
         subprocess.call(
             [
-                "python garnet.py",
+                "python",
+                "garnet.py",
                 "--width 32",
                 "--height 16",
                 "--no-pd",
