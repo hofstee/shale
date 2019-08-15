@@ -29,11 +29,7 @@ jobs:
         docker exec -i garnet bash -c "pip install genesis2"
     - name: Create bitstream
       run: |
-        docker exec -i garnet bash -c "cd /shale/deps/garnet && python garnet.py --width 32 --height 16 \
-          --no-pd --interconnect-only \
-          --input-app /shale/apps/conv_3_3/bin/design_top.json \
-          --input-file '../apps/conv_3_3/conv_3_3_input.raw' --gold-file '../apps/conv_3_3/conv_3_3_gold.raw' \
-          --output-file /shale/apps/conv_3_3/bin/conv_3_3.bs"
+        docker exec -i garnet bash -c "cd /shale && python generate-bitstreams.py"
         docker exec -i garnet bash -c "ls /shale/apps/conv_3_3/bin"
         docker exec -i garnet bash -c "cat /shale/apps/conv_3_3/bin/conv_3_3.bs.json"
 #     - name: Test with pytest
