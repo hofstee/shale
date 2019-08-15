@@ -7,7 +7,7 @@
                 "location": "0",
                 "num_active": "64",
                 "num_inactive": "0",
-                "file": "/home/teguhhofstee/aha/garnet/applications/conv_3_3/conv_3_3_input.raw",
+                "file": "conv_3_3_input.raw",
                 "trace": "in.trace"
             }
         ]
@@ -18,7 +18,7 @@
             {
                 "instance": "gb_output",
                 "location": "1",
-                "file": "/home/teguhhofstee/aha/garnet/applications/conv_3_3/conv_3_3_gold.raw",
+                "file": "conv_3_3_gold.raw",
                 "trace": "out.trace"
             }
         ]

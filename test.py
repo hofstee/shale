@@ -52,11 +52,12 @@ args = parser.parse_args()
 
 # app = "apps/handcrafted_ub_conv_3_3"
 # app = "apps/handcrafted_ub_layer_gb"
-app = "apps/conv_3_3/conv_3_3"
+app = "apps/conv_3_3/"
+app = "apps/avg_pool/"
 
-with open(app + ".json", "r") as f:
+with open(app + "bin/global_buffer.json", "r") as f:
     js = json.load(f)
-    with open(app + ".map.json", "r") as f2:
+    with open(app + "map.json", "r") as f2:
         mapping = json.load(f2)
 
     print(mapping['inputs'])
@@ -211,37 +212,38 @@ with open(app + ".json", "r") as f:
         """).body[0])
 
 
-        context.pop()
-        curr_body = context[-1][-1].orelse
+        if len(_in['dims']) > 1:
+            context.pop()
+            curr_body = context[-1][-1].orelse
 
-        # Iteration config
-        if len(idxs) > 1:
-            curr_body.append(parse_ast(f"""
-            for command in configure_io(mode=IO_INPUT_STREAM,
-                         addr={" + ".join(idxs)},
-                         size={_in['dims'][0][0]},
-                         io_ctrl={_in['location']},
-                         num_active={_in['num_active']},
-                         num_inactive={_in['num_inactive']},
-                         width=32):
-                yield gc.write(command.addr, command.data)
-            """).body[0])
+            # Iteration config
+            if len(idxs) > 1:
+                curr_body.append(parse_ast(f"""
+                for command in configure_io(mode=IO_INPUT_STREAM,
+                             addr={" + ".join(idxs)},
+                             size={_in['dims'][0][0]},
+                             io_ctrl={_in['location']},
+                             num_active={_in['num_active']},
+                             num_inactive={_in['num_inactive']},
+                             width=32):
+                    yield gc.write(command.addr, command.data)
+                """).body[0])
 
-            curr_body += parse_ast(f"""
-            yield gc.write(IO_AUTO_RESTART_REG({_in['location']}), 1)
-            # dut._log.info("Waiting for input auto_restart...")
-            yield FallingEdge(auto_restart_instream[{_in['location']}])
-            """).body
+                curr_body += parse_ast(f"""
+                yield gc.write(IO_AUTO_RESTART_REG({_in['location']}), 1)
+                # dut._log.info("Waiting for input auto_restart...")
+                yield FallingEdge(auto_restart_instream[{_in['location']}])
+                """).body
 
 
-        # for k, dim in enumerate(_in['dims'][1:]):
-        #     old_body = temp.body
-        #     temp.body = parse_ast(f"""
-        #     for x{k} in range({dim[0]}):
-        #         idx{k} = x{k} * {dim[1]}
-        #     """).body
-        #     temp.body[0].body += old_body
-        #     print(dim)
+            # for k, dim in enumerate(_in['dims'][1:]):
+            #     old_body = temp.body
+            #     temp.body = parse_ast(f"""
+            #     for x{k} in range({dim[0]}):
+            #         idx{k} = x{k} * {dim[1]}
+            #     """).body
+            #     temp.body[0].body += old_body
+            #     print(dim)
 
         # print(astor.dump_tree(temp))
         print_ast(temp)

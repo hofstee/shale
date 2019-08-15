@@ -1,0 +1,26 @@
+{
+    "inputs": [
+        [
+            "input",
+            {
+                "instance": "gb_input",
+                "location": "0",
+                "num_active": "1024",
+                "num_inactive": "0",
+                "file": "avg_pool_input.raw",
+                "trace": "in.trace"
+            }
+        ]
+    ],
+    "outputs": [
+        [
+            "output",
+            {
+                "instance": "gb_output",
+                "location": "1",
+                "file": "avg_pool_gold.raw",
+                "trace": "out.trace"
+            }
+        ]
+    ]
+}
