@@ -30,8 +30,12 @@ jobs:
     - name: Create bitstream
       run: |
         docker exec -i garnet bash -c "cd /shale && python generate-bitstreams.py"
-        docker exec -i garnet bash -c "ls /shale/apps/conv_3_3/bin"
-        docker exec -i garnet bash -c "cat /shale/apps/conv_3_3/bin/conv_3_3.bs.json"
+        docker cp garnet:/shale/apps artifact
+    - name: Upload artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: app-data
+        path: artifact
 #     - name: Test with pytest
 #       run: |
 #         docker exec -i garnet bash -c "pip install pytest"
