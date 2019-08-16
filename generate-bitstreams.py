@@ -3,6 +3,7 @@ import csv
 import os
 import re
 import subprocess
+import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("apps", nargs="*")
@@ -39,7 +40,10 @@ with open(f"{cwd}/apps/utilization.csv", "w") as f:
                 with open (f"{entry.path}/bin/garnet.log", "w") as log:
                     log.write(p.stdout)
 
-                if not p.returncode:
+                if p.returncode:
+                    print(f"Garnet failed to map `{entry.name}`", file=sys.stderr)
+                    print(p.stdout, file=sys.stderr)
+                else:
                     util = cgra_utilization.search(p.stdout)
                     if util:
                         d = util.groupdict()
