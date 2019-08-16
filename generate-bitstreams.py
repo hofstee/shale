@@ -36,6 +36,9 @@ with open(f"{cwd}/apps/utilization.csv", "w") as f:
                     text=True,
                 )
 
+                with open (f"{entry.path}/bin/garnet.log", "w") as log:
+                    log.write(p.stdout)
+
                 if not p.returncode:
                     util = cgra_utilization.search(p.stdout)
                     if util:
