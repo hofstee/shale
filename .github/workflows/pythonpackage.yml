@@ -31,6 +31,8 @@ jobs:
       run: |
         docker exec -i garnet bash -c "cd /shale && python generate-bitstreams.py"
         docker cp garnet:/shale/apps artifact
+    - name: Report application utilization
+      run: cat artifact/utilization.csv
     - name: Upload artifact
       uses: actions/upload-artifact@master
       with:
