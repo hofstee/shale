@@ -150,6 +150,10 @@ def IO_NUM_INACTIVE_REG(n):
     return int(f'01{n:04b}{7:04b}00', 2)
 
 
+def IO_AUTO_RESTART_REG(n):
+    return int(f'01{n:04b}{8:04b}00', 2)
+
+
 def FR_ADDR_REG(n):
     return int(f'10{n:04b}{0:04b}00', 2)
 
