@@ -489,7 +489,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     num_streams = len(inputs) + len(outputs)
     for _in in inputs:
         tb.body += parse_ast(f"""
-        {_in['name']}_data = np.fromfile("{_in['file']}", dtype=np.uint8).astype(np.uint16)
+        {_in['name']}_data = np.fromfile("apps/{app}/bin/{_in['file']}", dtype=np.uint8).astype(np.uint16)
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
         for k,x in enumerate({_in['name']}_data.view(np.uint64)):
@@ -503,7 +503,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
 
     for _out in outputs:
         tb.body += parse_ast(f"""
-        {_out['name']}_data = np.fromfile("{_out['file']}", dtype=np.uint8).astype(np.uint16)
+        {_out['name']}_data = np.fromfile("apps/{app}/bin/{_out['file']}", dtype=np.uint8).astype(np.uint16)
         """).body
         tb.body.append(process_output(_out))
 
