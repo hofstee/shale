@@ -343,14 +343,6 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     for command in gc_config_bitstream("apps/{app}/bin/{app}.bs"):
         yield gc.write(command.addr, command.data)
     dut._log.info("Done.")
-
-    dut._log.info("Transferring input data...")
-    tasks = []
-    for k,x in enumerate(im.view(np.uint64)):
-        tasks.append(cocotb.fork(gb.write(BANK_ADDR(0) + 8*k, int(x))))
-    for task in tasks:
-        yield task.join()
-    dut._log.info("Done.")
     """))
 
     # TODO: check output
@@ -500,7 +492,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
         {_in['name']}_data = np.fromfile({_in['file']}, dtype=np.uint8).astype(np.uint16)
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
-        for k,x in enumerate(im.view(np.uint64)):
+        for k,x in enumerate({_in['name']}_data.view(np.uint64)):
             tasks.append(cocotb.fork(gb.write({_in['addr']} + 8*k, int(x))))
         for task in tasks:
             yield task.join()
