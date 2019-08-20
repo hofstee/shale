@@ -4,6 +4,7 @@
 import csv
 import json
 from commands import *
+from pprint import pprint
 
 import ast
 import astor
@@ -11,11 +12,78 @@ import textwrap
 
 import argparse
 
+def new_code_context():
+    return ast.Module()
+
+def gather_input_ports(modulename):
+    with open("deps/garnet/garnet.v") as f:
+        verilog = f.read()
+        match = re.search(f"(module {modulename} \([^)]*\);)", verilog)
+        module_signature = verilog[match.start():match.end()]
+
+        return map(
+            lambda x: x.rsplit(' ', 1)[-1].rstrip(","),
+            re.findall("input (.*)", module_signature)
+        )
+
+mem_tile_inputs = list(gather_input_ports("Tile_MemCore"))
+pe_tile_inputs = list(gather_input_ports("Tile_PE"))
+
+def gen_monitor(module, portlist, name=None):
+    if name is None:
+        name = module
+
+    temp = create_function(f"monitor_{name}")
+    temp.decorator_list.append(ast.Attribute(
+        value=ast.Name(id='cocotb'),
+        attr='coroutine',
+    ))
+
+    node = parse_ast(f"""
+    with open("{name}.log", "w") as f:
+       while True:
+           yield RisingEdge(dut.clk)
+           yield ReadOnly()
+    """).body[0]
+
+    ctx = node.body[0].body
+
+    for port in portlist:
+        ctx.append(parse_ast(f"""
+            try:
+                f.write(f"{{int({module}.{port})}}, ")
+            except:
+                f.write(", ")
+        """).body[0])
+
+    temp.body.append(node)
+
+    return temp
+
 def parse_ast(s):
     return ast.parse(textwrap.dedent(s))
 
 def print_ast(tree):
     print(astor.to_source(tree))
+
+def parse_placement(placement_file):
+    if len(placement_file) == 0:
+        return {}, {}
+    with open(placement_file) as f:
+        lines = f.readlines()
+    lines = lines[2:]
+    placement = {}
+    name_to_id = {}
+    for line in lines:
+        raw_line = line.split()
+        assert (len(raw_line) == 4)
+        blk_name = raw_line[0].split('$')[0]
+        x = int(raw_line[1])
+        y = int(raw_line[2])
+        blk_id = raw_line[-1][1:]
+        placement[blk_id] = (x, y)
+        name_to_id[blk_name] = blk_id
+    return placement, name_to_id
 
 def process_inst(inst):
     args = inst['genargs']
@@ -52,12 +120,12 @@ args = parser.parse_args()
 
 # app = "apps/handcrafted_ub_conv_3_3"
 # app = "apps/handcrafted_ub_layer_gb"
-app = "apps/conv_3_3/"
-app = "apps/avg_pool/"
+app = "conv_3_3"
+# app = "apps/avg_pool/"
 
-with open(app + "bin/global_buffer.json", "r") as f:
+with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     js = json.load(f)
-    with open(app + "map.json", "r") as f2:
+    with open(f"apps/{app}/map.json", "r") as f2:
         mapping = json.load(f2)
 
     print(mapping['inputs'])
@@ -144,6 +212,150 @@ with open(app + "bin/global_buffer.json", "r") as f:
             body=[],
             decorator_list=[]
         )
+
+    placement = parse_placement(f"apps/{app}/bin/design.place")
+
+    def name_to_tile(name):
+        x, y = placement[0][placement[1][name]]
+        return f"dut.DUT.Interconnect_inst0.Tile_X{x:02X}_Y{y:02X}"
+
+    scope = parse_ast("""
+    import cocotb
+    from cocotb.clock import Clock
+    from cocotb.triggers import Timer, RisingEdge, FallingEdge, ReadOnly, Lock, Event, Combine
+    from cocotb.drivers import BusDriver
+    from cocotb.drivers.amba import AXI4LiteMaster
+    from cocotb.result import ReturnValue, TestSuccess
+    from cocotb.utils import get_sim_time
+    from pprint import pprint
+    import numpy as np
+
+    from commands import *
+
+    CLK_PERIOD = 10
+    """)
+
+    tb = create_function(f"test_{app}")
+    tb.decorator_list.append(ast.Attribute(
+        value=ast.Name(id='cocotb'),
+        attr='coroutine',
+    ))
+
+    tb.body.append(parse_ast(f"""
+    global_buffer = dut.DUT.GlobalBuffer_inst0.global_buffer_inst0.global_buffer_int
+
+    auto_restart_instream = [
+        global_buffer.io_controller.io_address_generator_0.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_1.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_2.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_3.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_4.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_5.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_6.auto_restart_instream,
+        global_buffer.io_controller.io_address_generator_7.auto_restart_instream,
+    ]
+
+    in_valid = [
+        dut.DUT.Interconnect_inst0.Tile_X00_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X10_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_1,
+        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_1,
+    ]
+
+    in_data = [
+        dut.DUT.Interconnect_inst0.Tile_X00_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X00_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_16,
+        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_16,
+    ]
+
+    out_valid = [
+        dut.DUT.Interconnect_inst0.Tile_X01_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X05_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X09_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X0B_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X11_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X15_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X19_Y00.f2io_1_0,
+        dut.DUT.Interconnect_inst0.Tile_X1B_Y00.f2io_1_0,
+    ]
+
+    out_data = [
+        dut.DUT.Interconnect_inst0.Tile_X01_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X05_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X09_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X0B_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X11_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X15_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X19_Y00.f2io_16_0,
+        dut.DUT.Interconnect_inst0.Tile_X1B_Y00.f2io_16_0,
+    ]
+
+    @cocotb.coroutine
+    def log_valid_data(filename, valid, data):
+        with open(filename, "w") as f:
+            while True:
+                yield RisingEdge(dut.clk)
+                yield ReadOnly()
+                try:
+                    if int(valid):
+                        f.write(f"{{int(data)}}, ")
+                        f.flush()
+                except:
+                    pass
+
+
+    @cocotb.coroutine
+    def wait_and_clear_interrupt():
+        yield RisingEdge(dut.GC_interrupt)
+        mask = yield gc.read(INTERRUPT_STATUS_REG)
+        yield gc.write(INTERRUPT_STATUS_REG, mask)
+
+    gc = AXI4LiteMaster(dut, "GC", dut.clk)
+    gb = GlobalBuffer(dut, "GB", dut.clk)
+
+    # reset
+    dut.reset = 1
+    cocotb.fork(Clock(dut.clk, CLK_PERIOD).start())
+    yield(Timer(CLK_PERIOD * 10))
+    dut.reset = 0
+
+    t_init = get_sim_time()
+
+    # prep cgra
+    yield gc.write(STALL_REG, 0b1111)
+    yield gc.write(INTERRUPT_ENABLE_REG, 0b11)
+
+    dut._log.info("Configuring CGRA...")
+    for command in gc_config_bitstream("apps/{app}/bin/{app}.bs"):
+        yield gc.write(command.addr, command.data)
+    dut._log.info("Done.")
+
+    dut._log.info("Transferring input data...")
+    tasks = []
+    for k,x in enumerate(im.view(np.uint64)):
+        tasks.append(cocotb.fork(gb.write(BANK_ADDR(0) + 8*k, int(x))))
+    for task in tasks:
+        yield task.join()
+    dut._log.info("Done.")
+    """))
+
+    # TODO: check output
+
+    monitors = []
+    for signal in mapping['trace']:
+        print(f"derp for {signal}")
+        print(name_to_tile(signal))
+        tb.body.append(gen_monitor(name_to_tile(signal), pe_tile_inputs, name=signal))
+        monitors.append(signal)
 
     def process_input(_in):
         assert _in['dims'][0][1] == 1, "ERROR: Innermost loop accesses must be linear."
@@ -246,7 +458,7 @@ with open(app + "bin/global_buffer.json", "r") as f:
             #     print(dim)
 
         # print(astor.dump_tree(temp))
-        print_ast(temp)
+        return temp
 
     def process_output(_out):
         assert _out['dims'][0][1] == 1, "ERROR: Innermost loop accesses must be linear."
@@ -270,15 +482,91 @@ with open(app + "bin/global_buffer.json", "r") as f:
         init_done[{_out['location']}].set()
         """).body[0])
 
-        print_ast(temp)
+        return temp
 
-    print("start_done = Event()")
-    print(f"init_done = [{', '.join(['Event()' for _ in range(len(inputs) + len(outputs))])}]")
+    tb.body += parse_ast("start_done = Event()").body
+    tb.body += parse_ast(f"""
+    init_done = [{', '.join(['Event()' for _ in range(len(inputs) + len(outputs))])}]
+    """).body
+
+    num_streams = len(inputs) + len(outputs)
     for _in in inputs:
-        process_input(_in)
+        tb.body += parse_ast(f"""
+        {_in['name']}_data = np.fromfile({_in['file']}, dtype=np.uint8).astype(np.uint16)
+        dut._log.info("Transferring {_in['name']} data...")
+        tasks = []
+        for k,x in enumerate(im.view(np.uint64)):
+            tasks.append(cocotb.fork(gb.write({_in['addr']} + 8*k, int(x))))
+        for task in tasks:
+            yield task.join()
+        dut._log.info("Done.")
+
+        """).body
+        tb.body.append(process_input(_in))
 
     for _out in outputs:
-        process_output(_out)
+        tb.body += parse_ast(f"""
+        {_out['name']}_data = np.fromfile({_out['file']}, dtype=np.uint8).astype(np.uint16)
+        """).body
+        tb.body.append(process_output(_out))
+
+    tb.body += parse_ast(
+        "\n".join([f"cocotb.fork(stream_{n}())" for n in range(num_streams)])
+    ).body
+    tb.body += parse_ast(
+        "Combine(" +
+        ",".join(f"init_done[{n}].wait()" for n in range(num_streams)) +
+        ")"
+    ).body
+
+    tb.body += parse_ast("""
+    t_start = get_sim_time()
+    dut._log.info("Starting application...")
+    yield gc.write(STALL_REG, 0)
+    yield gc.write(CGRA_START_REG, 1)
+    """).body
+
+    # launch all the monitors
+    tb.body += parse_ast("\n".join(f"cocotb.fork(monitor_{name})" for name in monitors)).body
+    for _in in inputs:
+        if _in['trace']:
+            tb.body.append(parse_ast(
+                f"cocotb.fork(log_valid_data(\"{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
+            ))
+    for _out in outputs:
+        if _out['trace']:
+            tb.body.append(parse_ast(
+                f"cocotb.fork(log_valid_data(\"{_out['trace']}\", in_valid[{_out['location']}], in_data[{_out['location']}]))"
+            ))
+
+
+    tb.body += parse_ast("""
+    start_done.set()
+
+    yield wait_and_clear_interrupt()
+    dut._log.info("Done.")
+
+    t_end = get_sim_time()
+
+    dut._log.info(f"{t_init}, {t_start}, {t_end}")
+    with open("test.tcl", "w") as f:
+        f.write(f\"\"\"
+            run {t_start}
+            power -gate_level on
+            power DUT
+            power -enable
+            run {t_end - t_start}
+            power -disable
+            power -report test.saif 1e-09 DUT
+            quit
+        \"\"\")
+
+    raise TestSuccess()
+    """).body
+
+    with open("tb.py", "w") as f:
+        scope.body.append(tb)
+        f.write(astor.to_source(scope))
 
     def index(dims):
         xs = [ 0 for _ in range(len(dims)) ]

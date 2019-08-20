@@ -22,5 +22,10 @@
                 "trace": "out.trace"
             }
         ]
+    ],
+    "trace": [
+        "add_290_294_295",
+        "mul_249_251_252",
+        "linebuffer_bank_0_0"
     ]
 }
