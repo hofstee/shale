@@ -236,9 +236,13 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     """)
 
     tb = create_function(f"test_{app}")
-    tb.decorator_list.append(ast.Attribute(
-        value=ast.Name(id='cocotb'),
-        attr='coroutine',
+    tb.decorator_list.append(ast.Call(
+        func=ast.Attribute(
+            value=ast.Name(id='cocotb'),
+            attr='test',
+        ),
+        args=[],
+        keywords=[],
     ))
 
     tb.body.append(parse_ast(f"""
