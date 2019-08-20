@@ -231,6 +231,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     import numpy as np
 
     from commands import *
+    from garnet_driver import GlobalBuffer
 
     CLK_PERIOD = 10
     """)
