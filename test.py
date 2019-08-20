@@ -202,12 +202,12 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
         return ast.FunctionDef(
             name=name,
             args=ast.arguments(
-                args=[],
-                vararg=None,
-                kwonlyargs=[],
-                kw_defaults=[],
-                kwarg=None,
-                defaults=[],
+                args=args,
+                vararg=vararg,
+                kwonlyargs=kwonlyargs,
+                kw_defaults=kw_defaults,
+                kwarg=kwarg,
+                defaults=defaults,
             ),
             body=[],
             decorator_list=[]
@@ -235,7 +235,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     CLK_PERIOD = 10
     """)
 
-    tb = create_function(f"test_{app}")
+    tb = create_function(f"test_{app}", args=[ast.arg(arg='dut', annotation=None)])
     tb.decorator_list.append(ast.Call(
         func=ast.Attribute(
             value=ast.Name(id='cocotb'),
