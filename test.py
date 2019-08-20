@@ -247,6 +247,9 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     ))
 
     tb.body.append(parse_ast(f"""
+    gc = AXI4LiteMaster(dut, "GC", dut.clk)
+    gb = GlobalBuffer(dut, "GB", dut.clk)
+
     global_buffer = dut.DUT.GlobalBuffer_inst0.global_buffer_inst0.global_buffer_int
 
     auto_restart_instream = [
@@ -323,9 +326,6 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
         yield RisingEdge(dut.GC_interrupt)
         mask = yield gc.read(INTERRUPT_STATUS_REG)
         yield gc.write(INTERRUPT_STATUS_REG, mask)
-
-    gc = AXI4LiteMaster(dut, "GC", dut.clk)
-    gb = GlobalBuffer(dut, "GB", dut.clk)
 
     # reset
     dut.reset = 1
