@@ -1,16 +1,16 @@
 # TODO: flatten nested dimensions that still have linear access
 # TODO: handle multidimensional outputs
 
-import csv
-import json
-from commands import *
-from pprint import pprint
-
+import argparse
 import ast
 import astor
+import csv
+import json
+import os
+from pprint import pprint
 import textwrap
 
-import argparse
+from commands import *
 
 def new_code_context():
     return ast.Module()
@@ -115,17 +115,13 @@ parser = argparse.ArgumentParser(description="""
 A simple SoC stub to test application flow of the CGRA.
 """)
 
+parser.add_argument('app')
 parser.add_argument('--verify-trace', action='store_true')
 args = parser.parse_args()
 
-# app = "apps/handcrafted_ub_conv_3_3"
-# app = "apps/handcrafted_ub_layer_gb"
-app = "conv_3_3"
-# app = "apps/avg_pool/"
-
-with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
+with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     js = json.load(f)
-    with open(f"apps/{app}/map.json", "r") as f2:
+    with open(f"apps/{args.app}/map.json", "r") as f2:
         mapping = json.load(f2)
 
     print(mapping['inputs'])
@@ -213,13 +209,14 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
             decorator_list=[]
         )
 
-    placement = parse_placement(f"apps/{app}/bin/design.place")
+    placement = parse_placement(f"apps/{args.app}/bin/design.place")
 
     def name_to_tile(name):
         x, y = placement[0][placement[1][name]]
         return f"dut.DUT.Interconnect_inst0.Tile_X{x:02X}_Y{y:02X}"
 
-    scope = parse_ast("""
+    scope = parse_ast(f"""
+    sys.path.insert(1, "{os.path.realpath(os.path.join(os.getcwd(), "extras"))}")
     import cocotb
     from cocotb.clock import Clock
     from cocotb.triggers import Timer, RisingEdge, FallingEdge, ReadOnly, Lock, Event, Combine
@@ -236,7 +233,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     CLK_PERIOD = 10
     """)
 
-    tb = create_function(f"test_{app}", args=[ast.arg(arg='dut', annotation=None)])
+    tb = create_function(f"test_{args.app}", args=[ast.arg(arg='dut', annotation=None)])
     tb.decorator_list.append(ast.Call(
         func=ast.Attribute(
             value=ast.Name(id='cocotb'),
@@ -340,7 +337,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     yield gc.write(INTERRUPT_ENABLE_REG, 0b11)
 
     dut._log.info("Configuring CGRA...")
-    for command in gc_config_bitstream("apps/{app}/bin/{app}.bs"):
+    for command in gc_config_bitstream("apps/{args.app}/bin/{args.app}.bs"):
         yield gc.write(command.addr, command.data)
     dut._log.info("Done.")
     """))
@@ -489,7 +486,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     num_streams = len(inputs) + len(outputs)
     for _in in inputs:
         tb.body += parse_ast(f"""
-        {_in['name']}_data = np.fromfile("apps/{app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
+        {_in['name']}_data = np.fromfile("apps/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
         for k,x in enumerate({_in['name']}_data.view(np.uint64)):
@@ -503,7 +500,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
 
     for _out in outputs:
         tb.body += parse_ast(f"""
-        {_out['name']}_data = np.fromfile("apps/{app}/{_out['file']}", dtype=np.uint8).astype(np.uint16)
+        {_out['name']}_data = np.fromfile("apps/{args.app}/{_out['file']}", dtype=np.uint8).astype(np.uint16)
         """).body
         tb.body.append(process_output(_out))
 
@@ -528,12 +525,12 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     for _in in inputs:
         if _in['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"apps/{app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
+                f"cocotb.fork(log_valid_data(\"apps/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
             ))
     for _out in outputs:
         if _out['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"apps/{app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
+                f"cocotb.fork(log_valid_data(\"apps/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
             ))
 
 
@@ -561,7 +558,8 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     raise TestSuccess()
     """).body
 
-    with open("tb.py", "w") as f:
+    os.makedirs(f"apps/{args.app}/test", exist_ok=True)
+    with open(f"apps/{args.app}/test/tb.py", "w") as f:
         scope.body.append(tb)
         f.write(astor.to_source(scope))
 
@@ -595,8 +593,8 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
                 return list(map(int, row[:-1]))
 
     def validate(i):
-        data = np.fromfile(f"apps/{app}/{i['file']}", dtype=np.uint8)
-        trace = np.array(read_csv(f"apps/{app}/{i['trace']}"), dtype=np.uint8)
+        data = np.fromfile(f"apps/{args.app}/{i['file']}", dtype=np.uint8)
+        trace = np.array(read_csv(f"apps/{args.app}/{i['trace']}"), dtype=np.uint8)
         gold = [data[k] for k in index(i['dims'])]
 
         print(f"Validating {i['name']}...")
