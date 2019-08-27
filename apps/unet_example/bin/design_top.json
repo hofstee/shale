@@ -127,7 +127,6 @@
           ["linebuffer_bank_0_1_flush.out","linebuffer_bank_0_1.flush"],
           ["self.reset","linebuffer_bank_0_1.reset"],
           ["output_accumulation.in_valid","linebuffer_bank_0_1.valid"],
-          ["output_accumulation.en","linebuffer_base.valid"],
           ["output_accumulation.bias","const0_0.out"],
           ["ub_hw_input_stencil_update_stream_in_reshape.out.0","linebuffer_base.datain0"],
           ["ub_hw_input_stencil_update_stream_out_reshape.in.2","linebuffer_base.dataout0"],
