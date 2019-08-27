@@ -1,5 +1,14 @@
 __pycache__
+.venv
+
 *.bs
 *.bs.json
+*.graph
+design.info
+design.layout
+design.packed
+design.place
+design.route
+test/
 *.log
 *.csv
