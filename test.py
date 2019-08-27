@@ -511,7 +511,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
         "\n".join([f"cocotb.fork(stream_{n}())" for n in range(num_streams)])
     ).body
     tb.body += parse_ast(
-        "Combine(" +
+        "yield Combine(" +
         ",".join(f"init_done[{n}].wait()" for n in range(num_streams)) +
         ")"
     ).body
