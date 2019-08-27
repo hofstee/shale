@@ -533,7 +533,7 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     for _out in outputs:
         if _out['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{_out['trace']}\", in_valid[{_out['location']}], in_data[{_out['location']}]))"
+                f"cocotb.fork(log_valid_data(\"{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
             ))
 
 
