@@ -528,12 +528,12 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
     for _in in inputs:
         if _in['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
+                f"cocotb.fork(log_valid_data(\"apps/{app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
             ))
     for _out in outputs:
         if _out['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
+                f"cocotb.fork(log_valid_data(\"apps/{app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
             ))
 
 
@@ -595,8 +595,8 @@ with open(f"apps/{app}/bin/global_buffer.json", "r") as f:
                 return list(map(int, row[:-1]))
 
     def validate(i):
-        data = np.fromfile(i['file'], dtype=np.uint8)
-        trace = np.array(read_csv(i['trace']), dtype=np.uint8)
+        data = np.fromfile(f"apps/{app}/{i['file']}", dtype=np.uint8)
+        trace = np.array(read_csv(f"apps/{app}/{i['trace']}"), dtype=np.uint8)
         gold = [data[k] for k in index(i['dims'])]
 
         print(f"Validating {i['name']}...")
