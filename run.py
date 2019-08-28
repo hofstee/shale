@@ -41,6 +41,7 @@
 # include $(shell cocotb-config --makefiles)/Makefile.sim
 
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -54,6 +55,11 @@ parser.add_argument("--skip-garnet", action="store_true")
 args = parser.parse_args()
 
 git_up_to_date = re.compile(r"Already up-to-date.")
+
+if len(args.apps) == 0:
+    for entry in os.scandir("apps"):
+        if entry.is_dir():
+            args.apps.append(entry.name)
 
 def generate_garnet():
     subprocess.run(
@@ -167,3 +173,4 @@ if not args.skip_garnet:
     generate_garnet()
 
 generate_bitstreams()
+generate_testbenches()
