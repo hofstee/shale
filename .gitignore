@@ -12,3 +12,5 @@ design.route
 test/
 *.log
 *.csv
+
+extras/Makefile

@@ -1,44 +1,5 @@
-# VERILOG_SOURCES = \
-#     $(PWD)/AO22D0BWP16P90.sv \
-#     $(PWD)/AN2D0BWP16P90.sv \
-#     $(PWD)/memory_core.sv \
-#     $(PWD)/mem_unq1.v \
-#     $(PWD)/sram_stub_unq1.v \
-#     $(PWD)/doublebuffer_control_unq1.sv \
-#     $(PWD)/sram_control_unq1.sv \
-#     $(PWD)/fifo_control_unq1.sv \
-#     $(PWD)/linebuffer_control_unq1.sv \
-#     $(PWD)/global_buffer.sv \
-#     $(PWD)/global_buffer_int.sv \
-#     $(PWD)/memory_bank.sv \
-#     $(PWD)/bank_controller.sv \
-#     $(PWD)/glbuf_memory_core.sv \
-#     $(PWD)/cfg_controller.sv \
-#     $(PWD)/cfg_address_generator.sv \
-#     $(PWD)/sram_controller.sv \
-#     $(PWD)/memory.sv \
-#     $(PWD)/io_controller.sv \
-#     $(PWD)/io_address_generator.sv \
-#     $(PWD)/sram_gen.sv \
-#     $(PWD)/TS1N16FFCLLSBLVTC2048X64M8SW.sv \
-#     $(PWD)/host_bank_interconnect.sv \
-#     $(PWD)/global_controller.sv \
-#     $(PWD)/DW_fp_add.v \
-#     $(PWD)/DW_fp_mult.v \
-#     $(PWD)/axi_ctrl_unq1.sv \
-#     $(PWD)/jtag_unq1.sv \
-#     $(PWD)/cfg_and_dbg_unq1.sv \
-#     $(PWD)/flop_unq3.sv \
-#     $(PWD)/flop_unq2.sv \
-#     $(PWD)/flop_unq1.sv \
-#     $(PWD)/tap_unq1.sv \
-#     $(PWD)/CW_tap.v
-
-# TOPLEVEL=garnet  # the module name in your Verilog or VHDL file
-# MODULE=tb  # the name of the Python test file
-
-# include $(shell cocotb-config --makefiles)/Makefile.inc
-# include $(shell cocotb-config --makefiles)/Makefile.sim
+# make SIM=vcs COMPILE_ARGS="-LDFLAGS -Wl,--no-as-needed"
+# LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 make SIM=ius
 
 import argparse
 import os
@@ -54,6 +15,7 @@ parser.add_argument("--force", action="store_true")
 parser.add_argument("--skip-garnet", action="store_true")
 args = parser.parse_args()
 
+cwd = os.getcwd()
 git_up_to_date = re.compile(r"Already up-to-date.")
 
 if len(args.apps) == 0:
@@ -94,21 +56,72 @@ def generate_garnet():
 
     if up_to_date:
         print(f"INFO: `garnet.v` is already up to date.")
-        return
+    else:
+        print(f"INFO: Generating `garnet.v`...")
+        subprocess.run(
+            [
+                "python",
+                "garnet.py",
+                "--width", f"{args.width}",
+                "--height", f"{args.height}",
+                "--verilog",
+            ],
+            cwd="deps/garnet",
+            stdout=subprocess.PIPE,
+            text=True,
+        )
 
-    print(f"INFO: Generating `garnet.v`...")
-    subprocess.run(
-        [
-            "python",
-            "garnet.py",
-            "--width", f"{args.width}",
-            "--height", f"{args.height}",
-            "--verilog",
-        ],
-        cwd="deps/garnet",
-        stdout=subprocess.PIPE,
-        text=True,
-    )
+    os.symlink("deps/garnet/garnet.v", "extras/garnet.sv")
+
+def generate_makefile():
+    with open("extras/Makefile", "w") as f:
+        f.write(f"""
+VERILOG_SOURCES = \\
+    {cwd}/deps/garnet/tests/AO22D0BWP16P90.sv \\
+    {cwd}/deps/garnet/tests/AN2D0BWP16P90.sv \\
+    {cwd}/deps/garnet/global_buffer/genesis/TS1N16FFCLLSBLVTC2048X64M8SW.sv \\
+    {cwd}/deps/garnet/genesis_verif/memory_core.sv \\
+    {cwd}/deps/garnet/genesis_verif/mem_unq1.v \\
+    {cwd}/deps/garnet/genesis_verif/sram_stub_unq1.v \\
+    {cwd}/deps/garnet/genesis_verif/doublebuffer_control_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/sram_control_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/fifo_control_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/linebuffer_control_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/global_buffer.sv \\
+    {cwd}/deps/garnet/genesis_verif/global_buffer_int.sv \\
+    {cwd}/deps/garnet/genesis_verif/memory_bank.sv \\
+    {cwd}/deps/garnet/genesis_verif/bank_controller.sv \\
+    {cwd}/deps/garnet/genesis_verif/glbuf_memory_core.sv \\
+    {cwd}/deps/garnet/genesis_verif/cfg_controller.sv \\
+    {cwd}/deps/garnet/genesis_verif/cfg_address_generator.sv \\
+    {cwd}/deps/garnet/genesis_verif/sram_controller.sv \\
+    {cwd}/deps/garnet/genesis_verif/memory.sv \\
+    {cwd}/deps/garnet/genesis_verif/io_controller.sv \\
+    {cwd}/deps/garnet/genesis_verif/io_address_generator.sv \\
+    {cwd}/deps/garnet/genesis_verif/sram_gen.sv \\
+    {cwd}/deps/garnet/genesis_verif/host_bank_interconnect.sv \\
+    {cwd}/deps/garnet/genesis_verif/global_controller.sv \\
+    {cwd}/deps/garnet/genesis_verif/DW_fp_add.v \\
+    {cwd}/deps/garnet/genesis_verif/DW_fp_mult.v \\
+    {cwd}/deps/garnet/genesis_verif/axi_ctrl_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/jtag_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/cfg_and_dbg_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/flop_unq3.sv \\
+    {cwd}/deps/garnet/genesis_verif/flop_unq2.sv \\
+    {cwd}/deps/garnet/genesis_verif/flop_unq1.sv \\
+    {cwd}/deps/garnet/genesis_verif/tap_unq1.sv \\
+    {cwd}/extras/CW_tap.v \\
+    {cwd}/extras/garnet.sv \\
+    {cwd}/extras/garnet_top.sv
+
+TOPLEVEL=Garnet_TB  # the module name in your Verilog or VHDL file
+TOPLEVEL_LANG=verilog
+MODULE=tb  # the name of the Python test file
+
+include $(shell cocotb-config --makefiles)/Makefile.inc
+include $(shell cocotb-config --makefiles)/Makefile.sim
+""")
+
 
 def generate_bitstreams():
     subprocess.run(
@@ -172,5 +185,6 @@ def generate_testbenches():
 if not args.skip_garnet:
     generate_garnet()
 
+generate_makefile()
 generate_bitstreams()
 generate_testbenches()
