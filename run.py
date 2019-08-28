@@ -80,6 +80,8 @@ VERILOG_SOURCES = \\
     {cwd}/deps/garnet/tests/AO22D0BWP16P90.sv \\
     {cwd}/deps/garnet/tests/AN2D0BWP16P90.sv \\
     {cwd}/deps/garnet/global_buffer/genesis/TS1N16FFCLLSBLVTC2048X64M8SW.sv \\
+    {cwd}/deps/garnet/peak_core/DW_fp_add.v \\
+    {cwd}/deps/garnet/peak_core/DW_fp_mult.v \\
     {cwd}/deps/garnet/genesis_verif/memory_core.sv \\
     {cwd}/deps/garnet/genesis_verif/mem_unq1.v \\
     {cwd}/deps/garnet/genesis_verif/sram_stub_unq1.v \\
@@ -101,8 +103,6 @@ VERILOG_SOURCES = \\
     {cwd}/deps/garnet/genesis_verif/sram_gen.sv \\
     {cwd}/deps/garnet/genesis_verif/host_bank_interconnect.sv \\
     {cwd}/deps/garnet/genesis_verif/global_controller.sv \\
-    {cwd}/deps/garnet/genesis_verif/DW_fp_add.v \\
-    {cwd}/deps/garnet/genesis_verif/DW_fp_mult.v \\
     {cwd}/deps/garnet/genesis_verif/axi_ctrl_unq1.sv \\
     {cwd}/deps/garnet/genesis_verif/jtag_unq1.sv \\
     {cwd}/deps/garnet/genesis_verif/cfg_and_dbg_unq1.sv \\
@@ -180,6 +180,8 @@ def generate_testbenches():
                 app,
             ],
         )
+
+        os.symlink("extras/Makefile", "apps/{app}/test/Makefile")
 
 
 if not args.skip_garnet:
