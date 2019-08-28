@@ -1,5 +1,11 @@
 # shale
 [![Actions Status](https://github.com/thofstee/shale/workflows/Python%20package/badge.svg)](https://github.com/thofstee/shale/actions)
+
+## Setup Instructions
+```
+git clone --recurse-submodules git@github.com:THofstee/shale.git
+pip install -r deps/garnet/requirements.txt
+pip install --ignore-installed deps/jmapper-0.1.19-cp37-cp37m-manylinux1_x86_64.whl
 pip install astor numpy genesis2 pycoreir
 ```
 
@@ -25,3 +31,4 @@ If you specified any signals to be traced in the CoreIR
 `design_top.json` for an application, these will be output to
 `{signal_name}.csv` in the test directory of the application.
 
+To generate VCD or SAIF files using these CSV files as input,
