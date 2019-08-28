@@ -131,8 +131,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
 
     inputs = []
     for i in mapping['inputs']:
-        name = i[0]
-        i = i[1]
+        name = i['name']
         inst = instances[i['instance']]
         _in = process_inst(inst)
         _in['location'] = i['location']
@@ -161,8 +160,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
 
     outputs = []
     for o in mapping['outputs']:
-        name = o[0]
-        o = o[1]
+        name = o['name']
         inst = instances[o['instance']]
         _out = process_inst(inst)
         _out['location'] = o['location']

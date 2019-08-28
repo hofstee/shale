@@ -1,27 +1,23 @@
 {
     "inputs": [
-        [
-            "input",
-            {
-                "instance": "gb_input",
-                "location": "0",
-                "num_active": "64",
-                "num_inactive": "0",
-                "file": "conv_3_3_input.raw",
-                "trace": "in.trace"
-            }
-        ]
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "64",
+            "num_inactive": "0",
+            "file": "conv_3_3_input.raw",
+            "trace": "in.trace"
+        }
     ],
     "outputs": [
-        [
-            "output",
-            {
-                "instance": "gb_output",
-                "location": "1",
-                "file": "conv_3_3_gold.raw",
-                "trace": "out.trace"
-            }
-        ]
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "1",
+            "file": "conv_3_3_gold.raw",
+            "trace": "out.trace"
+        }
     ],
     "trace": [
         "add_290_294_295",
