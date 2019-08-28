@@ -182,6 +182,9 @@ def generate_testbenches():
             ],
         )
 
+        if os.path.exists(f"apps/{app}/test/Makefile"):
+            os.remove(f"apps/{app}/test/Makefile")
+
         os.symlink("extras/Makefile", f"apps/{app}/test/Makefile")
 
 
