@@ -1043,7 +1043,3 @@ def create_straightline_code(ops):
     """
 
     return src
-
-
-
-print(create_interpreter(ops))
