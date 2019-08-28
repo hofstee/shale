@@ -219,6 +219,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
         return f"dut.DUT.Interconnect_inst0.Tile_X{x:02X}_Y{y:02X}"
 
     scope = parse_ast(f"""
+    import sys
     sys.path.insert(1, "{os.path.realpath(os.path.join(os.getcwd(), "extras"))}")
     import cocotb
     from cocotb.clock import Clock
