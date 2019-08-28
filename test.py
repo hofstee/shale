@@ -220,7 +220,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
 
     scope = parse_ast(f"""
     import sys
-    sys.path.insert(1, "{os.path.realpath(os.path.join(os.getcwd(), "extras"))}")
+    sys.path.insert(1, "{os.path.realpath(os.getcwd())}")
     import cocotb
     from cocotb.clock import Clock
     from cocotb.triggers import Timer, RisingEdge, FallingEdge, ReadOnly, Lock, Event, Combine
