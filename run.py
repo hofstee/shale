@@ -72,7 +72,7 @@ def generate_garnet():
         )
 
     if not os.path.exists("extras/garnet.sv"):
-        os.symlink("deps/garnet/garnet.v", "extras/garnet.sv")
+        os.symlink("{cwd}/deps/garnet/garnet.v", "extras/garnet.sv")
 
 def generate_makefile():
     with open("extras/Makefile", "w") as f:
@@ -185,7 +185,7 @@ def generate_testbenches():
         if os.path.exists(f"apps/{app}/test/Makefile"):
             os.remove(f"apps/{app}/test/Makefile")
 
-        os.symlink("extras/Makefile", f"apps/{app}/test/Makefile")
+        os.symlink("{cwd}/extras/Makefile", f"apps/{app}/test/Makefile")
 
 
 if not args.skip_garnet:
