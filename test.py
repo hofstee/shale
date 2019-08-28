@@ -12,6 +12,8 @@ import textwrap
 
 from commands import *
 
+cwd = os.getcwd()
+
 def new_code_context():
     return ast.Module()
 
@@ -343,7 +345,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     yield gc.write(INTERRUPT_ENABLE_REG, 0b11)
 
     dut._log.info("Configuring CGRA...")
-    for command in gc_config_bitstream("apps/{args.app}/bin/{args.app}.bs"):
+    for command in gc_config_bitstream("{cwd}/apps/{args.app}/bin/{args.app}.bs"):
         yield gc.write(command.addr, command.data)
     dut._log.info("Done.")
     """))
@@ -492,7 +494,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     num_streams = len(inputs) + len(outputs)
     for _in in inputs:
         tb.body += parse_ast(f"""
-        {_in['name']}_data = np.fromfile("apps/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
+        {_in['name']}_data = np.fromfile("{cwd}/apps/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
         for k,x in enumerate({_in['name']}_data.view(np.uint64)):
@@ -506,7 +508,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
 
     for _out in outputs:
         tb.body += parse_ast(f"""
-        {_out['name']}_data = np.fromfile("apps/{args.app}/{_out['file']}", dtype=np.uint8).astype(np.uint16)
+        {_out['name']}_data = np.fromfile("{cwd}/apps/{args.app}/{_out['file']}", dtype=np.uint8).astype(np.uint16)
         """).body
         tb.body.append(process_output(_out))
 
@@ -531,12 +533,12 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     for _in in inputs:
         if _in['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"apps/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
+                f"cocotb.fork(log_valid_data(\"{cwd}/apps/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
             ))
     for _out in outputs:
         if _out['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"apps/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
+                f"cocotb.fork(log_valid_data(\"{cwd}/apps/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
             ))
 
 
