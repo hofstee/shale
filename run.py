@@ -71,7 +71,8 @@ def generate_garnet():
             text=True,
         )
 
-    os.symlink("deps/garnet/garnet.v", "extras/garnet.sv")
+    if not os.path.exists("extras/garnet.sv"):
+        os.symlink("deps/garnet/garnet.v", "extras/garnet.sv")
 
 def generate_makefile():
     with open("extras/Makefile", "w") as f:
