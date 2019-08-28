@@ -40,21 +40,26 @@ def gen_monitor(module, portlist, name=None):
     ))
 
     node = parse_ast(f"""
-    with open("{name}.log", "w") as f:
-       while True:
-           yield RisingEdge(dut.clk)
-           yield ReadOnly()
+    with open("{name}.csv", "w") as f:
+        w = csv.DictWriter(f, fieldnames={portlist})
+        w.writeheader()
+        while True:
+            yield RisingEdge(dut.clk)
+            yield ReadOnly()
+            step = {{}}
     """).body[0]
 
-    ctx = node.body[0].body
+    ctx = node.body[-1].body
 
     for port in portlist:
         ctx.append(parse_ast(f"""
-            try:
-                f.write(f"{{int({module}.{port})}}, ")
-            except:
-                f.write(", ")
+        try:
+            step['{port}'] = int({module}.{port})
+        except:
+            step['{port}'] = 0
         """).body[0])
+
+    ctx.append(parse_ast("w.writerow(step)"))
 
     temp.body.append(node)
 
@@ -224,6 +229,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     from cocotb.utils import get_sim_time
     from pprint import pprint
     import numpy as np
+    import csv
 
     from commands import *
     from garnet_driver import GlobalBuffer
