@@ -181,7 +181,7 @@ def generate_testbenches():
             ],
         )
 
-        os.symlink("extras/Makefile", "apps/{app}/test/Makefile")
+        os.symlink("extras/Makefile", f"apps/{app}/test/Makefile")
 
 
 if not args.skip_garnet:
