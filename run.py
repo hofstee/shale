@@ -115,10 +115,10 @@ VERILOG_SOURCES = \\
     {cwd}/extras/garnet.sv \\
     {cwd}/extras/garnet_top.sv
 
+TESTCASE?=test_app
 TOPLEVEL?=Garnet_TB
 TOPLEVEL_LANG=verilog
 MODULE=tb
-TESTCASE=test_app
 
 include $(shell cocotb-config --makefiles)/Makefile.inc
 include $(shell cocotb-config --makefiles)/Makefile.sim
