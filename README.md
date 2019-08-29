@@ -7,6 +7,7 @@ git clone --recurse-submodules git@github.com:THofstee/shale.git
 pip install -r deps/garnet/requirements.txt
 pip install --ignore-installed deps/jmapper-0.1.19-cp37-cp37m-manylinux1_x86_64.whl
 pip install astor numpy genesis2 pycoreir cocotb
+cp /cad/cadence/GENUS17.21.000.lnx86/share/synth/lib/chipware/sim/verilog/CW/CW_tap.v extras/CW_tap.v
 ```
 
 ## Usage Instructions
@@ -32,3 +33,14 @@ If you specified any signals to be traced in the CoreIR
 `{signal_name}.csv` in the test directory of the application.
 
 To generate VCD or SAIF files using these CSV files as input,
+
+## Troubleshooting
+
+### `AttributeError: Can not find Root Handle (...)`
+
+This is an issue related to cocotb as far as I can tell. If your
+`TOPLEVEL` in the Makefile is specified to be a top level design unit,
+then try `make clean` and make again to see if that helps. Otherwise,
+you may need to modify the Verilog so that the module you want to test
+is a top level module in the design (i.e. there are no modules that
+instantiate it in any of the files you include in the Makefile).
