@@ -221,6 +221,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
         return f"dut.DUT.Interconnect_inst0.Tile_X{x:02X}_Y{y:02X}"
 
     scope = parse_ast(f"""
+    import os
     import sys
     sys.path.insert(1, "{os.path.realpath(os.getcwd())}")
     sys.path.insert(1, "{os.path.realpath(os.path.join(os.getcwd(), "extras"))}")
@@ -239,9 +240,46 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     from garnet_driver import GlobalBuffer
 
     CLK_PERIOD = 10
+
+    tracefile = os.getenv('TRACE')
+    top = os.getenv('TOPLEVEL')
+
+    @cocotb.test()
+    def test_tile(dut):
+        dut.reset = 1
+        cocotb.fork(Clock(dut.clk, CLK_PERIOD).start())
+        yield Timer(CLK_PERIOD * 10)
+        dut.reset = 0
+        yield Timer(CLK_PERIOD * 10)
+
+        t_start = get_sim_time()
+
+        with open(tracefile) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                for k,v in row.items():
+                    getattr(dut, k) <= int(v)
+                yield RisingEdge(dut.clk)
+
+        t_end = get_sim_time()
+
+        dut._log.info(f'{{t_start}}, {{t_end}}')
+        with open('test.tcl', 'w') as f:
+            f.write(f\"\"\"
+            run {{t_start}}
+            power -gate_level on
+            power {{top}}
+            power -enable
+            run {{(t_end - t_start)}}
+            power -disable
+            power -report test.saif 1e-09 {{top}}
+            quit
+            \"\"\")
+
+        raise TestSuccess()
     """)
 
-    tb = create_function(f"test_{args.app}", args=[ast.arg(arg='dut', annotation=None)])
+    tb = create_function(f"test_app", args=[ast.arg(arg='dut', annotation=None)])
     tb.decorator_list.append(ast.Call(
         func=ast.Attribute(
             value=ast.Name(id='cocotb'),
@@ -251,7 +289,9 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
         keywords=[],
     ))
 
-    tb.body.append(parse_ast(f"""
+    tb.body.append(parse_ast(f"\"Testing {args.app}...\"").body[0])
+
+    tb.body += parse_ast(f"""
     gc = AXI4LiteMaster(dut, "GC", dut.clk)
     gb = GlobalBuffer(dut, "GB", dut.clk)
 
@@ -348,7 +388,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     for command in gc_config_bitstream("{cwd}/apps/{args.app}/bin/{args.app}.bs"):
         yield gc.write(command.addr, command.data)
     dut._log.info("Done.")
-    """))
+    """).body
 
     # TODO: check output
 

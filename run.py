@@ -115,9 +115,10 @@ VERILOG_SOURCES = \\
     {cwd}/extras/garnet.sv \\
     {cwd}/extras/garnet_top.sv
 
-TOPLEVEL=Garnet_TB  # the module name in your Verilog or VHDL file
+TOPLEVEL?=Garnet_TB
 TOPLEVEL_LANG=verilog
-MODULE=tb  # the name of the Python test file
+MODULE=tb
+TESTCASE=test_app
 
 include $(shell cocotb-config --makefiles)/Makefile.inc
 include $(shell cocotb-config --makefiles)/Makefile.sim
