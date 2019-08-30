@@ -124,6 +124,7 @@ A simple SoC stub to test application flow of the CGRA.
 
 parser.add_argument('app')
 parser.add_argument('--verify-trace', action='store_true')
+parser.add_argument('--width', type=int, default=32)
 args = parser.parse_args()
 
 with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
@@ -296,62 +297,49 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     gb = GlobalBuffer(dut, "GB", dut.clk)
 
     global_buffer = dut.DUT.GlobalBuffer_inst0.global_buffer_inst0.global_buffer_int
+    """).body
 
+    tb.body += parse_ast(f"""
     auto_restart_instream = [
-        global_buffer.io_controller.io_address_generator_0.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_1.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_2.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_3.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_4.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_5.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_6.auto_restart_instream,
-        global_buffer.io_controller.io_address_generator_7.auto_restart_instream,
+        {",".join([ f"global_buffer.io_controller.io_address_generator_{n}.auto_restart_instream"
+        for n in range(args.width//4)
+        ])}
     ]
+    """).body
 
+    tb.body += parse_ast(f"""
     in_valid = [
-        dut.DUT.Interconnect_inst0.Tile_X00_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X10_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_1,
-        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_1,
+        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_1"
+        for n in range(0,args.width,4)
+        ])}
     ]
+    """).body
 
+    tb.body += parse_ast(f"""
     in_data = [
-        dut.DUT.Interconnect_inst0.Tile_X00_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X00_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X04_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X08_Y00.io2f_16,
-        dut.DUT.Interconnect_inst0.Tile_X0A_Y00.io2f_16,
+        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_16"
+        for n in range(0,args.width,4)
+        ])}
     ]
+    """).body
 
+    tb.body += parse_ast(f"""
     out_valid = [
-        dut.DUT.Interconnect_inst0.Tile_X01_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X05_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X09_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X0B_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X11_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X15_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X19_Y00.f2io_1_0,
-        dut.DUT.Interconnect_inst0.Tile_X1B_Y00.f2io_1_0,
+        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_1_0"
+        for n in range(1,args.width,4)
+        ])}
     ]
+    """).body
 
+    tb.body += parse_ast(f"""
     out_data = [
-        dut.DUT.Interconnect_inst0.Tile_X01_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X05_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X09_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X0B_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X11_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X15_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X19_Y00.f2io_16_0,
-        dut.DUT.Interconnect_inst0.Tile_X1B_Y00.f2io_16_0,
+        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_16_0"
+        for n in range(1,args.width,4)
+        ])}
     ]
+    """).body
 
+    tb.body += parse_ast(f"""
     @cocotb.coroutine
     def log_valid_data(filename, valid, data):
         with open(filename, "w") as f:

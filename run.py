@@ -180,6 +180,7 @@ def generate_testbenches():
                 "python",
                 "test.py",
                 app,
+                "--width", f"{args.width}",
             ],
         )
 
