@@ -1,0 +1,34 @@
+/// CHANGE THESE THINGS
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",[
+          ["in",["Record",[["arg_0",["Array",2,["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]]],
+          ["reset","BitIn"],
+          ["in_en",["Record",[["arg_0",["Array",2,["Array",1,["Array",1,"BitIn"]]]]]]],
+          ["out",["Array",1,["Array",1,["Array",1,["Array",16,"Bit"]]]]],
+          ["valid","Bit"]
+        ]],
+        "instances":{
+          "gb_input":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",774400], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",99123200], "dimensionality":["Int",4], "stride_0":["Int",1], "range_0":["Int",110], "stride_1":["Int",12100], "range_1":["Int",64], "stride_2":["Int",110], "range_2":["Int",110], "stride_3":["Int",0], "range_3":["Int",128], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          },
+          "gb_weights":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",73728], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",73728], "dimensionality":["Int",4], "stride_0":["Int",1], "range_0":["Int",3], "stride_1":["Int",3], "range_1":["Int",3], "stride_2":["Int",9], "range_2":["Int",64], "stride_3":["Int",576], "range_3":["Int",128], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          },
+           "gb_output":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",1492992], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",1492992], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",1492992], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          }
+        },
+        "connections":[
+        ]
+      }
+    }
+  }
+}
+}
