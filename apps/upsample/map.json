@@ -1,0 +1,24 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "4096",
+            "num_inactive": "0",
+            "file": "upsample_input.raw",
+            "trace": "in.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "1",
+            "file": "upsample_gold.raw",
+            "trace": "out.trace"
+        }
+    ],
+    "trace": [
+    ]
+}
