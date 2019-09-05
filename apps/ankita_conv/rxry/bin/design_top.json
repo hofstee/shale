@@ -150,7 +150,7 @@
           "stencil_size":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h008f"]}
+            "modargs":{"value":[["BitVector",16],"16'h000f"]}
           },
           "invalid_cycles":{
             "genref":"coreir.const",
@@ -414,7 +414,7 @@
           ["counter.reset","self.reset"],
           ["counter.en","linebuffer_base.valid"],
           ["line_counter.reset","self.reset"],
-          ["line_counter.en","linebuffer_base.valid"],
+          ["line_counter.en","linebuffer_bank_0_0.valid"],
           ["is_valid_data.in0","invalid_cycles.out"],
           ["is_valid_data.in1","counter.out"],
           ["is_valid_line.in0","stencil_size.out"],

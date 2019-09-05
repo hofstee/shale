@@ -1,0 +1,33 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "32768",
+            "num_inactive": "0",
+            "file": "rx_input.raw",
+            "trace": "in.trace"
+        },
+        {
+            "name": "weights",
+            "instance": "gb_weights",
+            "location": "1",
+            "num_active": "1152",
+            "num_inactive": "0",
+            "file": "rx_weights.raw",
+            "trace": "wt.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "2",
+            "file": "rx_gold.raw",
+            "trace": "out.trace"
+        }
+    ],
+    "trace": [
+    ]
+}
