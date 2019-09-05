@@ -75,6 +75,10 @@
             "modref":"corebit.const",
             "modargs":{"value":["Bool",false]}
           },
+          "buffer_read":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
+          },
           "sub0_nearest_neighbor_y___scan_dim_1_329":{
             "genref":"coreir.sub",
             "genargs":{"width":["Int",16]}
@@ -111,15 +115,15 @@
           ["count__nearest_neighbor_z___scan_dim_2.en","count__nearest_neighbor_y___scan_dim_1.overflow"],
           ["self.reset","count__nearest_neighbor_y___scan_dim_1.reset"],
           ["sub0_nearest_neighbor_z___scan_dim_2_326.in1","count__nearest_neighbor_z___scan_dim_2.out"],
-	  ["count__nearest_neighbor_x___scan_dim_0.en","double_buffer.valid"],
+          ["count__nearest_neighbor_x___scan_dim_0.en","double_buffer.valid"],
           ["self.reset","count__nearest_neighbor_z___scan_dim_2.reset"],
-	  ["double_buffer.wen","self.in_en"],
-	  ["double_buffer.ren","self.in_en"],
+          ["double_buffer.wen","self.in_en"],
+          ["double_buffer.ren","buffer_read.out"],
           ["double_buffer_flush.out","double_buffer.flush"],
-	  ["double_buffer.reset","self.reset"],
-	  ["self.valid","double_buffer.valid"],
-	  ["double_buffer.datain0","ub_hw_input_stencil_update_stream_in_reshape.out.0"],
-	  ["double_buffer.dataout0","ub_hw_input_stencil_update_stream_out_reshape.in.0"],
+          ["double_buffer.reset","self.reset"],
+          ["self.valid","double_buffer.valid"],
+          ["double_buffer.datain0","ub_hw_input_stencil_update_stream_in_reshape.out.0"],
+          ["double_buffer.dataout0","ub_hw_input_stencil_update_stream_out_reshape.in.0"],
           ["ub_hw_input_stencil_update_stream_in_reshape.in","self.in.arg_0"],
           ["ub_hw_input_stencil_update_stream_out_reshape.out.0.0.0","self.out.0.0.0"]
         ]
