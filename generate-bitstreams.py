@@ -15,7 +15,7 @@ args = parser.parse_args()
 cwd = os.getcwd()
 cgra_utilization = re.compile(r"PE: (?P<PE>\d+) IO: (?P<IO>\d+) MEM: (?P<MEM>\d+) REG: (?P<REG>\d+)")
 
-def should_run_app(entry, args):
+def should_run_app(subdir, entry, args):
     # Complete applications are expected to be in subdirectories of
     # the apps folder. These subdirectories have the following
     # information:
@@ -43,7 +43,7 @@ def should_run_app(entry, args):
         return False
 
     # If args.apps is empty, we run all apps.
-    if not (len(args.apps) == 0 or entry.name in args.apps):
+    if not (len(args.apps) == 0 or (subdir + "/" + entry.name) in args.apps):
         return False
 
     if args.force:
@@ -69,8 +69,18 @@ with open(f"apps/utilization.csv", "w") as f:
 
     print(args.width, args.height)
 
+    # If there are apps within a folder, grab the apps that are inside that folder
+    entries = []
     for entry in os.scandir("apps"):
-        if should_run_app(entry, args):
+        if os.path.isdir(f"{entry.path}/bin/"):
+            entries.append(("", entry))
+        elif entry.is_dir():
+            for subentry in os.scandir(entry):
+                entries.append((entry.name, subentry))
+
+    for dir_entry in entries:
+        if should_run_app(dir_entry[0], dir_entry[1], args):
+            entry = dir_entry[1]
             p = subprocess.run(
                 [
                     "python",
