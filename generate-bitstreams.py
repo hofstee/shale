@@ -79,8 +79,9 @@ with open(f"apps/utilization.csv", "w") as f:
                 entries.append((entry.name, subentry))
 
     for dir_entry in entries:
-        if should_run_app(dir_entry[0], dir_entry[1], args):
-            entry = dir_entry[1]
+        subdir = dir_entry[0]
+        entry = dir_entry[1]
+        if should_run_app(subdir, entry, args):
             p = subprocess.run(
                 [
                     "python",
@@ -112,5 +113,5 @@ with open(f"apps/utilization.csv", "w") as f:
                 util = cgra_utilization.search(p.stdout)
                 if util:
                     d = util.groupdict()
-                    d["name"] = entry.name
+                    d["name"] = subdir + "/" + entry.name
                     w.writerow(d)
