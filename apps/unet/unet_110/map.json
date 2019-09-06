@@ -13,8 +13,8 @@
             "name": "weights",
             "instance": "gb_weights",
             "location": "1",
-            "num_active": "73728",
-            "num_inactive": "700672",
+            "num_active": "576",
+            "num_inactive": "773824",
             "file": "unet_110_weights.raw",
             "trace": "wt.trace"
         }
