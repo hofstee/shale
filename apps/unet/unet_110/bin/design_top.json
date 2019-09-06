@@ -130,7 +130,7 @@
           },
           "counter":{
              "genref":"commonlib.counter",
-             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",774400], "inc":["Int",1]}
+             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",774399], "inc":["Int",1]}
           },
           "is_valid_data":{
             "genref":"coreir.ult",
@@ -138,7 +138,7 @@
           },
           "line_counter":{
              "genref":"commonlib.counter",
-             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",7040], "inc":["Int",1]}
+             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",7039], "inc":["Int",1]}
           },
           "is_valid_line":{
             "genref":"coreir.ult",
