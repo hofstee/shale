@@ -4,7 +4,7 @@
             "name": "input",
             "instance": "gb_input",
             "location": "0",
-            "num_active": "32768",
+            "num_active": "262144",
             "num_inactive": "0",
             "file": "out_two_input.raw",
             "trace": "in.trace"

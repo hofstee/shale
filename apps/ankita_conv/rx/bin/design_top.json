@@ -46,7 +46,7 @@
           },
           "linebuffer_base":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",32768], "dimensionality":["Int",5], "init":["Json",{"init":[0]}], "iter_cnt":["Int",5376], "logical_size":["Json",{"capacity":[32768]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",3], "range_1":["Int",8], "range_2":["Int",64], "range_3":["Int",64], "range_4":["Int",16], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",64], "stride_1":["Int",4096], "stride_2":["Int",1], "stride_3":["Int",64], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",512], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "iter_cnt":["Int",512], "logical_size":["Json",{"capacity":[512]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",512], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "linebuffer_base_flush":{
             "modref":"corebit.const",
