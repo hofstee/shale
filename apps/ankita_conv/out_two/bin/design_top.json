@@ -510,7 +510,7 @@
           ["linebuffer_base_flush.out","linebuffer_base.flush"],
           ["buffer_read.out","linebuffer_base.ren"],
           ["self.reset","linebuffer_base.reset"],
-          ["self.in_en.arg_0.1.0.0","linebuffer_base.wen"],
+          ["self.in_en.arg_0.0.0.0","linebuffer_base.wen"],
           ["kernela0.reset","self.reset"],
           ["kernela0$1.reset","self.reset"],
           ["kernela0$2.reset","self.reset"],
