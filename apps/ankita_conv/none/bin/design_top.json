@@ -46,7 +46,7 @@
           },
           "output_accumulation":{
             "genref":"commonlib.accumulation_register",
-            "genargs":{"iterations":["Int",144], "width":["Int",16]}
+            "genargs":{"iterations":["Int",72], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
