@@ -97,18 +97,18 @@ with open(f"{args.app_root}/utilization.csv", "w") as f:
                 text=True,
             )
 
-            with open (f"{entry.path}/bin/garnet.log", "w") as log:
+            with open (f"{entry}/bin/garnet.log", "w") as log:
                 log.write(p.stdout)
 
             if p.returncode:
-                print(f"Garnet failed to map `{entry.name}`", file=sys.stderr)
+                print(f"Garnet failed to map `{name}`", file=sys.stderr)
                 print(p.stdout, file=sys.stderr)
             else:
                 for collateral in os.scandir("deps/garnet/temp"):
-                    os.rename(collateral.path, f"{entry.path}/bin/{collateral.name}")
+                    os.rename(collateral.path, f"{entry}/bin/{collateral.name}")
 
                 util = cgra_utilization.search(p.stdout)
                 if util:
                     d = util.groupdict()
-                    d["name"] = entry.name
+                    d["name"] = name
                     w.writerow(d)
