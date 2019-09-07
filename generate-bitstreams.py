@@ -73,8 +73,6 @@ with open(f"{args.app_root}/utilization.csv", "w") as f:
     w = csv.DictWriter(f, fieldnames=["name", "PE", "IO", "MEM", "REG"])
     w.writeheader()
 
-    print(args.width, args.height)
-
     # If there are apps within a folder, grab the apps that are inside that folder
     for root, dirs, files in os.walk("apps"):
         entry = Path(root)
