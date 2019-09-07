@@ -127,7 +127,7 @@ parser.add_argument('--verify-trace', action='store_true')
 parser.add_argument('--width', type=int, default=32)
 args = parser.parse_args()
 
-appname = args.app.rsplit("/", 1)[1]
+app_name = args.app.rsplit("/", 1)[-1]
 
 with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     js = json.load(f)
@@ -375,7 +375,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     yield gc.write(INTERRUPT_ENABLE_REG, 0b11)
 
     dut._log.info("Configuring CGRA...")
-    for command in gc_config_bitstream("{cwd}/apps/{args.app}/bin/{appname}.bs"):
+    for command in gc_config_bitstream("{cwd}/apps/{args.app}/bin/{app_name}.bs"):
         yield gc.write(command.addr, command.data)
     dut._log.info("Done.")
     """).body
