@@ -7,6 +7,7 @@ import astor
 import csv
 import json
 import os
+from pathlib import Path
 from pprint import pprint
 import textwrap
 
@@ -125,13 +126,14 @@ A simple SoC stub to test application flow of the CGRA.
 parser.add_argument('app')
 parser.add_argument('--verify-trace', action='store_true')
 parser.add_argument('--width', type=int, default=32)
+parser.add_argument('--app-root', type=str, default="apps")
 args = parser.parse_args()
 
 app_name = args.app.rsplit("/", 1)[-1]
 
-with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
+with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     js = json.load(f)
-    with open(f"apps/{args.app}/map.json", "r") as f2:
+    with open(f"{args.app_root}/{args.app}/map.json", "r") as f2:
         mapping = json.load(f2)
 
     print(mapping['inputs'])
@@ -217,7 +219,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
             decorator_list=[]
         )
 
-    placement = parse_placement(f"apps/{args.app}/bin/design.place")
+    placement = parse_placement(f"{args.app_root}/{args.app}/bin/design.place")
 
     def name_to_tile(name):
         x, y = placement[0][placement[1][name]]
@@ -375,7 +377,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     yield gc.write(INTERRUPT_ENABLE_REG, 0b11)
 
     dut._log.info("Configuring CGRA...")
-    for command in gc_config_bitstream("{cwd}/apps/{args.app}/bin/{app_name}.bs"):
+    for command in gc_config_bitstream("{cwd}/{args.app_root}/{args.app}/bin/{app_name}.bs"):
         yield gc.write(command.addr, command.data)
     dut._log.info("Done.")
     """).body
@@ -524,7 +526,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     num_streams = len(inputs) + len(outputs)
     for _in in inputs:
         tb.body += parse_ast(f"""
-        {_in['name']}_data = np.fromfile("{cwd}/apps/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
+        {_in['name']}_data = np.fromfile("{cwd}/{args.app_root}/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
         for k,x in enumerate({_in['name']}_data.view(np.uint64)):
@@ -538,7 +540,7 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
 
     for _out in outputs:
         tb.body += parse_ast(f"""
-        {_out['name']}_data = np.fromfile("{cwd}/apps/{args.app}/{_out['file']}", dtype=np.uint8).astype(np.uint16)
+        {_out['name']}_data = np.fromfile("{cwd}/{args.app_root}/{args.app}/{_out['file']}", dtype=np.uint8).astype(np.uint16)
         """).body
         tb.body.append(process_output(_out))
 
@@ -563,12 +565,12 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     for _in in inputs:
         if _in['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{cwd}/apps/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
+                f"cocotb.fork(log_valid_data(\"{cwd}/{args.app_root}/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
             ))
     for _out in outputs:
         if _out['trace']:
             tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{cwd}/apps/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
+                f"cocotb.fork(log_valid_data(\"{cwd}/{args.app_root}/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
             ))
 
 
@@ -596,8 +598,8 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
     raise TestSuccess()
     """).body
 
-    os.makedirs(f"apps/{args.app}/test", exist_ok=True)
-    with open(f"apps/{args.app}/test/tb.py", "w") as f:
+    os.makedirs(f"{args.app_root}/{args.app}/test", exist_ok=True)
+    with open(f"{args.app_root}/{args.app}/test/tb.py", "w") as f:
         scope.body.append(tb)
         f.write(astor.to_source(scope))
 
@@ -631,8 +633,8 @@ with open(f"apps/{args.app}/bin/global_buffer.json", "r") as f:
                 return list(map(int, row[:-1]))
 
     def validate(i):
-        data = np.fromfile(f"apps/{args.app}/{i['file']}", dtype=np.uint8)
-        trace = np.array(read_csv(f"apps/{args.app}/{i['trace']}"), dtype=np.uint8)
+        data = np.fromfile(f"{args.app_root}/{args.app}/{i['file']}", dtype=np.uint8)
+        trace = np.array(read_csv(f"{args.app_root}/{args.app}/{i['trace']}"), dtype=np.uint8)
         gold = [data[k] for k in index(i['dims'])]
 
         print(f"Validating {i['name']}...")
