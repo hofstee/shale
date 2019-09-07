@@ -277,7 +277,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             power -enable
             run {{(t_end - t_start)}}
             power -disable
-            power -report test.saif 1e-09 {{top}}
+            power -report tile.saif 1e-09 {{top}}
             quit
             \"\"\")
 
@@ -591,7 +591,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             power -enable
             run {t_end - t_start}
             power -disable
-            power -report test.saif 1e-09 DUT
+            power -report top.saif 1e-09 DUT
             quit
         \"\"\")
 
