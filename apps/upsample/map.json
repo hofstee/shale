@@ -4,7 +4,7 @@
             "name": "input",
             "instance": "gb_input",
             "location": "0",
-            "num_active": "4096",
+            "num_active": "64",
             "num_inactive": "0",
             "file": "upsample_input.raw",
             "trace": "in.trace"
