@@ -76,11 +76,8 @@ with open(f"{args.app_root}/utilization.csv", "w") as f:
     print(args.width, args.height)
 
     # If there are apps within a folder, grab the apps that are inside that folder
-    for app_root, dirs, files in os.walk("apps"):
-        if not 'bin' in dirs:
-            continue
-
-        entry = Path(app_root)
+    for root, dirs, files in os.walk("apps"):
+        entry = Path(root)
         name = entry.parts[-1]
 
         if should_run_app(entry, args):
