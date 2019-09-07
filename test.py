@@ -247,6 +247,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     CLK_PERIOD = 10
 
     tracefile = os.getenv('TRACE')
+    top = os.getenv('TOPLEVEL')
 
     @cocotb.test()
     def test_tile(dut):
@@ -288,6 +289,17 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             run {{(t_end - t_start)}}
             power -disable
             power -report tile.saif 1e-09 Tile_MemCore
+            quit
+            \"\"\")
+        with open('power_tile.tcl', 'w') as f:
+            f.write(f\"\"\"
+            run {{t_start}}
+            power -gate_level on
+            power {{top}}
+            power -enable
+            run {{(t_end - t_start)}}
+            power -disable
+            power -report tile.saif 1e-09 {{top}}
             quit
             \"\"\")
 
