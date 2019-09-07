@@ -32,6 +32,99 @@ If you specified any signals to be traced in the CoreIR
 `design_top.json` for an application, these will be output to
 `{signal_name}.csv` in the test directory of the application.
 
+### Creating a `map.json` for your application
+
+As an example, the `map.json` for conv_3_3 looks like this:
+
+```
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "64",
+            "num_inactive": "0",
+            "file": "conv_3_3_input.raw",
+            "trace": "in.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "1",
+            "file": "conv_3_3_gold.raw",
+            "trace": "out.trace"
+        }
+    ],
+    "trace": [
+        "add_290_294_295",
+        "mul_249_251_252",
+        "linebuffer_bank_0_0"
+    ]
+}
+```
+
+At the top level, the `map.json` contains three entires: `inputs`,
+`outputs`, and `trace`.
+
+#### Inputs and Outputs
+
+The inputs and outputs are both lists of json
+records that have at the very least a `name`, `instance`, `location`,
+and `file`.
+
+- `name` is just a name for the stream. Pick whatever makes sense to
+  you.
+
+- `instance` corresponds to the instance name that holds the unified
+  buffer parameters for this stream in `bin/global_buffer.json`.
+
+- `location` decides which I/O port of the CGRA this stream is
+  connected to. TODO: this feature could be automated with some
+  effort.
+
+- `file` is a filename that holds the data that should be loaded into
+  the global buffer during testing. Currently the files are expected
+  to be binary data where every byte is a new input element. These are
+  zero-padded to 16-bits by the testbench as the CGRA operates on
+  16-bit data.
+
+- `trace` will configure the testbench to log the data when it is
+valid to the filename given.
+
+Additionally you can specify `num_active` and `num_inactive` on the
+inputs. These can occasionally be automatically detected by the
+testbench, but there are quirks with the current implementation. TODO:
+fix the implementation.
+
+- `num_active` specifies how many cycles of the *inner loop* should be
+  sent at a time. It is *very important* that this is less than or
+  equal to the range of the inner loop or else the testbench will not
+  function properly.
+
+- `num_inactive` specifies how many cycles the inputs should be paused
+  between active inputs. If you want no inactive cycles, just set this
+  to 0.
+
+As an example, `range=16, num_active=4, num_inactive=4` will send 4
+elements, wait 4 cycles, and repeat this three more times for a total
+of 32 cycles to send the 16 elements. After these 32 cycles it will
+then increment the next dimension of the loop if one exists.
+
+#### Tracing application signals
+
+The `trace` field is a list of signals from the `design_top.json` that
+should be monitored during application execution. By default they are
+saved to `{signal_name}.csv`. These are used when generating tile
+power reports to provide the input stimulus for a testbench. This is
+done because generating power information on the entire Garnet design
+is very time consuming, so if you just need power information for a
+specific tile in the CGRA it is much faster to just simulate the
+tile. More information can be found in the section in this readme
+about 'Generating Tile Power Reports'.
+
 ### Generating Tile Power Reports (SAIF/VCD)
 
 #### VCS
