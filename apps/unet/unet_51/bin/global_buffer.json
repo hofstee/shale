@@ -13,11 +13,11 @@
         "instances":{
           "gb_input":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"width":["Int",16], "depth":["Int",774400], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",99123200], "dimensionality":["Int",4], "stride_0":["Int",1], "range_0":["Int",110], "stride_1":["Int",12100], "range_1":["Int",64], "stride_2":["Int",110], "range_2":["Int",110], "stride_3":["Int",0], "range_3":["Int",128], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+            "genargs":{"width":["Int",16], "depth":["Int",665856], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",170459136], "dimensionality":["Int",4], "stride_0":["Int",2601], "range_0":["Int",256], "stride_1":["Int",1], "range_1":["Int",51], "stride_2":["Int",51], "range_2":["Int",51], "stride_3":["Int",0], "range_3":["Int",256], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           },
           "gb_weights":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"width":["Int",16], "depth":["Int",73728], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",73728], "dimensionality":["Int",4], "stride_0":["Int",1], "range_0":["Int",3], "stride_1":["Int",3], "range_1":["Int",3], "stride_2":["Int",9], "range_2":["Int",64], "stride_3":["Int",576], "range_3":["Int",128], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+            "genargs":{"width":["Int",16], "depth":["Int",589824], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",589824], "dimensionality":["Int",4], "stride_0":["Int",1], "range_0":["Int",3], "stride_1":["Int",3], "range_1":["Int",3], "stride_2":["Int",9], "range_2":["Int",256], "stride_3":["Int",2304], "range_3":["Int",256], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           },
            "gb_output":{
             "genref":"commonlib.unified_buffer",

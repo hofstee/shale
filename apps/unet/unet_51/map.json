@@ -4,18 +4,18 @@
             "name": "input",
             "instance": "gb_input",
             "location": "0",
-            "num_active": "99123200",
+            "num_active": "170459136",
             "num_inactive": "0",
-            "file": "unet_110_input.raw",
+            "file": "unet_51_input.raw",
             "trace": "in.trace"
         },
         {
             "name": "weights",
             "instance": "gb_weights",
             "location": "1",
-            "num_active": "73728",
-            "num_inactive": "700672",
-            "file": "unet_110_weights.raw",
+            "num_active": "2304",
+            "num_inactive": "663552",
+            "file": "unet_51_weights.raw",
             "trace": "wt.trace"
         }
     ],
@@ -24,7 +24,7 @@
             "name": "output",
             "instance": "gb_output",
             "location": "2",
-            "file": "unet_110_gold.raw",
+            "file": "unet_51_gold.raw",
             "trace": "out.trace"
         }
     ],

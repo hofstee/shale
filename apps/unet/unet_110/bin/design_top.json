@@ -130,7 +130,7 @@
           },
           "counter":{
              "genref":"commonlib.counter",
-             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",774400], "inc":["Int",1]}
+             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",774399], "inc":["Int",1]}
           },
           "is_valid_data":{
             "genref":"coreir.ult",
@@ -138,7 +138,7 @@
           },
           "line_counter":{
              "genref":"commonlib.counter",
-             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",7040], "inc":["Int",1]}
+             "genargs":{"width":["Int",16], "min":["Int",0], "max":["Int",7039], "inc":["Int",1]}
           },
           "is_valid_line":{
             "genref":"coreir.ult",
@@ -150,7 +150,7 @@
           "stencil_size":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
-            "modargs":{"value":[["BitVector",16],"16'h0080"]}
+            "modargs":{"value":[["BitVector",16],"16'h007f"]}
           },
           "invalid_cycles":{
             "genref":"coreir.const",
@@ -356,7 +356,7 @@
           ["linebuffer_base_flush.out","linebuffer_base.flush"],
           ["buffer_read.out","linebuffer_base.ren"],
           ["self.reset","linebuffer_base.reset"],
-          ["self.in_en.arg_0.1.0.0","linebuffer_base.wen"],
+          ["self.in_en.arg_0.0.0.0","linebuffer_base.wen"],
           ["kernela0.reset","self.reset"],
           ["kernela0$1.reset","self.reset"],
           ["kernela0$2.reset","self.reset"],
@@ -414,7 +414,7 @@
           ["counter.reset","self.reset"],
           ["counter.en","linebuffer_base.valid"],
           ["line_counter.reset","self.reset"],
-          ["line_counter.en","linebuffer_base.valid"],
+          ["line_counter.en","linebuffer_bank_0_0.valid"],
           ["is_valid_data.in0","invalid_cycles.out"],
           ["is_valid_data.in1","counter.out"],
           ["is_valid_line.in0","stencil_size.out"],
