@@ -14,13 +14,14 @@ parser.add_argument("--width", type=int, default=32)
 parser.add_argument("--height", type=int, default=16)
 parser.add_argument("--force", action="store_true")
 parser.add_argument("--skip-garnet", action="store_true")
+parser.add_argument("--app-root", type=str, default="apps")
 args = parser.parse_args()
 
 cwd = os.getcwd()
 git_up_to_date = re.compile(r"Already up-to-date.")
 
 if len(args.apps) == 0:
-    for entry in os.scandir("apps"):
+    for entry in os.scandir(f"{args.app_root}"):
         if entry.is_dir():
             args.apps.append(entry.name)
 
@@ -186,11 +187,11 @@ def generate_testbenches():
             ],
         )
 
-        if os.path.islink(f"apps/{app}/test/Makefile"):
-            os.remove(f"apps/{app}/test/Makefile")
+        if os.path.islink(f"{args.app_root}/{app}/test/Makefile"):
+            os.remove(f"{args.app_root}/{app}/test/Makefile")
 
-        if not os.path.exists(f"apps/{app}/test/Makefile"):
-            os.symlink(f"{cwd}/extras/Makefile", f"apps/{app}/test/Makefile")
+        if not os.path.exists(f"{args.app_root}/{app}/test/Makefile"):
+            os.symlink(f"{cwd}/extras/Makefile", f"{args.app_root}/{app}/test/Makefile")
 
 
 if not args.skip_garnet:
