@@ -3,6 +3,7 @@
 
 import argparse
 import os
+from pathlib import Path
 import re
 import subprocess
 import sys
@@ -71,8 +72,9 @@ def generate_garnet():
             text=True,
         )
 
-    if not os.path.exists("extras/garnet.sv"):
-        os.symlink(f"{cwd}/deps/garnet/garnet.v", "extras/garnet.sv")
+    garnet_sv = Path("extras/garnet.sv")
+    if not (garnet_sv.is_symlink() or garnet_sv.is_file()):
+        os.symlink(f"{cwd}/deps/garnet/garnet.v", garnet_sv)
 
 def generate_makefile():
     with open("extras/Makefile", "w") as f:
