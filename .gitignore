@@ -10,7 +10,9 @@ design.packed
 design.place
 design.route
 test/
+src/
 *.log
 *.csv
+*.trace
 
 extras/Makefile
