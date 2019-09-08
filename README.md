@@ -165,6 +165,27 @@ Using this method to generate a SAIF file, you should have run make a
 total of 3 times. Once to generate the CSV, once to generate the TCL
 file, and a final time to generate the SAIF file.
 
+#### Incisive/Xcelium (NCSim)
+
+Please read the VCS section first to get a general idea for the flow,
+then come back here. First thing to note is that unlike VCS, you do
+not need to `make clean` beforhand. Like in the VCS case, you'll need
+to run the tile level testbench first to generate some tcl scripts for
+reporting power information.
+
+An example of a command is as follows:
+
+```
+make SIM=xcelium TESTCASE="test_tile" TOPLEVEL="Tile_PE" TRACE="add_290_294_295.csv"
+```
+
+Then you can run one of the tcl scripts as input to get a SAIF file
+out.
+
+```
+make SIM=xcelium TESTCASE="test_tile" SIM_ARGS="-input xrun_power_Tile_PE.tcl" TOPLEVEL="Tile_PE" TRACE="add_290_294_295.csv"
+```
+
 ## Known Issues
 
 ### Timescale using VCS

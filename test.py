@@ -269,7 +269,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
         t_end = get_sim_time()
 
         dut._log.info(f'{{t_start}}, {{t_end}}')
-        with open('power_tile_pe.tcl', 'w') as f:
+        with open('vcs_power_Tile_PE.tcl', 'w') as f:
             f.write(f\"\"\"
             run {{t_start}}
             power -gate_level on
@@ -277,10 +277,11 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             power -enable
             run {{(t_end - t_start)}}
             power -disable
-            power -report tile.saif 1e-09 Tile_PE
+            power -report vcs_Tile_PE.saif 1e-09 Tile_PE
+            run
             quit
             \"\"\")
-        with open('power_tile_memcore.tcl', 'w') as f:
+        with open('vcs_power_Tile_MemCore.tcl', 'w') as f:
             f.write(f\"\"\"
             run {{t_start}}
             power -gate_level on
@@ -288,10 +289,11 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             power -enable
             run {{(t_end - t_start)}}
             power -disable
-            power -report tile.saif 1e-09 Tile_MemCore
+            power -report vcs_Tile_MemCore.saif 1e-09 Tile_MemCore
+            run
             quit
             \"\"\")
-        with open('power_tile.tcl', 'w') as f:
+        with open(f'vcs_power_{{top}}.tcl', 'w') as f:
             f.write(f\"\"\"
             run {{t_start}}
             power -gate_level on
@@ -299,7 +301,35 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             power -enable
             run {{(t_end - t_start)}}
             power -disable
-            power -report tile.saif 1e-09 {{top}}
+            power -report vcs_{{top}}.saif 1e-09 {{top}}
+            run
+            quit
+            \"\"\")
+        with open('xrun_power_Tile_PE.tcl', 'w') as f:
+            f.write(f\"\"\"
+            run {{t_start}}
+            dumpsaif -scope Tile_PE -hierarchy -internal -output xrun_Tile_PE.saif -overwrite
+            run {{(t_end - t_start)}}
+            dumpsaif -end
+            run
+            quit
+            \"\"\")
+        with open('xrun_power_Tile_MemCore.tcl', 'w') as f:
+            f.write(f\"\"\"
+            run {{t_start}}
+            dumpsaif -scope Tile_MemCore -hierarchy -internal -output xrun_Tile_MemCore.saif -overwrite
+            run {{(t_end - t_start)}}
+            dumpsaif -end
+            run
+            quit
+            \"\"\")
+        with open(f'xrun_power_{{top}}.tcl', 'w') as f:
+            f.write(f\"\"\"
+            run {{t_start}}
+            dumpsaif -scope {{top}} -hierarchy -internal -output xrun_{{top}}.saif -overwrite
+            run {{(t_end - t_start)}}
+            dumpsaif -end
+            run
             quit
             \"\"\")
 
@@ -605,7 +635,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     t_end = get_sim_time()
 
     dut._log.info(f"{t_init}, {t_start}, {t_end}")
-    with open("power_top.tcl", "w") as f:
+    with open("vcs_power_top.tcl", "w") as f:
         f.write(f\"\"\"
             run {t_start}
             power -gate_level on
@@ -613,7 +643,16 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             power -enable
             run {t_end - t_start}
             power -disable
-            power -report top.saif 1e-09 DUT
+            power -report vcs_Garnet.saif 1e-09 DUT
+            quit
+        \"\"\")
+    with open("xrun_power_top.tcl", "w") as f:
+        f.write(f\"\"\"
+            run {t_start}
+            dumpsaif -scope DUT -hierarchy -internal -output xrun_Garnet.saif -overwrite
+            run {t_end - t_start}
+            dumpsaif -end
+            run
             quit
         \"\"\")
 
