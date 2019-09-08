@@ -16,3 +16,5 @@ src/
 *.trace
 
 extras/Makefile
+extras/CW_tap.v
+extras/garnet.sv
