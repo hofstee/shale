@@ -14,7 +14,10 @@ parser.add_argument("--width", type=int, default=32)
 parser.add_argument("--height", type=int, default=16)
 parser.add_argument("--force", action="store_true")
 parser.add_argument("--skip-garnet", action="store_true")
-parser.add_argument("--app-root", type=str, default="apps")
+parser.add_argument("--app-root", type=str, default="apps",
+                    help="Sets the base application directory (default: ./apps)")
+parser.add_argument("--power", type=bool, default=False,
+                    help="Use this flag if you are using this flow for generating power numbers")
 args = parser.parse_args()
 
 cwd = os.getcwd()
@@ -60,6 +63,12 @@ def generate_garnet():
         print(f"INFO: `garnet.v` is already up to date.")
     else:
         print(f"INFO: Generating `garnet.v`...")
+        extra_args = []
+        if args.power:
+            extra_args += [
+                "--no_sram_stub",
+            ]
+
         subprocess.run(
             [
                 "python",
@@ -67,6 +76,7 @@ def generate_garnet():
                 "--width", f"{args.width}",
                 "--height", f"{args.height}",
                 "--verilog",
+                *extra_args,
             ],
             cwd="deps/garnet",
             stdout=subprocess.PIPE,
