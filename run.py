@@ -16,7 +16,7 @@ parser.add_argument("--force", action="store_true")
 parser.add_argument("--skip-garnet", action="store_true")
 parser.add_argument("--app-root", type=str, default="apps",
                     help="Sets the base application directory (default: ./apps)")
-parser.add_argument("--power", type=bool, default=False,
+parser.add_argument("--power", action="store_true",
                     help="Use this flag if you are using this flow for generating power numbers")
 args = parser.parse_args()
 
