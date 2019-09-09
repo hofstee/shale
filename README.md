@@ -16,8 +16,8 @@ python run.py --width 32 --height 16 conv_3_3
 cd apps/conv_3_3/test
 
 # Pick one of the following (VCS tends to run the quickest):
-make SIM=vcs COMPILE_ARGS="-LDFLAGS -Wl,--no-as-needed"
-LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 make SIM=ius
+make SIM=vcs
+make SIM=ius
 make SIM=xcelium
 
 # You can also modify COMPILE_ARGS and SIM_ARGS as you see fit.
@@ -134,9 +134,9 @@ using the CSV files generated above. These make use of secondary
 testbenches, and unfortunately many of the flags we need are
 compile-time flags for VCS, so make sure you `make clean` first.
 
-We'll need to specify `TOPLEVEL` and add `-top` to `COMPILE_ARGS` in
-order for this all to work. Additionally, we'll change the `TESTCASE`
-to be `test_tile` instead.
+We'll need to specify `TOPLEVEL` in order for this all to
+work. Additionally, we'll change the `TESTCASE` to be `test_tile`
+instead.
 
 To dump a VCD file, we can add `+vcs+dumpvars+{filename}.vpd` to
 COMPILE_ARGS, and specify the CSV file we want to use with
@@ -146,7 +146,7 @@ the extension on dumpvars to `.vcd` instead.
 An example of such a command is as follows:
 
 ```
-make SIM=vcs TESTCASE="test_tile" COMPILE_ARGS="-LDFLAGS -Wl,--no-as-needed +vcs+dumpvars+test.vpd -top Tile_MemCore" TOPLEVEL="Tile_MemCore" TRACE="linebuffer_bank_0_0.csv"
+make SIM=vcs TESTCASE="test_tile" COMPILE_ARGS="+vcs+dumpvars+test.vpd" TOPLEVEL="Tile_MemCore" TRACE="linebuffer_bank_0_0.csv"
 ```
 
 Alternatively, running the same command without the
@@ -158,7 +158,7 @@ will bring up the ucli prompt in VCS. Then we can just `source
 test.tcl`, which will generate a SAIF file named `test.saif`.
 
 ```
-make SIM=vcs TESTCASE="test_tile" COMPILE_ARGS="-LDFLAGS -Wl,--no-as-needed -top Tile_MemCore" SIM_ARGS="-ucli" TOPLEVEL="Tile_MemCore" TRACE="linebuffer_bank_0_0.csv"
+make SIM=vcs TESTCASE="test_tile" SIM_ARGS="-ucli" TOPLEVEL="Tile_MemCore" TRACE="linebuffer_bank_0_0.csv"
 ```
 
 Using this method to generate a SAIF file, you should have run make a
@@ -183,17 +183,12 @@ Then you can run one of the tcl scripts as input to get a SAIF file
 out.
 
 ```
-make SIM=xcelium TESTCASE="test_tile" SIM_ARGS="-input xrun_power_Tile_PE.tcl" TOPLEVEL="Tile_PE" TRACE="add_290_294_295.csv"
+make SIM=xcelium TESTCASE="test_tile" TOPLEVEL="Tile_PE" TRACE="add_290_294_295.csv" SIM_ARGS="-input xrun_power_Tile_PE.tcl"
 ```
 
 ## Known Issues
 
-### Timescale using VCS
-
-For whatever reason, it seems like the timescale reported by VCS is
-not in the correct units. Please be cautious if using anything that
-relies on the timescale to be accurate. I believe Incisive does not
-have this issue.
+Currently, none.
 
 ## Troubleshooting
 
