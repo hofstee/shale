@@ -132,6 +132,18 @@ TESTCASE?=test_app
 TOPLEVEL?=Garnet_TB
 TOPLEVEL_LANG=verilog
 MODULE=tb
+TIMESCALE=1ns/1ns
+
+ifeq ($(SIM), vcs)
+    COMPILE_ARGS += -LDFLAGS -Wl,--no-as-needed
+    COMPILE_ARGS += -top $(TOPLEVEL)
+    COMPILE_ARGS += -timescale=$(TIMESCALE)
+else ifeq ($(SIM), ius)
+    LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+    SIM_ARGS += -timescale $(TIMESCALE)
+else ifeq ($(SIM), xcelium)
+    SIM_ARGS += -timescale $(TIMESCALE)
+endif
 
 include $(shell cocotb-config --makefiles)/Makefile.inc
 include $(shell cocotb-config --makefiles)/Makefile.sim
