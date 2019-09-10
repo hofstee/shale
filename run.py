@@ -142,6 +142,7 @@ else ifeq ($(SIM), ius)
     LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
     override SIM_ARGS += -timescale $(TIMESCALE)
 else ifeq ($(SIM), xcelium)
+    SHM_RESET_DEFAULTS=1
     override SIM_ARGS += -timescale $(TIMESCALE)
 endif
 
