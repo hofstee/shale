@@ -99,7 +99,7 @@
           },
           "linebuffer_bank_-1_0":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",30], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",30], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",30], "logical_size":["Json",{"capacity":[30]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",30], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",31], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",30], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",31], "logical_size":["Json",{"capacity":[31]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",31], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "linebuffer_bank_-1_0_flush":{
             "modref":"corebit.const",
@@ -205,7 +205,7 @@
             "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
           },
           "ub_hw_input_stencil_update_stream_out_reshape":{
-            "genref":"commonlib.transpose_reshape",
+            "genref":"commonlib.reshape",
             "genargs":{"input_type":["CoreIRType",["Array",9,["Array",16,"BitIn"]]], "output_type":["CoreIRType",["Array",3,["Array",3,["Array",16,"Bit"]]]]}
           }
         },
