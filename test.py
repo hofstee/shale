@@ -579,6 +579,9 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     for _in in inputs:
         tb.body += parse_ast(f"""
         {_in['name']}_data = np.fromfile("{cwd}/{args.app_root}/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
+        if {_in['name']}_data.shape[0] % 64 != 0:
+            for i in range(64 - ({_in['name']}_data.shape[0] % 64)):
+                {_in['name']}_data = np.append({_in['name']}_data, [0])
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
         for k,x in enumerate({_in['name']}_data.view(np.uint64)):
