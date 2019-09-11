@@ -1,0 +1,127 @@
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",[
+          ["in",["Record",[["arg_0",["Array",2,["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]]],
+          ["reset","BitIn"],
+          ["in_en",["Record",[["arg_0",["Array",2,["Array",1,["Array",1,"BitIn"]]]]]]],
+          ["out",["Array",1,["Array",1,["Array",1,["Array",16,"Bit"]]]]],
+          ["valid","Bit"]
+        ]],
+        "instances":{
+          "add_356_361_362":{
+            "genref":"coreir.add",
+            "genargs":{"width":["Int",16]}
+          },
+          "add_363_369_370":{
+            "genref":"coreir.add",
+            "genargs":{"width":["Int",16]}
+          },
+          "const0_0":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
+          },
+          "double_buffer_bank_0":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",8192], "dimensionality":["Int",5], "init":["Json",{"init":[0]}], "input_range_0":["Int",8192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",138384], "logical_size":["Json",{"capacity":[8192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",3], "range_1":["Int",3], "range_2":["Int",62], "range_3":["Int",62], "range_4":["Int",4], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",64], "stride_2":["Int",1], "stride_3":["Int",64], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
+          },
+          "double_buffer_bank_0_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "double_buffer_bank_1":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",8192], "dimensionality":["Int",5], "init":["Json",{"init":[0]}], "input_range_0":["Int",8192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",138384], "logical_size":["Json",{"capacity":[8192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[4096]}], "range_0":["Int",3], "range_1":["Int",3], "range_2":["Int",62], "range_3":["Int",62], "range_4":["Int",4], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",64], "stride_2":["Int",1], "stride_3":["Int",64], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
+          },
+          "double_buffer_bank_1_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "buffer_read":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
+          },
+          "mul_358_360_361":{
+            "genref":"coreir.mul",
+            "genargs":{"width":["Int",16]}
+          },
+          "mul_366_368_369":{
+            "genref":"coreir.mul",
+            "genargs":{"width":["Int",16]}
+          },
+          "kernela0":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",72], "dimensionality":["Int",5], "iter_cnt":["Int",138384], "logical_size":["Json",{"capacity":[72]}], "num_input_ports":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",3], "range_1":["Int",3], "range_2":["Int",62], "range_3":["Int",62], "range_4":["Int",4], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",3], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",18], "stride_5":["Int",0], "width":["Int",16],"init":["Json",{"init":[0]}]}
+          },
+          "kernela0_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "kernela0$1":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",72], "dimensionality":["Int",5], "iter_cnt":["Int",138384], "logical_size":["Json",{"capacity":[72]}], "num_input_ports":["Int",1], "output_starting_addrs":["Json",{"output_start":[9]}], "range_0":["Int",3], "range_1":["Int",3], "range_2":["Int",62], "range_3":["Int",62], "range_4":["Int",4], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",3], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",18], "stride_5":["Int",0], "width":["Int",16],"init":["Json",{"init":[0]}]}
+         },
+          "kernela0$1_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "output_accumulation":{
+            "genref":"commonlib.accumulation_register",
+            "genargs":{"iterations":["Int",9], "width":["Int",16]}
+          },
+          "ub_hw_input_stencil_update_stream_in_reshape":{
+            "genref":"commonlib.reshape",
+            "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
+          },
+          "ub_hw_input_stencil_update_stream_out_reshape":{
+            "genref":"commonlib.reshape",
+            "genargs":{"input_type":["CoreIRType",["Array",2,["Array",16,"BitIn"]]], "output_type":["CoreIRType",["Array",2,["Array",1,["Array",1,["Array",16,"Bit"]]]]]}
+          }
+        },
+        "connections":[
+          ["mul_366_368_369.in1","ub_hw_input_stencil_update_stream_out_reshape.out.1.0.0"],
+          ["mul_358_360_361.in1","ub_hw_input_stencil_update_stream_out_reshape.out.0.0.0"],
+          ["const0_0.out","add_356_361_362.in0"],
+          ["mul_358_360_361.out","add_356_361_362.in1"],
+          ["add_363_369_370.in0","add_356_361_362.out"],
+          ["mul_366_368_369.out","add_363_369_370.in1"],
+          ["output_accumulation.in_data","add_363_369_370.out"],
+          ["output_accumulation.bias","const0_0.out"],
+          ["output_accumulation.in_valid","double_buffer_bank_0.valid"],
+          ["self.out.0.0.0","output_accumulation.out_data"],
+          ["self.reset","output_accumulation.reset"],
+          ["self.valid","output_accumulation.valid"],
+          ["ub_hw_input_stencil_update_stream_in_reshape.out.0","double_buffer_bank_0.datain0"],
+          ["ub_hw_input_stencil_update_stream_out_reshape.in.0","double_buffer_bank_0.dataout0"],
+          ["double_buffer_bank_0_flush.out","double_buffer_bank_0.flush"],
+          ["buffer_read.out","double_buffer_bank_0.ren"],
+          ["self.reset","double_buffer_bank_0.reset"],
+          ["self.in_en.arg_0.0.0.0","double_buffer_bank_0.wen"],
+          ["ub_hw_input_stencil_update_stream_in_reshape.out.0","double_buffer_bank_1.datain0"],
+          ["ub_hw_input_stencil_update_stream_out_reshape.in.1","double_buffer_bank_1.dataout0"],
+          ["double_buffer_bank_1_flush.out","double_buffer_bank_1.flush"],
+          ["buffer_read.out","double_buffer_bank_1.ren"],
+          ["self.reset","double_buffer_bank_1.reset"],
+          ["self.in_en.arg_0.0.0.0","double_buffer_bank_1.wen"],
+          ["kernela0.dataout0","mul_358_360_361.in0"],
+          ["kernela0$1.dataout0","mul_366_368_369.in0"],
+          ["double_buffer_bank_0.valid","kernela0$1.ren"],
+          ["double_buffer_bank_0.valid","kernela0.ren"],
+          ["self.in_en.arg_0.1.0.0","kernela0$1.wen"],
+          ["self.in_en.arg_0.1.0.0","kernela0.wen"],
+          ["self.in.arg_0.1.0.0","kernela0$1.datain0"],
+          ["self.in.arg_0.1.0.0","kernela0.datain0"],
+          ["self.reset","kernela0.reset"],
+          ["self.reset","kernela0$1.reset"],
+          ["kernela0_flush.out","kernela0.flush"],
+          ["kernela0$1_flush.out","kernela0$1.flush"],
+          ["ub_hw_input_stencil_update_stream_in_reshape.in","self.in.arg_0.0"]
+        ]
+      }
+    }
+  }
+}
+}
