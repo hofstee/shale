@@ -664,14 +664,6 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
-          "ub_lxx_stencil_update_streamlinebuffer_base":{
-            "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",3844], "dimensionality":["Int",2], "init":["Json",{"init":[0]}], "input_range_0":["Int",3844], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",3844], "logical_size":["Json",{"capacity":[3844]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",62], "range_1":["Int",62], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",62], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
-          },
-          "ub_lxx_stencil_update_streamlinebuffer_base_flush":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
-          },
           "ub_lxy_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
             "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
@@ -729,14 +721,6 @@
             "genref":"coreir.reg",
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
-          },
-          "ub_lxy_stencil_update_streamlinebuffer_base":{
-            "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",3844], "dimensionality":["Int",2], "init":["Json",{"init":[0]}], "input_range_0":["Int",3844], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",3844], "logical_size":["Json",{"capacity":[3844]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",62], "range_1":["Int",62], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",62], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
-          },
-          "ub_lxy_stencil_update_streamlinebuffer_base_flush":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
           },
           "ub_lyy_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
@@ -796,14 +780,6 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
-          "ub_lyy_stencil_update_streamlinebuffer_base":{
-            "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",3844], "dimensionality":["Int",2], "init":["Json",{"init":[0]}], "input_range_0":["Int",3844], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",3844], "logical_size":["Json",{"capacity":[3844]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",62], "range_1":["Int",62], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",62], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
-          },
-          "ub_lyy_stencil_update_streamlinebuffer_base_flush":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
-          },
           "ub_padded16_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
             "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
@@ -818,7 +794,7 @@
           },
           "ub_padded16_stencil_update_streamlinebuffer_bank_0_0":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",64], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",60], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",64], "logical_size":["Json",{"capacity":[60]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",64], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",64], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",64], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",64], "logical_size":["Json",{"capacity":[64]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",64], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_padded16_stencil_update_streamlinebuffer_bank_0_0_0":{
             "genref":"coreir.reg",
@@ -836,7 +812,7 @@
           },
           "ub_padded16_stencil_update_streamlinebuffer_bank_0_1":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",64], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",60], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",64], "logical_size":["Json",{"capacity":[60]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",64], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
+            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",64], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",64], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",64], "logical_size":["Json",{"capacity":[64]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",64], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_padded16_stencil_update_streamlinebuffer_bank_0_1_0":{
             "genref":"coreir.reg",
@@ -861,14 +837,6 @@
             "genref":"coreir.reg",
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
-          },
-          "ub_padded16_stencil_update_streamlinebuffer_base":{
-            "genref":"commonlib.unified_buffer",
-            "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",4096], "dimensionality":["Int",2], "init":["Json",{"init":[0]}], "input_range_0":["Int",4096], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",4096], "logical_size":["Json",{"capacity":[4096]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",64], "range_1":["Int",64], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",64], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
-          },
-          "ub_padded16_stencil_update_streamlinebuffer_base_flush":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
           }
         },
         "connections":[
@@ -1034,22 +1002,18 @@
           ["sub_408_411_412.in1","mul_410_410_411.out"],
           ["self.out.0.0","mux_4422550.out"],
           ["ub_padded16_stencil_update_stream_in_reshape.in","self.in.arg_1"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.ren","ub_padded16_stencil_update_stream_ren.out"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.wen","self.in_en"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.ren","ub_padded16_stencil_update_stream_ren.out"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.wen","self.in_en"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_0.reset","self.reset"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1.reset","self.reset"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0.reset","self.reset"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.reset","self.reset"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.reset","self.reset"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0.reset","self.reset"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.reset","self.reset"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.reset","self.reset"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0.reset","self.reset"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.reset","self.reset"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.reset","self.reset"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.reset","self.reset"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.reset","self.reset"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.reset","self.reset"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1.valid","self.valid"],
           ["ub_cim_stencil_update_stream_out_reshape.out.1.1","sle1_418_441.in1"],
           ["ub_cim_stencil_update_stream_out_reshape.out.0.0","slt_417_418_419.in0"],
@@ -1117,7 +1081,9 @@
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1_flush.out","ub_cim_stencil_update_streamlinebuffer_bank_0_1.flush"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1_1.in","ub_cim_stencil_update_streamlinebuffer_bank_0_1_0.out"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_2_1.in","ub_cim_stencil_update_streamlinebuffer_bank_0_2_0.out"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.datain0","ub_lxx_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lxx_stencil_update_stream_out_reshape.in.8","ub_lxx_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0.datain0","ub_lxx_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_0.in","ub_lxx_stencil_update_stream_in_reshape.out.0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_2_1.out","ub_lxx_stencil_update_stream_out_reshape.in.0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_2_0.out","ub_lxx_stencil_update_stream_out_reshape.in.1"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.dataout0","ub_lxx_stencil_update_stream_out_reshape.in.2"],
@@ -1126,25 +1092,21 @@
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_lxx_stencil_update_stream_out_reshape.in.5"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_lxx_stencil_update_stream_out_reshape.in.6"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_lxx_stencil_update_stream_out_reshape.in.7"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.dataout0","ub_lxx_stencil_update_stream_out_reshape.in.8"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.dataout0","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.datain0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.valid","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.ren"],
+          ["ub_lxx_stencil_update_stream_ren.out","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.ren","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.wen","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.valid"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.valid","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.wen"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base.dataout0","ub_lxx_stencil_update_streamlinebuffer_bank_0_0_0.in"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.wen"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_1.in","ub_lxx_stencil_update_streamlinebuffer_bank_0_0_0.out"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_2_0.in","ub_lxx_stencil_update_streamlinebuffer_bank_0_1.dataout0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1_flush.out","ub_lxx_stencil_update_streamlinebuffer_bank_0_1.flush"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1_1.in","ub_lxx_stencil_update_streamlinebuffer_bank_0_1_0.out"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_2_1.in","ub_lxx_stencil_update_streamlinebuffer_bank_0_2_0.out"],
-          ["ub_lxx_stencil_update_streamlinebuffer_base_flush.out","ub_lxx_stencil_update_streamlinebuffer_base.flush"],
-          ["ub_lxx_stencil_update_stream_ren.out","ub_lxx_stencil_update_streamlinebuffer_base.ren"],
-          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lxx_stencil_update_streamlinebuffer_base.wen"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.datain0","ub_lxy_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lxy_stencil_update_stream_out_reshape.in.8","ub_lxy_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0.datain0","ub_lxy_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_0.in","ub_lxy_stencil_update_stream_in_reshape.out.0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_2_1.out","ub_lxy_stencil_update_stream_out_reshape.in.0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_2_0.out","ub_lxy_stencil_update_stream_out_reshape.in.1"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.dataout0","ub_lxy_stencil_update_stream_out_reshape.in.2"],
@@ -1153,25 +1115,21 @@
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_lxy_stencil_update_stream_out_reshape.in.5"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_lxy_stencil_update_stream_out_reshape.in.6"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_lxy_stencil_update_stream_out_reshape.in.7"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.dataout0","ub_lxy_stencil_update_stream_out_reshape.in.8"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.dataout0","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.datain0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.valid","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.ren"],
+          ["ub_lxy_stencil_update_stream_ren.out","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.ren","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.wen","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.valid"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.valid","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.wen"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base.dataout0","ub_lxy_stencil_update_streamlinebuffer_bank_0_0_0.in"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.wen"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_1.in","ub_lxy_stencil_update_streamlinebuffer_bank_0_0_0.out"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_2_0.in","ub_lxy_stencil_update_streamlinebuffer_bank_0_1.dataout0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1_flush.out","ub_lxy_stencil_update_streamlinebuffer_bank_0_1.flush"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1_1.in","ub_lxy_stencil_update_streamlinebuffer_bank_0_1_0.out"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_2_1.in","ub_lxy_stencil_update_streamlinebuffer_bank_0_2_0.out"],
-          ["ub_lxy_stencil_update_streamlinebuffer_base_flush.out","ub_lxy_stencil_update_streamlinebuffer_base.flush"],
-          ["ub_lxy_stencil_update_stream_ren.out","ub_lxy_stencil_update_streamlinebuffer_base.ren"],
-          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lxy_stencil_update_streamlinebuffer_base.wen"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.datain0","ub_lyy_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lyy_stencil_update_stream_out_reshape.in.8","ub_lyy_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0.datain0","ub_lyy_stencil_update_stream_in_reshape.out.0"],
+          ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_0.in","ub_lyy_stencil_update_stream_in_reshape.out.0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_2_1.out","ub_lyy_stencil_update_stream_out_reshape.in.0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_2_0.out","ub_lyy_stencil_update_stream_out_reshape.in.1"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.dataout0","ub_lyy_stencil_update_stream_out_reshape.in.2"],
@@ -1180,25 +1138,21 @@
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_lyy_stencil_update_stream_out_reshape.in.5"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_lyy_stencil_update_stream_out_reshape.in.6"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_lyy_stencil_update_stream_out_reshape.in.7"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.dataout0","ub_lyy_stencil_update_stream_out_reshape.in.8"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.dataout0","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.datain0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.valid","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.ren"],
+          ["ub_lyy_stencil_update_stream_ren.out","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.ren","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.wen","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.valid"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.valid","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.wen"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base.dataout0","ub_lyy_stencil_update_streamlinebuffer_bank_0_0_0.in"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.wen"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_1.in","ub_lyy_stencil_update_streamlinebuffer_bank_0_0_0.out"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_2_0.in","ub_lyy_stencil_update_streamlinebuffer_bank_0_1.dataout0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1_flush.out","ub_lyy_stencil_update_streamlinebuffer_bank_0_1.flush"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1_1.in","ub_lyy_stencil_update_streamlinebuffer_bank_0_1_0.out"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_2_1.in","ub_lyy_stencil_update_streamlinebuffer_bank_0_2_0.out"],
-          ["ub_lyy_stencil_update_streamlinebuffer_base_flush.out","ub_lyy_stencil_update_streamlinebuffer_base.flush"],
-          ["ub_lyy_stencil_update_stream_ren.out","ub_lyy_stencil_update_streamlinebuffer_base.ren"],
-          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lyy_stencil_update_streamlinebuffer_base.wen"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.datain0","ub_padded16_stencil_update_stream_in_reshape.out.0"],
+          ["ub_padded16_stencil_update_stream_out_reshape.in.8","ub_padded16_stencil_update_stream_in_reshape.out.0"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.datain0","ub_padded16_stencil_update_stream_in_reshape.out.0"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_0.in","ub_padded16_stencil_update_stream_in_reshape.out.0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_2_1.out","ub_padded16_stencil_update_stream_out_reshape.in.0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_2_0.out","ub_padded16_stencil_update_stream_out_reshape.in.1"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.dataout0","ub_padded16_stencil_update_stream_out_reshape.in.2"],
@@ -1207,22 +1161,16 @@
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_padded16_stencil_update_stream_out_reshape.in.5"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_padded16_stencil_update_stream_out_reshape.in.6"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_padded16_stencil_update_stream_out_reshape.in.7"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.dataout0","ub_padded16_stencil_update_stream_out_reshape.in.8"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.dataout0","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.datain0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.valid","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.ren","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.wen","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.valid"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.valid","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.wen"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base.dataout0","ub_padded16_stencil_update_streamlinebuffer_bank_0_0_0.in"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_1.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_0_0.out"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_2_0.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_1.dataout0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1_flush.out","ub_padded16_stencil_update_streamlinebuffer_bank_0_1.flush"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1_1.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_1_0.out"],
-          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_2_1.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_2_0.out"],
-          ["ub_padded16_stencil_update_streamlinebuffer_base_flush.out","ub_padded16_stencil_update_streamlinebuffer_base.flush"]
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_2_1.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_2_0.out"]
         ]
       }
     }
