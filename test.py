@@ -26,16 +26,12 @@ args = parser.parse_args()
 
 cwd = os.getcwd()
 
-garnet_dir = "deps/garnet"
-if args.garnet_flow:
-    garnet_dir = "/GarnetFlow/scripts/garnet"
-
 
 def new_code_context():
     return ast.Module()
 
 def gather_input_ports(modulename):
-    with open(f"{garnet_dir}/garnet.v") as f:
+    with open(f"deps/garnet/garnet.v") as f:
         verilog = f.read()
         match = re.search(f"(module {modulename} \([^)]*\);)", verilog)
         module_signature = verilog[match.start():match.end()]
