@@ -237,11 +237,25 @@ if args.garnet_flow:
         ],
     )
 
-    # Create testbenches
-    generate_testbenches(args.apps)
-
     # Run testbenches
     for app in args.apps:
+        # Create testbench
+        subprocess.run(
+            [
+                "python",
+                "test.py",
+                app,
+                "--width", f"{args.width}",
+                "--garnet-flow",
+            ],
+        )
+
+        if os.path.islink(f"{args.app_root}/{app}/test/Makefile"):
+            os.remove(f"{args.app_root}/{app}/test/Makefile")
+
+        if not os.path.exists(f"{args.app_root}/{app}/test/Makefile"):
+            os.symlink(f"{cwd}/extras/Makefile", f"{args.app_root}/{app}/test/Makefile")
+
         # Run top-level testbench
         subprocess.run(
             [
@@ -258,6 +272,7 @@ if args.garnet_flow:
                 "test.py",
                 app,
                 "--verify-trace",
+                "--garnet-flow",
             ],
         )
 else:

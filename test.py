@@ -26,7 +26,7 @@ args = parser.parse_args()
 
 cwd = os.getcwd()
 
-garnet_dir = "deps/garnet/"
+garnet_dir = "deps/garnet"
 if args.garnet_flow:
     garnet_dir = "/GarnetFlow/scripts/garnet"
 
