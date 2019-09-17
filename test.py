@@ -21,16 +21,21 @@ parser.add_argument('app')
 parser.add_argument('--verify-trace', action='store_true')
 parser.add_argument('--width', type=int, default=32)
 parser.add_argument('--app-root', type=str, default="apps")
+parser.add_argument('--garnet-flow', action='store_true')
 args = parser.parse_args()
 
 cwd = os.getcwd()
+
+garnet_dir = "deps/garnet/"
+if args.garnet_flow:
+    garnet_dir = "/GarnetFlow/scripts/garnet"
 
 
 def new_code_context():
     return ast.Module()
 
 def gather_input_ports(modulename):
-    with open("deps/garnet/garnet.v") as f:
+    with open(f"{garnet_dir}/garnet.v") as f:
         verilog = f.read()
         match = re.search(f"(module {modulename} \([^)]*\);)", verilog)
         module_signature = verilog[match.start():match.end()]
