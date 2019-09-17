@@ -227,6 +227,7 @@ if args.garnet_flow:
         "--width", f"{args.width}",
         "--height", f"{args.height}",
         *args.apps,
+        "--garnet-flow",
     ]
 
     subprocess.run(
