@@ -22,6 +22,10 @@ parser.add_argument("--garnet-flow", action="store_true")
 args = parser.parse_args()
 
 cwd = os.getcwd()
+garnet_dir = f"{cwd}/deps/garnet"
+if args.garnet_flow:
+    garnet_dir = "/GarnetFlow/scripts/garnet"
+
 git_up_to_date = re.compile(r"Already up-to-date.")
 
 if len(args.apps) == 0:
@@ -92,39 +96,39 @@ def generate_makefile():
     with open("extras/Makefile", "w") as f:
         f.write(f"""
 VERILOG_SOURCES = \\
-    {cwd}/deps/garnet/tests/AO22D0BWP16P90.sv \\
-    {cwd}/deps/garnet/tests/AN2D0BWP16P90.sv \\
-    {cwd}/deps/garnet/global_buffer/genesis/TS1N16FFCLLSBLVTC2048X64M8SW.sv \\
-    {cwd}/deps/garnet/peak_core/DW_fp_add.v \\
-    {cwd}/deps/garnet/peak_core/DW_fp_mult.v \\
-    {cwd}/deps/garnet/genesis_verif/memory_core.sv \\
-    {cwd}/deps/garnet/genesis_verif/mem_unq1.v \\
-    {cwd}/deps/garnet/genesis_verif/sram_stub_unq1.v \\
-    {cwd}/deps/garnet/genesis_verif/doublebuffer_control_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/sram_control_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/fifo_control_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/linebuffer_control_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/global_buffer.sv \\
-    {cwd}/deps/garnet/genesis_verif/global_buffer_int.sv \\
-    {cwd}/deps/garnet/genesis_verif/memory_bank.sv \\
-    {cwd}/deps/garnet/genesis_verif/bank_controller.sv \\
-    {cwd}/deps/garnet/genesis_verif/glbuf_memory_core.sv \\
-    {cwd}/deps/garnet/genesis_verif/cfg_controller.sv \\
-    {cwd}/deps/garnet/genesis_verif/cfg_address_generator.sv \\
-    {cwd}/deps/garnet/genesis_verif/sram_controller.sv \\
-    {cwd}/deps/garnet/genesis_verif/memory.sv \\
-    {cwd}/deps/garnet/genesis_verif/io_controller.sv \\
-    {cwd}/deps/garnet/genesis_verif/io_address_generator.sv \\
-    {cwd}/deps/garnet/genesis_verif/sram_gen.sv \\
-    {cwd}/deps/garnet/genesis_verif/host_bank_interconnect.sv \\
-    {cwd}/deps/garnet/genesis_verif/global_controller.sv \\
-    {cwd}/deps/garnet/genesis_verif/axi_ctrl_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/jtag_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/cfg_and_dbg_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/flop_unq3.sv \\
-    {cwd}/deps/garnet/genesis_verif/flop_unq2.sv \\
-    {cwd}/deps/garnet/genesis_verif/flop_unq1.sv \\
-    {cwd}/deps/garnet/genesis_verif/tap_unq1.sv \\
+    {garnet_dir}/tests/AO22D0BWP16P90.sv \\
+    {garnet_dir}/tests/AN2D0BWP16P90.sv \\
+    {garnet_dir}/global_buffer/genesis/TS1N16FFCLLSBLVTC2048X64M8SW.sv \\
+    {garnet_dir}/peak_core/DW_fp_add.v \\
+    {garnet_dir}/peak_core/DW_fp_mult.v \\
+    {garnet_dir}/genesis_verif/memory_core.sv \\
+    {garnet_dir}/genesis_verif/mem_unq1.v \\
+    {garnet_dir}/genesis_verif/sram_stub_unq1.v \\
+    {garnet_dir}/genesis_verif/doublebuffer_control_unq1.sv \\
+    {garnet_dir}/genesis_verif/sram_control_unq1.sv \\
+    {garnet_dir}/genesis_verif/fifo_control_unq1.sv \\
+    {garnet_dir}/genesis_verif/linebuffer_control_unq1.sv \\
+    {garnet_dir}/genesis_verif/global_buffer.sv \\
+    {garnet_dir}/genesis_verif/global_buffer_int.sv \\
+    {garnet_dir}/genesis_verif/memory_bank.sv \\
+    {garnet_dir}/genesis_verif/bank_controller.sv \\
+    {garnet_dir}/genesis_verif/glbuf_memory_core.sv \\
+    {garnet_dir}/genesis_verif/cfg_controller.sv \\
+    {garnet_dir}/genesis_verif/cfg_address_generator.sv \\
+    {garnet_dir}/genesis_verif/sram_controller.sv \\
+    {garnet_dir}/genesis_verif/memory.sv \\
+    {garnet_dir}/genesis_verif/io_controller.sv \\
+    {garnet_dir}/genesis_verif/io_address_generator.sv \\
+    {garnet_dir}/genesis_verif/sram_gen.sv \\
+    {garnet_dir}/genesis_verif/host_bank_interconnect.sv \\
+    {garnet_dir}/genesis_verif/global_controller.sv \\
+    {garnet_dir}/genesis_verif/axi_ctrl_unq1.sv \\
+    {garnet_dir}/genesis_verif/jtag_unq1.sv \\
+    {garnet_dir}/genesis_verif/cfg_and_dbg_unq1.sv \\
+    {garnet_dir}/genesis_verif/flop_unq3.sv \\
+    {garnet_dir}/genesis_verif/flop_unq2.sv \\
+    {garnet_dir}/genesis_verif/flop_unq1.sv \\
+    {garnet_dir}/genesis_verif/tap_unq1.sv \\
     {cwd}/extras/CW_tap.v \\
     {cwd}/extras/garnet.sv \\
     {cwd}/extras/garnet_top.sv
