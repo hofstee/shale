@@ -12,6 +12,7 @@ parser.add_argument("--width", type=int, default=32)
 parser.add_argument("--height", type=int, default=16)
 parser.add_argument("--force", action="store_true")
 parser.add_argument("--app-root", type=str, default="apps")
+parser.add_argument("--garnet-flow", action="store_true")
 args = parser.parse_args()
 args.apps = list(map(Path, args.apps))
 args.apps = list(map(lambda x: Path(args.app_root) / x, args.apps))
@@ -69,46 +70,55 @@ def should_run_app(entry, args):
 
     return True
 
-with open(f"{args.app_root}/utilization.csv", "w") as f:
-    w = csv.DictWriter(f, fieldnames=["name", "PE", "IO", "MEM", "REG"])
-    w.writeheader()
-
-    # If there are apps within a folder, grab the apps that are inside that folder
+if args.garnet_flow:
     for root, dirs, files in os.walk("apps"):
         entry = Path(root)
         name = entry.parts[-1]
 
         if should_run_app(entry, args):
-            p = subprocess.run(
-                [
-                    "python",
-                    "garnet.py",
-                    "--width", f"{args.width}",
-                    "--height", f"{args.height}",
-                    "--no-pd",
-                    "--interconnect-only",
-                    "--input-app", f"{cwd}/{entry}/bin/design_top.json",
-                    "--input-file", f"{cwd}/{entry}/{name}_input.raw",
-                    "--gold-file", f"{cwd}/{entry}/{name}_gold.raw",
-                    "--output-file", f"{cwd}/{entry}/bin/{name}.bs",
-                ],
-                cwd="deps/garnet",
-                stdout=subprocess.PIPE,
-                text=True,
-            )
+            for collateral in os.scandir("/GarnetFlow/scripts/garnet/temp"):
+                os.rename(collateral.path, f"{entry}/bin/{collateral.name}")
+else:
+    with open(f"{args.app_root}/utilization.csv", "w") as f:
+        w = csv.DictWriter(f, fieldnames=["name", "PE", "IO", "MEM", "REG"])
+        w.writeheader()
 
-            with open (f"{entry}/bin/garnet.log", "w") as log:
-                log.write(p.stdout)
+        # If there are apps within a folder, grab the apps that are inside that folder
+        for root, dirs, files in os.walk("apps"):
+            entry = Path(root)
+            name = entry.parts[-1]
 
-            if p.returncode:
-                print(f"Garnet failed to map `{name}`", file=sys.stderr)
-                print(p.stdout, file=sys.stderr)
-            else:
-                for collateral in os.scandir("deps/garnet/temp"):
-                    os.rename(collateral.path, f"{entry}/bin/{collateral.name}")
+            if should_run_app(entry, args):
+                p = subprocess.run(
+                    [
+                        "python",
+                        "garnet.py",
+                        "--width", f"{args.width}",
+                        "--height", f"{args.height}",
+                        "--no-pd",
+                        "--interconnect-only",
+                        "--input-app", f"{cwd}/{entry}/bin/design_top.json",
+                        "--input-file", f"{cwd}/{entry}/{name}_input.raw",
+                        "--gold-file", f"{cwd}/{entry}/{name}_gold.raw",
+                        "--output-file", f"{cwd}/{entry}/bin/{name}.bs",
+                    ],
+                    cwd="deps/garnet",
+                    stdout=subprocess.PIPE,
+                    text=True,
+                )
 
-                util = cgra_utilization.search(p.stdout)
-                if util:
-                    d = util.groupdict()
-                    d["name"] = name
-                    w.writerow(d)
+                with open (f"{entry}/bin/garnet.log", "w") as log:
+                    log.write(p.stdout)
+
+                if p.returncode:
+                    print(f"Garnet failed to map `{name}`", file=sys.stderr)
+                    print(p.stdout, file=sys.stderr)
+                else:
+                    for collateral in os.scandir("deps/garnet/temp"):
+                        os.rename(collateral.path, f"{entry}/bin/{collateral.name}")
+
+                    util = cgra_utilization.search(p.stdout)
+                    if util:
+                        d = util.groupdict()
+                        d["name"] = name
+                        w.writerow(d)

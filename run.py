@@ -18,6 +18,7 @@ parser.add_argument("--app-root", type=str, default="apps",
                     help="Sets the base application directory (default: ./apps)")
 parser.add_argument("--power", action="store_true",
                     help="Use this flag if you are using this flow for generating power numbers")
+parser.add_argument("--garnet-flow", action="store_true")
 args = parser.parse_args()
 
 cwd = os.getcwd()
@@ -199,8 +200,8 @@ def generate_bitstreams():
         ],
     )
 
-def generate_testbenches():
-    for app in args.apps:
+def generate_testbenches(apps):
+    for app in apps:
         subprocess.run(
             [
                 "python",
@@ -217,9 +218,52 @@ def generate_testbenches():
             os.symlink(f"{cwd}/extras/Makefile", f"{args.app_root}/{app}/test/Makefile")
 
 
-if not args.skip_garnet:
-    generate_garnet()
+if args.garnet_flow:
+    # Create makefile
+    generate_makefile()
 
-generate_makefile()
-generate_bitstreams()
-generate_testbenches()
+    # Create bitstream
+    gen_bitstream_args = [
+        "--width", f"{args.width}",
+        "--height", f"{args.height}",
+        *args.apps,
+    ]
+
+    subprocess.run(
+        [
+            "python",
+            "generate-bitstreams.py",
+            *gen_bitstream_args,
+        ],
+    )
+
+    # Create testbenches
+    generate_testbenches(args.apps)
+
+    # Run testbenches
+    for app in args.apps:
+        # Run top-level testbench
+        subprocess.run(
+            [
+                "make",
+                "SIM=ius",
+            ],
+            cwd=f"{args.app_root}/app/test",
+        )
+
+        # Verify outputs
+        subprocess.run(
+            [
+                "python",
+                "test.py",
+                app,
+                "--verify-trace",
+            ],
+        )
+else:
+    if not args.skip_garnet:
+        generate_garnet()
+
+    generate_makefile()
+    generate_bitstreams()
+    generate_testbenches(args.apps)

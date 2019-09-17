@@ -13,7 +13,18 @@ import textwrap
 
 from commands import *
 
+parser = argparse.ArgumentParser(description="""
+A simple SoC stub to test application flow of the CGRA.
+""")
+
+parser.add_argument('app')
+parser.add_argument('--verify-trace', action='store_true')
+parser.add_argument('--width', type=int, default=32)
+parser.add_argument('--app-root', type=str, default="apps")
+args = parser.parse_args()
+
 cwd = os.getcwd()
+
 
 def new_code_context():
     return ast.Module()
@@ -118,16 +129,6 @@ def process_inst(inst):
         "nbytes": (num_bits // 8) * num_elems,
     }
 
-
-parser = argparse.ArgumentParser(description="""
-A simple SoC stub to test application flow of the CGRA.
-""")
-
-parser.add_argument('app')
-parser.add_argument('--verify-trace', action='store_true')
-parser.add_argument('--width', type=int, default=32)
-parser.add_argument('--app-root', type=str, default="apps")
-args = parser.parse_args()
 
 app_name = args.app.rsplit("/", 1)[-1]
 
