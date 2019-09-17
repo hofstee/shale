@@ -623,7 +623,9 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     """).body
 
     # launch all the monitors
-    tb.body += parse_ast("\n".join(f"cocotb.fork(monitor_{name}())" for name in monitors)).body
+    if not args.garnet_flow: # TODO: re-enable when halide generates map.json
+        tb.body += parse_ast("\n".join(f"cocotb.fork(monitor_{name}())" for name in monitors)).body
+
     for _in in inputs:
         if _in['trace']:
             tb.body.append(parse_ast(
