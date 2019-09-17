@@ -223,6 +223,11 @@ if args.garnet_flow:
     # generate our own.
     generate_garnet()
 
+    # Grab CW_tap.v
+    if not os.path.exists("extras/CW_tap.v"):
+        cw_tap_f = "/cad/cadence/GENUS17.21.000.lnx86/share/synth/lib/chipware/sim/verilog/CW/CW_tap.v"
+        os.symlink(cw_tap_f, "extras/CW_tap.v")
+
     # Create makefile
     generate_makefile()
 
