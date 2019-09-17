@@ -579,6 +579,9 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     for _in in inputs:
         tb.body += parse_ast(f"""
         {_in['name']}_data = np.fromfile("{cwd}/{args.app_root}/{args.app}/{_in['file']}", dtype=np.uint8).astype(np.uint16)
+        # TODO: this should probably use WRITE_DATA instead and use the byte enables
+        rounded_size = ((len({_in['name']}_data) + 4-1) // 4) * 4
+        {_in['name']}_data.resize((rounded_size,))
         dut._log.info("Transferring {_in['name']} data...")
         tasks = []
         for k,x in enumerate({_in['name']}_data.view(np.uint64)):

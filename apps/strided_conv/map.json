@@ -1,0 +1,24 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "3721",
+            "num_inactive": "0",
+            "file": "strided_conv_input.raw",
+            "trace": "in.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "1",
+            "file": "strided_conv_gold.raw",
+            "trace": "out.trace"
+        }
+    ],
+    "trace": [
+    ]
+}
