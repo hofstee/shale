@@ -442,12 +442,13 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
 
     # TODO: check output
 
-    monitors = []
-    for signal in mapping['trace']:
-        print(f"derp for {signal}")
-        print(name_to_tile(signal))
-        tb.body.append(gen_monitor(name_to_tile(signal), pe_tile_inputs, name=signal))
-        monitors.append(signal)
+    if not args.garnet_flow: # TODO: re-enable once halide flow generates map.json
+        monitors = []
+        for signal in mapping['trace']:
+            print(f"derp for {signal}")
+            print(name_to_tile(signal))
+            tb.body.append(gen_monitor(name_to_tile(signal), pe_tile_inputs, name=signal))
+            monitors.append(signal)
 
     def process_input(_in):
         assert _in['dims'][0][1] == 1, "ERROR: Innermost loop accesses must be linear."
