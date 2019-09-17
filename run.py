@@ -267,7 +267,7 @@ if args.garnet_flow:
                 "make",
                 "SIM=ius",
             ],
-            cwd=f"{args.app_root}/app/test",
+            cwd=f"{args.app_root}/{app}/test",
         )
 
         # Verify outputs
