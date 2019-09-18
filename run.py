@@ -249,6 +249,10 @@ if args.garnet_flow:
 
     # Run testbenches
     for app in args.apps:
+        # Symlink the GarnetFlow-generated bitstream
+        if not os.path.exists(f"{args.app_root}/{app}/bin/{app}.bs"):
+            os.symlink(f"/tmp/{app}.bs", f"{args.app_root}/{app}/bin/{app}.bs")
+
         # Create testbench
         subprocess.run(
             [
