@@ -89,6 +89,18 @@ else:
             name = entry.parts[-1]
 
             if should_run_app(entry, args):
+                # create mapped.json
+                p = subprocess.run(
+                    [
+                        "mapper",
+                        f"{cwd}/{entry}/bin/design_top.json",
+                        f"{cwd}/{entry}/bin/mapped.json",
+                    ],
+                    stdout=subprocess.PIPE,
+                    text=True,
+                )
+
+                # create bitstream
                 p = subprocess.run(
                     [
                         "python",
