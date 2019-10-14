@@ -246,7 +246,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     from commands import *
     from garnet_driver import GlobalBuffer
 
-    CLK_PERIOD = 10
+    CLK_PERIOD = 2300
 
     tracefile = os.getenv('TRACE')
     top = os.getenv('TOPLEVEL')
