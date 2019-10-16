@@ -95,7 +95,7 @@ VERILOG_SOURCES = \\
     {cwd}/deps/garnet/tests/AO22D0BWP16P90.sv \\
     {cwd}/deps/garnet/tests/AN2D0BWP16P90.sv \\
     {cwd}/deps/garnet/global_buffer/genesis/TS1N16FFCLLSBLVTC2048X64M8SW.sv \\
-    {cwd}/deps/garnet/memory_core/genesis_new/TS1N16FFCLLSBLVTC512X64M8SW.sv \\
+    {cwd}/deps/garnet/memory_core/genesis_new/TS1N16FFCLLSBLVTC512X16M8S.sv \\
     {cwd}/deps/garnet/peak_core/DW_fp_add.v \\
     {cwd}/deps/garnet/peak_core/DW_fp_mult.v \\
     {cwd}/deps/garnet/genesis_verif/memory_core.sv \\
