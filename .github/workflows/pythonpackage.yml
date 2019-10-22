@@ -27,7 +27,9 @@ jobs:
       run: |
         python generate-bitstreams.py
     - name: Report application utilization
-      run: cat apps/utilization.csv | column -t -s ',' -n
+      run: |
+        apt install bsdmainutils
+        cat apps/utilization.csv | column -t -s ',' -n
     - name: Upload artifact
       uses: actions/upload-artifact@master
       with:
