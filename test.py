@@ -253,16 +253,20 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
 
     @cocotb.test()
     def test_tile(dut):
-        dut.reset = 1
-        cocotb.fork(Clock(dut.clk, CLK_PERIOD).start())
-        yield Timer(CLK_PERIOD * 10)
-        dut.reset = 0
-        yield Timer(CLK_PERIOD * 10)
-
-        t_start = get_sim_time()
-
         with open(tracefile) as f:
             reader = csv.DictReader(f)
+            for port in reader.fieldnames:
+                getattr(dut, port) = 0
+
+            dut.reset = 1
+            cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ps').start())
+            yield Timer(CLK_PERIOD * 10)
+            dut.reset = 0
+            yield Timer(CLK_PERIOD * 10)
+
+            t_start = get_sim_time()
+            dut.TB_monitor_power = 1
+
             for row in reader:
                 for k,v in row.items():
                     getattr(dut, k) <= int(v)
