@@ -297,3 +297,16 @@ else:
     generate_makefile()
     generate_bitstreams()
     generate_testbenches(args.apps)
+
+    # We want garnet to be on the flow branch for running testbenches
+    # because of the extra Verilog stubs
+    subprocess.run(
+        [
+            "git",
+            "checkout",
+            "flow",
+        ],
+        cwd="deps/garnet",
+        stdout=subprocess.PIPE,
+        text=True,
+    )
