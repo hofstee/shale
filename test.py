@@ -35,11 +35,10 @@ def gather_input_ports(modulename):
         verilog = f.read()
         match = re.search(f"module {modulename} \(([^)]*)\);", verilog)
         module_signature = match.group(1)
-
-        return map(
-            lambda x: x.rsplit(' ', 1)[-1].rstrip(","),
-            re.findall("input (.*)", module_signature)
-        )
+        ports = module_signature.split(",")
+        ports = [port.strip().split(" ") for port in ports]
+        ports = [port[-1] for port in ports if port[0] == "input"]
+        return ports
 
 mem_tile_inputs = list(gather_input_ports("Tile_MemCore"))
 pe_tile_inputs = list(gather_input_ports("Tile_PE"))
