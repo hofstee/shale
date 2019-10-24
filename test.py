@@ -264,7 +264,6 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
             yield Timer(CLK_PERIOD * 10)
 
             t_start = get_sim_time()
-            dut.TB_monitor_power = 1
 
             for row in reader:
                 for k,v in row.items():
