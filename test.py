@@ -33,8 +33,8 @@ def new_code_context():
 def gather_input_ports(modulename):
     with open(f"deps/garnet/garnet.v") as f:
         verilog = f.read()
-        match = re.search(f"(module {modulename} \([^)]*\);)", verilog)
-        module_signature = verilog[match.start():match.end()]
+        match = re.search(f"module {modulename} \(([^)]*)\);", verilog)
+        module_signature = match.group(1)
 
         return map(
             lambda x: x.rsplit(' ', 1)[-1].rstrip(","),
@@ -256,7 +256,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
         with open(tracefile) as f:
             reader = csv.DictReader(f)
             for port in reader.fieldnames:
-                getattr(dut, port) = 0
+                getattr(dut, port) <= 0
 
             dut.reset = 1
             cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ps').start())
@@ -447,7 +447,7 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
         for signal in mapping['trace']:
             print(f"derp for {signal}")
             print(name_to_tile(signal))
-            tb.body.append(gen_monitor(name_to_tile(signal), pe_tile_inputs, name=signal))
+            tb.body.append(gen_monitor(name_to_tile(signal), mem_tile_inputs, name=signal))
             monitors.append(signal)
 
     def process_input(_in):
