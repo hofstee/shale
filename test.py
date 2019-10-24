@@ -421,7 +421,21 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
         yield RisingEdge(dut.GC_interrupt)
         mask = yield gc.read(INTERRUPT_STATUS_REG)
         yield gc.write(INTERRUPT_STATUS_REG, mask)
+    """).body
 
+    # launch all the monitors
+    if not args.garnet_flow: # TODO: re-enable when halide generates map.json
+        monitors = []
+        for signal in mapping['trace']:
+            print(f"derp for {signal}")
+            print(name_to_tile(signal))
+            tb.body.append(gen_monitor(name_to_tile(signal), mem_tile_inputs, name=signal))
+            monitors.append(signal)
+
+        tb.body += parse_ast("\n".join(f"cocotb.fork(monitor_{name}())" for name in monitors)).body
+
+
+    tb.body += parse_ast(f"""
     # reset
     dut.reset = 1
     cocotb.fork(Clock(dut.clk, CLK_PERIOD).start())
@@ -441,14 +455,6 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     """).body
 
     # TODO: check output
-
-    if not args.garnet_flow: # TODO: re-enable once halide flow generates map.json
-        monitors = []
-        for signal in mapping['trace']:
-            print(f"derp for {signal}")
-            print(name_to_tile(signal))
-            tb.body.append(gen_monitor(name_to_tile(signal), mem_tile_inputs, name=signal))
-            monitors.append(signal)
 
     def process_input(_in):
         assert _in['dims'][0][1] == 1, "ERROR: Innermost loop accesses must be linear."
@@ -621,10 +627,6 @@ with open(f"{args.app_root}/{args.app}/bin/global_buffer.json", "r") as f:
     yield gc.write(STALL_REG, 0)
     yield gc.write(CGRA_START_REG, 1)
     """).body
-
-    # launch all the monitors
-    if not args.garnet_flow: # TODO: re-enable when halide generates map.json
-        tb.body += parse_ast("\n".join(f"cocotb.fork(monitor_{name}())" for name in monitors)).body
 
     for _in in inputs:
         if _in['trace']:
