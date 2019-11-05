@@ -14,6 +14,7 @@ src/
 *.log
 *.csv
 *.trace
+mapped.json
 
 extras/Makefile
 extras/CW_tap.v

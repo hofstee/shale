@@ -548,6 +548,10 @@
             "genref":"coreir.sub",
             "genargs":{"width":["Int",16]}
           },
+          "ub_cim_stencil_update_stream_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
           "ub_cim_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
             "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
@@ -605,6 +609,10 @@
             "genref":"coreir.reg",
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
+          },
+          "ub_lxx_stencil_update_stream_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
           },
           "ub_lxx_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
@@ -664,6 +672,10 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
+          "ub_lxy_stencil_update_stream_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
           "ub_lxy_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
             "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
@@ -722,6 +734,10 @@
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
+          "ub_lyy_stencil_update_stream_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
           "ub_lyy_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
             "genargs":{"input_type":["CoreIRType",["Array",1,["Array",1,["Array",16,"BitIn"]]]], "output_type":["CoreIRType",["Array",1,["Array",16,"Bit"]]]}
@@ -779,6 +795,10 @@
             "genref":"coreir.reg",
             "genargs":{"width":["Int",16]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
+          },
+          "ub_padded16_stencil_update_stream_flush":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
           },
           "ub_padded16_stencil_update_stream_in_reshape":{
             "genref":"commonlib.reshape",
@@ -1002,7 +1022,6 @@
           ["sub_408_411_412.in1","mul_410_410_411.out"],
           ["self.out.0.0","mux_4422550.out"],
           ["ub_padded16_stencil_update_stream_in_reshape.in","self.in.arg_1"],
-          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.ren","ub_padded16_stencil_update_stream_ren.out"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.wen","self.in_en"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_0.reset","self.reset"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1.reset","self.reset"],
@@ -1069,10 +1088,10 @@
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_cim_stencil_update_stream_out_reshape.in.5"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_cim_stencil_update_stream_out_reshape.in.6"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_cim_stencil_update_stream_out_reshape.in.7"],
+          ["ub_cim_stencil_update_streamlinebuffer_bank_0_0.ren","ub_cim_stencil_update_stream_ren.out"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_cim_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_cim_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_cim_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_cim_stencil_update_stream_ren.out","ub_cim_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1.ren","ub_cim_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_cim_stencil_update_streamlinebuffer_bank_0_1.wen","ub_cim_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.valid","ub_cim_stencil_update_streamlinebuffer_bank_0_0.wen"],
@@ -1092,10 +1111,10 @@
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_lxx_stencil_update_stream_out_reshape.in.5"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_lxx_stencil_update_stream_out_reshape.in.6"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_lxx_stencil_update_stream_out_reshape.in.7"],
+          ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0.ren","ub_lxx_stencil_update_stream_ren.out"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_lxx_stencil_update_stream_ren.out","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.ren","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lxx_stencil_update_streamlinebuffer_bank_0_1.wen","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lxx_stencil_update_streamlinebuffer_bank_0_0.wen"],
@@ -1115,10 +1134,10 @@
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_lxy_stencil_update_stream_out_reshape.in.5"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_lxy_stencil_update_stream_out_reshape.in.6"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_lxy_stencil_update_stream_out_reshape.in.7"],
+          ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0.ren","ub_lxy_stencil_update_stream_ren.out"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_lxy_stencil_update_stream_ren.out","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.ren","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lxy_stencil_update_streamlinebuffer_bank_0_1.wen","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lxy_stencil_update_streamlinebuffer_bank_0_0.wen"],
@@ -1138,10 +1157,10 @@
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_lyy_stencil_update_stream_out_reshape.in.5"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_lyy_stencil_update_stream_out_reshape.in.6"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_lyy_stencil_update_stream_out_reshape.in.7"],
+          ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0.ren","ub_lyy_stencil_update_stream_ren.out"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.flush"],
-          ["ub_lyy_stencil_update_stream_ren.out","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.ren"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.ren","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_lyy_stencil_update_streamlinebuffer_bank_0_1.wen","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.valid"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.valid","ub_lyy_stencil_update_streamlinebuffer_bank_0_0.wen"],
@@ -1161,6 +1180,7 @@
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.dataout0","ub_padded16_stencil_update_stream_out_reshape.in.5"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_1.out","ub_padded16_stencil_update_stream_out_reshape.in.6"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_0.out","ub_padded16_stencil_update_stream_out_reshape.in.7"],
+          ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0.ren","ub_padded16_stencil_update_stream_ren.out"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1.datain0","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_1_0.in","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.dataout0"],
           ["ub_padded16_stencil_update_streamlinebuffer_bank_0_0_flush.out","ub_padded16_stencil_update_streamlinebuffer_bank_0_0.flush"],
