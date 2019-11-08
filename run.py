@@ -158,7 +158,7 @@ def generate_bitstreams():
         [
             "git",
             "checkout",
-            "simple_mapper",
+            "master",
         ],
         cwd="deps/garnet",
         stdout=subprocess.PIPE,
