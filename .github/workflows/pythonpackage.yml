@@ -6,9 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    container:
-      image: docker://keyiz/garnet-flow
-
+    
     strategy:
       max-parallel: 4
 
@@ -18,17 +16,23 @@ jobs:
       run: |
         git submodule init
         git submodule update
-    - name: Install dependencies
+    - name: Create bitstreams
       run: |
+        sudo apt install -y libmpfr-dev libmpc-dev
+        conda create -n ci python=3.7
+        source $CONDA/bin/activate
+        conda activate ci
         pip install -r deps/garnet/requirements.txt
         pip install deps/*.whl
-        pip install genesis2
-    - name: Create bitstream
-      run: |
-        python generate-bitstreams.py
+        export OS_NAME="linux"
+        curl -s -L https://github.com/rdaly525/coreir/releases/latest | grep "href.*coreir-${OS_NAME}.tar.gz" | cut -d \" -f 2 | xargs -I {} wget https://github.com"{}"
+        mkdir coreir_release;
+        tar -xf coreir-${OS_NAME}.tar.gz -C coreir_release --strip-components 1;
+        cd coreir_release && sudo make install && cd ..
+        pip install -e .
+        python run.py --width 32 --height 16
     - name: Report application utilization
       run: |
-        apt install bsdmainutils
         cat apps/utilization.csv | column -t -s ',' -n
     - name: Upload artifact
       uses: actions/upload-artifact@master
