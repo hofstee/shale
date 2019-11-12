@@ -38,12 +38,20 @@ def generate_bitstreams(args):
                 for collateral in os.scandir("/GarnetFlow/scripts/garnet/temp"):
                     os.rename(collateral.path, f"{entry.resolve()}/bin/{collateral.name}")
     else:
+        if args.dry_run:
+            for entry in args.apps:
+                name = entry.parts[-1]
+
+                if should_run_app(entry, args):
+                    logging.info(f"Generating bitstream for {entry}")
+            return
+
         with open(f"{args.app_root}/utilization.csv", "w") as f:
             w = csv.DictWriter(f, fieldnames=["name", "PE", "IO", "MEM", "REG"])
             w.writeheader()
 
             # If there are apps within a folder, grab the apps that are inside that folder
-            for entry in gather_apps("apps"):
+            for entry in args.apps:
                 name = entry.parts[-1]
 
                 if should_run_app(entry, args):
