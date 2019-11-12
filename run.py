@@ -91,7 +91,7 @@ def generate_garnet():
 def generate_makefile():
     with open("extras/Makefile", "w") as f:
         f.write(f"""
-VERILOG_SOURCES = \\
+VERILOG_SOURCES ?= \\
     {cwd}/deps/garnet/tests/AO22D0BWP16P90.sv \\
     {cwd}/deps/garnet/tests/AN2D0BWP16P90.sv \\
     {cwd}/deps/garnet/global_buffer/genesis/TS1N16FFCLLSBLVTC2048X64M8SW.sv \\
