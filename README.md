@@ -6,7 +6,7 @@
 git clone --recurse-submodules git@github.com:THofstee/shale.git
 pip install -r deps/garnet/requirements.txt
 pip install --ignore-installed deps/jmapper-0.1.19-cp37-cp37m-manylinux1_x86_64.whl
-pip install astor numpy genesis2 pycoreir cocotb
+pip install -e .
 cp /cad/cadence/GENUS17.21.000.lnx86/share/synth/lib/chipware/sim/verilog/CW/CW_tap.v extras/CW_tap.v
 ```
 
