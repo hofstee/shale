@@ -357,17 +357,16 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     tb.body += parse_ast(f"""
     gc = AXI4LiteMaster(dut, "GC", dut.clk)
     gb = GlobalBuffer(dut, "GB", dut.clk)
-
-    global_buffer = dut.DUT.GlobalBuffer_inst0.global_buffer_inst0.global_buffer_int
     """).body
 
-    tb.body += parse_ast(f"""
-    auto_restart_instream = [
-        {",".join([ f"global_buffer.io_controller.io_address_generator_{n}.auto_restart_instream"
-        for n in range(args.width//4)
-        ])}
-    ]
-    """).body
+    # tb.body += parse_ast(f"""
+    # global_buffer = dut.DUT.GlobalBuffer_inst0.global_buffer_inst0.global_buffer_int
+    # auto_restart_instream = [
+    #     {",".join([ f"global_buffer.io_controller.io_address_generator_{n}.auto_restart_instream"
+    #     for n in range(args.width//4)
+    #     ])}
+    # ]
+    # """).body
 
     tb.body += parse_ast(f"""
     in_valid = [
@@ -540,10 +539,21 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
                     yield gc.write(command.addr, command.data)
                 """).body[0])
 
+                # curr_body += parse_ast(f"""
+                # yield gc.write(IO_AUTO_RESTART_REG({_in['location']}), 1)
+                # # dut._log.info("Waiting for input auto_restart...")
+                # yield FallingEdge(auto_restart_instream[{_in['location']}])
+                # """).body
+
                 curr_body += parse_ast(f"""
                 yield gc.write(IO_AUTO_RESTART_REG({_in['location']}), 1)
+
                 # dut._log.info("Waiting for input auto_restart...")
-                yield FallingEdge(auto_restart_instream[{_in['location']}])
+                while True:
+                    yield RisingEdge(dut.GC_interrupt)
+                    mask = yield gc.read(INSTREAM_RESTART_REG)
+                    if mask[{_in['location']}] == 1:
+                        break
                 """).body
 
 
