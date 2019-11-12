@@ -1,12 +1,12 @@
-# make SIM=vcs COMPILE_ARGS="-LDFLAGS -Wl,--no-as-needed"
-# LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 make SIM=ius
-
 import argparse
+import logging
 import os
 from pathlib import Path
 import re
 import subprocess
 import sys
+from util.apps import gather_apps
+from util.generate_bitstreams import generate_bitstreams as gen_bitstreams
 
 parser = argparse.ArgumentParser()
 parser.add_argument("apps", nargs="*")
@@ -19,15 +19,22 @@ parser.add_argument("--app-root", type=str, default="apps",
 parser.add_argument("--power", action="store_true",
                     help="Use this flag if you are using this flow for generating power numbers")
 parser.add_argument("--garnet-flow", action="store_true")
+
+# Logging
+parser.add_argument('-v', '--verbose',
+                    action="store_const", const=logging.INFO, default=logging.WARNING)
+parser.add_argument('-d', '--debug',
+                    action="store_const", const=logging.DEBUG, default=logging.WARNING)
+
 args = parser.parse_args()
+
+logging.basicConfig(level=min(args.verbose, args.debug))
 
 cwd = os.getcwd()
 git_up_to_date = re.compile(r"Already up-to-date.")
 
 if len(args.apps) == 0:
-    for entry in os.scandir(f"{args.app_root}"):
-        if entry.is_dir():
-            args.apps.append(entry.name)
+    args.apps = gather_apps(args.app_root)
 
 def generate_garnet():
     subprocess.run(
@@ -52,7 +59,7 @@ def generate_garnet():
     )
 
     if p.returncode:
-        print(f"WARN: Couldn't fetch latest updates.", file=sys.stderr)
+        logging.warn("Couldn't fetch latest updates.")
         up_to_date = True
     else:
         up_to_date = git_up_to_date.search(p.stdout)
@@ -176,34 +183,16 @@ def generate_bitstreams():
     )
 
     if p.returncode:
-        print(f"WARN: Couldn't fetch latest updates.", file=sys.stderr)
-        up_to_date = True
+        logging.warn("Couldn't fetch latest updates.")
     else:
-        up_to_date = git_up_to_date.search(p.stdout)
+        if not git_up_to_date.search(p.stdout):
+            args.force = True
 
-    if args.force:
-        up_to_date = False
-
-    gen_bitstream_args = [
-        "--width", f"{args.width}",
-        "--height", f"{args.height}",
-        *args.apps,
-    ]
-
-    if not up_to_date:
-        gen_bitstream_args.append("--force")
-
-    subprocess.run(
-        [
-            "python",
-            "generate-bitstreams.py",
-            *gen_bitstream_args,
-        ],
-    )
+    gen_bitstreams(args)
 
 def generate_testbenches(apps):
     for app in apps:
-        os.makedirs(f"{args.app_root}/{app}/test", exist_ok=True)
+        os.makedirs(f"{app}/test", exist_ok=True)
         
         subprocess.run(
             [
@@ -214,11 +203,11 @@ def generate_testbenches(apps):
             ],
         )
 
-        if os.path.islink(f"{args.app_root}/{app}/test/Makefile"):
-            os.remove(f"{args.app_root}/{app}/test/Makefile")
+        if os.path.islink(f"{app}/test/Makefile"):
+            os.remove(f"{app}/test/Makefile")
 
-        if not os.path.exists(f"{args.app_root}/{app}/test/Makefile"):
-            os.symlink(f"{cwd}/extras/Makefile", f"{args.app_root}/{app}/test/Makefile")
+        if not os.path.exists(f"{app}/test/Makefile"):
+            os.symlink(f"{cwd}/extras/Makefile", f"{app}/test/Makefile")
 
 
 if args.garnet_flow:
@@ -235,26 +224,13 @@ if args.garnet_flow:
     generate_makefile()
 
     # Create bitstream
-    gen_bitstream_args = [
-        "--width", f"{args.width}",
-        "--height", f"{args.height}",
-        *args.apps,
-        "--garnet-flow",
-    ]
-
-    subprocess.run(
-        [
-            "python",
-            "generate-bitstreams.py",
-            *gen_bitstream_args,
-        ],
-    )
+    gen_bitstreams(args)
 
     # Run testbenches
     for app in args.apps:
         # Symlink the GarnetFlow-generated bitstream
-        if not os.path.exists(f"{args.app_root}/{app}/bin/{app}.bs"):
-            os.symlink(f"/tmp/{app}.bs", f"{args.app_root}/{app}/bin/{app}.bs")
+        if not os.path.exists(f"{app}/bin/{app}.bs"):
+            os.symlink(f"/tmp/{app}.bs", f"{app}/bin/{app}.bs")
 
         # Create testbench
         subprocess.run(
@@ -267,19 +243,19 @@ if args.garnet_flow:
             ],
         )
 
-        if os.path.islink(f"{args.app_root}/{app}/test/Makefile"):
-            os.remove(f"{args.app_root}/{app}/test/Makefile")
+        if os.path.islink(f"{app}/test/Makefile"):
+            os.remove(f"{app}/test/Makefile")
 
-        if not os.path.exists(f"{args.app_root}/{app}/test/Makefile"):
-            os.symlink(f"{cwd}/extras/Makefile", f"{args.app_root}/{app}/test/Makefile")
+        if not os.path.exists(f"{app}/test/Makefile"):
+            os.symlink(f"{cwd}/extras/Makefile", f"{app}/test/Makefile")
 
         # Run top-level testbench
-        subprocess.run(
+        p = subprocess.run(
             [
                 "make",
-                "SIM=ius",
+                "SIM=vcs",
             ],
-            cwd=f"{args.app_root}/{app}/test",
+            cwd=f"{app}/test",
         )
 
         # Verify outputs
