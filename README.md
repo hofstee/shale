@@ -186,10 +186,6 @@ out.
 make SIM=xcelium TESTCASE="test_tile" TOPLEVEL="Tile_PE" TRACE="add_290_294_295.csv" SIM_ARGS="-input xrun_power_Tile_PE.tcl"
 ```
 
-## Known Issues
-
-Currently, none.
-
 ## Troubleshooting
 
 ### Something isn't working
