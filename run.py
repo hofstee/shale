@@ -35,6 +35,9 @@ if args.dry_run:
 else:
     logging.basicConfig(level=min(args.verbose, args.debug))
 
+flow_branch = "lb-mem-flow"
+mapper_branch = "lb-mem-mapper"
+
 cwd = os.getcwd()
 git_up_to_date = re.compile(r"Already up-to-date.")
 
@@ -50,7 +53,7 @@ def generate_garnet():
         [
             "git",
             "checkout",
-            "flow",
+            flow_branch,
         ],
         cwd="deps/garnet",
         stdout=subprocess.PIPE,
@@ -179,7 +182,7 @@ def generate_bitstreams():
             [
                 "git",
                 "checkout",
-                "master",
+                mapper_branch,
             ],
             cwd="deps/garnet",
             stdout=subprocess.PIPE,
@@ -304,7 +307,7 @@ else:
             [
                 "git",
                 "checkout",
-                "flow",
+                flow_branch,
             ],
             cwd="deps/garnet",
             stdout=subprocess.PIPE,
