@@ -368,51 +368,51 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     # ]
     # """).body
 
-    tb.body += parse_ast(f"""
-    in_valid = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_1"
-        for n in range(0,args.width,4)
-        ])}
-    ]
-    """).body
+    # tb.body += parse_ast(f"""
+    # in_valid = [
+    #     {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_1"
+    #     for n in range(0,args.width,4)
+    #     ])}
+    # ]
+    # """).body
+
+    # tb.body += parse_ast(f"""
+    # in_data = [
+    #     {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_16"
+    #     for n in range(0,args.width,4)
+    #     ])}
+    # ]
+    # """).body
+
+    # tb.body += parse_ast(f"""
+    # out_valid = [
+    #     {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_1_0"
+    #     for n in range(1,args.width,4)
+    #     ])}
+    # ]
+    # """).body
+
+    # tb.body += parse_ast(f"""
+    # out_data = [
+    #     {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_16_0"
+    #     for n in range(1,args.width,4)
+    #     ])}
+    # ]
+    # """).body
 
     tb.body += parse_ast(f"""
-    in_data = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_16"
-        for n in range(0,args.width,4)
-        ])}
-    ]
-    """).body
-
-    tb.body += parse_ast(f"""
-    out_valid = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_1_0"
-        for n in range(1,args.width,4)
-        ])}
-    ]
-    """).body
-
-    tb.body += parse_ast(f"""
-    out_data = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_16_0"
-        for n in range(1,args.width,4)
-        ])}
-    ]
-    """).body
-
-    tb.body += parse_ast(f"""
-    @cocotb.coroutine
-    def log_valid_data(filename, valid, data):
-        with open(filename, "w") as f:
-            while True:
-                yield RisingEdge(dut.clk)
-                yield ReadOnly()
-                try:
-                    if int(valid):
-                        f.write(f"{{int(data)}}, ")
-                        f.flush()
-                except:
-                    pass
+    # @cocotb.coroutine
+    # def log_valid_data(filename, valid, data):
+    #     with open(filename, "w") as f:
+    #         while True:
+    #             yield RisingEdge(dut.clk)
+    #             yield ReadOnly()
+    #             try:
+    #                 if int(valid):
+    #                     f.write(f"{{int(data)}}, ")
+    #                     f.flush()
+    #             except:
+    #                 pass
 
 
     @cocotb.coroutine
@@ -640,16 +640,16 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     yield gc.write(CGRA_START_REG, 1)
     """).body
 
-    for _in in inputs:
-        if _in['trace']:
-            tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{cwd}/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
-            ))
-    for _out in outputs:
-        if _out['trace']:
-            tb.body.append(parse_ast(
-                f"cocotb.fork(log_valid_data(\"{cwd}/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
-            ))
+    # for _in in inputs:
+    #     if _in['trace']:
+    #         tb.body.append(parse_ast(
+    #             f"cocotb.fork(log_valid_data(\"{cwd}/{args.app}/{_in['trace']}\", in_valid[{_in['location']}], in_data[{_in['location']}]))"
+    #         ))
+    # for _out in outputs:
+    #     if _out['trace']:
+    #         tb.body.append(parse_ast(
+    #             f"cocotb.fork(log_valid_data(\"{cwd}/{args.app}/{_out['trace']}\", out_valid[{_out['location']}], out_data[{_out['location']}]))"
+    #         ))
 
 
     tb.body += parse_ast("""
