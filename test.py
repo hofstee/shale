@@ -358,12 +358,12 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     gc = AXI4LiteMaster(dut, "GC", dut.clk)
     gb = GlobalBuffer(dut, "GB", dut.clk)
 
-    global_buffer = dut.DUT.GlobalBuffer_inst0.global_buffer_inst0.global_buffer_int
+    global_buffer = dut.DUT.GlobalBuffer_inst0
     """).body
 
     tb.body += parse_ast(f"""
     auto_restart_instream = [
-        {",".join([ f"global_buffer.io_controller.io_address_generator_{n}.auto_restart_instream"
+        {",".join([ f"global_buffer.auto_restart_instream[{n}]"
         for n in range(args.width//4)
         ])}
     ]
@@ -371,32 +371,32 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
 
     tb.body += parse_ast(f"""
     in_valid = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_1"
-        for n in range(0,args.width,4)
+        {",".join([ f"global_buffer.io_to_cgra_rd_data_valid[{n}]"
+        for n in range(args.width//4)
         ])}
     ]
     """).body
 
     tb.body += parse_ast(f"""
     in_data = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.io2f_16"
-        for n in range(0,args.width,4)
+        {",".join([ f"global_buffer.io_to_cgra_rd_data_{n}"
+        for n in range(args.width//4)
         ])}
     ]
     """).body
 
     tb.body += parse_ast(f"""
     out_valid = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_1_0"
-        for n in range(1,args.width,4)
+        {",".join([ f"global_buffer.cgra_to_io_wr_en[{n}]"
+        for n in range(args.width//4)
         ])}
     ]
     """).body
 
     tb.body += parse_ast(f"""
     out_data = [
-        {",".join([ f"dut.DUT.Interconnect_inst0.Tile_X{n:02X}_Y00.f2io_16_0"
-        for n in range(1,args.width,4)
+        {",".join([ f"global_buffer.cgra_to_io_wr_data_{n}"
+        for n in range(args.width//4)
         ])}
     ]
     """).body
