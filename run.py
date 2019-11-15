@@ -50,7 +50,7 @@ def generate_garnet():
         [
             "git",
             "checkout",
-            "flow",
+            "flow-oldgb",
         ],
         cwd="deps/garnet",
         stdout=subprocess.PIPE,
@@ -303,7 +303,7 @@ else:
             [
                 "git",
                 "checkout",
-                "flow",
+                "flow-oldgb",
             ],
             cwd="deps/garnet",
             stdout=subprocess.PIPE,
