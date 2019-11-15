@@ -258,7 +258,7 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
                 getattr(dut, port) <= 0
 
             dut.reset = 1
-            dut.TB_monitor_power = 0
+            # dut.TB_monitor_power = 0
             cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ps').start())
             yield Timer(CLK_PERIOD * 10)
             dut.reset = 0
@@ -272,7 +272,7 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
                 yield RisingEdge(dut.clk)
 
         t_end = get_sim_time()
-        dut.TB_monitor_power = 0
+        # dut.TB_monitor_power = 0
 
         dut._log.info(f'{{t_start}}, {{t_end}}')
         with open('vcs_power_Tile_PE.tcl', 'w') as f:
@@ -623,7 +623,7 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
 
     tb.body += parse_ast("""
     t_start = get_sim_time()
-    dut.TB_monitor_power = 1
+    # dut.TB_monitor_power = 1
     dut._log.info("Starting application...")
 
     yield gc.write(STALL_REG, 0)
@@ -649,7 +649,7 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     dut._log.info("Done.")
 
     t_end = get_sim_time()
-    dut.TB_monitor_power = 0
+    # dut.TB_monitor_power = 0
 
     dut._log.info(f"{t_init}, {t_start}, {t_end}")
     with open("vcs_power_top.tcl", "w") as f:
