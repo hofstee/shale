@@ -218,6 +218,7 @@ def generate_testbenches(apps):
                 "test.py",
                 app,
                 "--width", f"{args.width}",
+                "--height", f"{args.height}",
             ],
         )
 

@@ -5,6 +5,7 @@ import argparse
 import ast
 import astor
 import csv
+import itertools
 import json
 import os
 from pathlib import Path
@@ -20,6 +21,7 @@ A simple SoC stub to test application flow of the CGRA.
 parser.add_argument('app')
 parser.add_argument('--verify-trace', action='store_true')
 parser.add_argument('--width', type=int, default=32)
+parser.add_argument('--height', type=int, default=16)
 parser.add_argument('--app-root', type=str, default="apps")
 parser.add_argument('--garnet-flow', action='store_true')
 args = parser.parse_args()
@@ -426,11 +428,21 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     # launch all the monitors
     if not args.garnet_flow: # TODO: re-enable when halide generates map.json
         monitors = []
-        for signal in mapping['trace']:
-            print(f"derp for {signal}")
-            print(name_to_tile(signal))
-            tb.body.append(gen_monitor(name_to_tile(signal), mem_tile_inputs, name=signal))
-            monitors.append(signal)
+
+        for x,y in itertools.product(range(args.width), range(args.height)):
+            tile_name = f"Tile_X{x:02X}_Y{y:02X}"
+            tile_inst = f"dut.DUT.Interconnect_inst0.Tile_X{x:02X}_Y{y:02X}"
+            if x%4 == 3:
+                tb.body.append(gen_monitor(tile_inst, mem_tile_inputs, name=tile_name))
+            else:
+                tb.body.append(gen_monitor(tile_inst, pe_tile_inputs, name=tile_name))
+            monitors.append(tile_name)
+
+        # for signal in mapping['trace']:
+        #     print(f"derp for {signal}")
+        #     print(name_to_tile(signal))
+        #     tb.body.append(gen_monitor(name_to_tile(signal), mem_tile_inputs, name=signal))
+        #     monitors.append(signal)
 
         tb.body += parse_ast("\n".join(f"cocotb.fork(monitor_{name}())" for name in monitors)).body
 
