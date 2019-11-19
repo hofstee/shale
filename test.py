@@ -43,7 +43,9 @@ def gather_input_ports(modulename):
         return ports
 
 mem_tile_inputs = list(gather_input_ports("Tile_MemCore"))
+mem_tile_inputs.remove("clk")
 pe_tile_inputs = list(gather_input_ports("Tile_PE"))
+pe_tile_inputs.remove("clk")
 
 def gen_monitor(module, portlist, name=None):
     if name is None:
