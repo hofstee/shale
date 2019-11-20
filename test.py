@@ -42,6 +42,7 @@ def gather_input_ports(modulename):
         ports = [port[-1] for port in ports if port[0] == "input"]
         return ports
 
+io_tile_inputs = list(gather_input_ports("Tile_io_core"))
 mem_tile_inputs = list(gather_input_ports("Tile_MemCore"))
 mem_tile_inputs.remove("clk")
 pe_tile_inputs = list(gather_input_ports("Tile_PE"))
@@ -431,10 +432,12 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     if not args.garnet_flow: # TODO: re-enable when halide generates map.json
         monitors = []
 
-        for x,y in itertools.product(range(args.width), range(args.height)):
+        for x,y in itertools.product(range(args.width), range(args.height+1)):
             tile_name = f"Tile_X{x:02X}_Y{y:02X}"
             tile_inst = f"dut.DUT.Interconnect_inst0.Tile_X{x:02X}_Y{y:02X}"
-            if x%4 == 3:
+            if y == 0:
+                tb.body.append(gen_monitor(tile_inst, io_tile_inputs, name=tile_name))
+            elif x%4 == 3:
                 tb.body.append(gen_monitor(tile_inst, mem_tile_inputs, name=tile_name))
             else:
                 tb.body.append(gen_monitor(tile_inst, pe_tile_inputs, name=tile_name))
