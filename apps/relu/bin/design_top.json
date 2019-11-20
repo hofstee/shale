@@ -1,0 +1,57 @@
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",[
+          ["in",["Record",[["arg_0",["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]],
+          ["out",["Array",1,["Array",1,["Array",16,"Bit"]]]],
+          ["in_en","BitIn"],
+          ["valid","Bit"]
+        ]],
+        "instances":{
+          "const0__241":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
+          },
+          "count__hw_output_x___scan_dim_0":{
+            "genref":"commonlib.counter",
+            "genargs":{"inc":["Int",1], "max":["Int",63], "min":["Int",0], "width":["Int",16]}
+          },
+          "count__hw_output_x___scan_dim_0_reset":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "count__hw_output_x___scan_dim_0_wen":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
+          },
+          "count__hw_output_y___scan_dim_1":{
+            "genref":"commonlib.counter",
+            "genargs":{"inc":["Int",1], "max":["Int",63], "min":["Int",0], "width":["Int",16]}
+          },
+          "count__hw_output_y___scan_dim_1_reset":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "smax_240_241_242":{
+            "genref":"commonlib.smax",
+            "genargs":{"width":["Int",16]}
+          }
+        },
+        "connections":[
+          ["smax_240_241_242.in1","const0__241.out"],
+          ["count__hw_output_x___scan_dim_0_wen.out","count__hw_output_x___scan_dim_0.en"],
+          ["count__hw_output_y___scan_dim_1.en","count__hw_output_x___scan_dim_0.overflow"],
+          ["count__hw_output_x___scan_dim_0_reset.out","count__hw_output_x___scan_dim_0.reset"],
+          ["count__hw_output_y___scan_dim_1_reset.out","count__hw_output_y___scan_dim_1.reset"],
+          ["smax_240_241_242.in0","self.in.arg_0.0.0"],
+          ["smax_240_241_242.out","self.out.0.0"],
+          ["self.valid","self.in_en"]
+        ]
+      }
+    }
+  }
+}
+}
