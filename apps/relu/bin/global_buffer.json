@@ -13,11 +13,11 @@
         "instances":{
           "gb_input":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"width":["Int",16], "depth":["Int",4096], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",4096], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",4096], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+            "genargs":{"width":["Int",16], "depth":["Int",64], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",64], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",64], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           },
           "gb_output":{
             "genref":"commonlib.unified_buffer",
-            "genargs":{"width":["Int",16], "depth":["Int",4096], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",4096], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",4096], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+            "genargs":{"width":["Int",16], "depth":["Int",64], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",64], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",64], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           }
         },
         "connections":[
