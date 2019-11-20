@@ -1,0 +1,24 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "484",
+            "num_inactive": "0",
+            "file": "saxpy_input.raw",
+            "trace": "in.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "1",
+            "file": "saxpy_gold.raw",
+            "trace": "out.trace"
+        }
+    ],
+    "trace": [
+    ]
+}
