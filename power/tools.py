@@ -1,3 +1,4 @@
+import pandas as pd
 import sqlite3
 import time
 from util import get_labels
@@ -6,6 +7,80 @@ class PrimeTime():
     def __init__(self, *, batch_size=1024):
         self.batch_size = batch_size
         pass
+
+    def create_df(self, rpt_file, db_file):
+        header = []
+
+        with open(rpt_file) as f:
+            hier = []
+            rows = []
+            skip_header = True
+            for k, line in enumerate(f):
+                line_num = k+1
+                if skip_header:
+                    if "----" in line:
+                        skip_header = False
+                        temp = []
+                        for header_line in reversed(header):
+                            if header_line.strip() == '':
+                                break
+                            temp.append(header_line)
+                        labels = get_labels("\n".join(reversed(temp)))
+                        print(labels)
+                    else:
+                        header.append(line)
+                    continue
+
+                if line == "1\n":
+                    print(f"Done on line {line_num}")
+                    break
+
+                info = line.split()
+                if len(info) == 6:
+                    cell = None
+                    name, internal, switching, leakage, total, percent = info
+                elif len(info) == 7:
+                    name, cell, internal, switching, leakage, total, percent = info
+                elif len(info) == 10:
+                    cell = None
+                    name, internal, switching, leakage, peak_power, peak_time, glitch_power, x_tran_power, total, percent = info
+                elif len(info) == 11:
+                    name, cell, internal, switching, leakage, peak_power, peak_time, glitch_power, x_tran_power, total, percent = info
+                else:
+                    raise NotImplementedError(line)
+
+                if cell is not None:
+                    cell = cell.lstrip("(").rstrip(")")
+                if total == "N/A":
+                    total = None
+
+                info = {
+                    "indent": len(line) - len(line.lstrip(' ')),
+                    "id": line_num,
+                    "name": name,
+                    "cell": cell,
+                    "internal": internal,
+                    "switching": switching,
+                    "leakage": leakage,
+                    "total": total,
+                }
+
+                while len(hier) > 0 and info["indent"] <= hier[-1]["indent"]:
+                    node = hier.pop()
+                    node["last"] = line_num-1
+                    node["parent"] = hier[-1]["id"] if len(hier) > 0 else None
+                    rows.append(node)
+
+                hier.append(info)
+
+            while len(hier) > 0:
+                node = hier.pop()
+                node["last"] = line_num-1
+                node["parent"] = hier[-1]["id"] if len(hier) > 0 else None
+                rows.append(node)
+
+        return pd.DataFrame(rows)
+
 
     def create_db(self, rpt_file, db_file):
         con = sqlite3.connect(db_file)

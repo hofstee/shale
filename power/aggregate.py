@@ -303,24 +303,33 @@ def tile_breakdown(tilename, df):
 # config_regs[config_regs.parent.isin(mem_tiles.id)]
 
 def main(args):
-    if args.force:
-        if os.path.exists(args.db):
-            os.remove(args.db)
-
-    if args.db is ":memory:" or not os.path.exists(args.db):
+    if args.db is None:
         start = time.time()
         if args.source == "PrimeTime":
-            conn = PrimeTime().create_db(args.src, args.db)
-        elif args.source == "Genus":
-            conn = Genus().create_db(args.src, args.db)
+            df = PrimeTime().create_df(args.src, args.db)
         else:
             raise NotImplementedError(f"Can't parse report from `{args.source}`")
         logging.info(f"Creating database took {time.time()-start:0.2f}s")
     else:
-        conn = sqlite3.connect(args.db)
+        if args.force:
+            if os.path.exists(args.db):
+                os.remove(args.db)
 
-    c = conn.cursor()
-    df = pd.read_sql("SELECT * FROM nodes", conn)
+        if args.db is ":memory:" or not os.path.exists(args.db):
+            start = time.time()
+            if args.source == "PrimeTime":
+                conn = PrimeTime().create_db(args.src, args.db)
+            elif args.source == "Genus":
+                conn = Genus().create_db(args.src, args.db)
+            else:
+                raise NotImplementedError(f"Can't parse report from `{args.source}`")
+            logging.info(f"Creating database took {time.time()-start:0.2f}s")
+        else:
+            conn = sqlite3.connect(args.db)
+
+        c = conn.cursor()
+        df = pd.read_sql("SELECT * FROM nodes", conn)
+
     df.parent = df.parent.astype('Int64')
 
     # print(df.sort_values(by=['total'], ascending=False))
@@ -407,7 +416,7 @@ if __name__ == "__main__":
     """)
 
     parser.add_argument("src", type=str)
-    parser.add_argument("--db", type=str)
+    parser.add_argument("--db", type=str, default="None")
     parser.add_argument("--source", type=str, default="PrimeTime")
     parser.add_argument("--report-dir", type=str, default="reports")
     parser.add_argument("--force", action="store_true")
