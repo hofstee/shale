@@ -17,10 +17,6 @@ from tile import group_tiles_by_op, get_tile_ops
 pd.set_option('display.max_colwidth', -1)
 
 
-def tile_ops(name):
-    return group_tiles_by_op(get_tile_ops(name))
-
-
 def get_cover(intervals):
     res = set()
     for lo, hi in intervals:
@@ -340,7 +336,7 @@ def main(args):
     tile_breakdown(args.top, df)
     assert False
 
-    op_map = tile_ops("mapped.json")
+    op_map = group_tiles_by_op(get_tile_ops("mapped.json", "design.place"))
     active_tiles = set()
     for tiles in op_map.values():
         active_tiles.update(tiles)

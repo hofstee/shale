@@ -53,8 +53,8 @@ def parse_placement(filename):
 
 
 # mapped.json -> {tile: op}
-def get_tile_ops(design):
-    placement = parse_placement("/home/teguhhofstee/aha/temp/design.place")
+def get_tile_ops(design, placement):
+    placement = parse_placement(placement)
     with open(design) as f:
         design = json.load(f)
         instances = design["namespaces"]["global"]["modules"]["DesignTop"]["instances"]
@@ -93,12 +93,6 @@ def get_tile_ops(design):
 
 # {tile: op} -> {op: [tiles]}
 def group_tiles_by_op(tiles):
-    placement = parse_placement("/home/teguhhofstee/aha/temp/design.place")
-
-    def name_to_tile(name):
-        x, y = placement[0][placement[1][name]]
-        return f"Tile_X{x:02X}_Y{y:02X}"
-
     op_mapping = {}
     for tile, op in tiles.items():
         op_mapping[op] = op_mapping.get(op, []) + [tile]
