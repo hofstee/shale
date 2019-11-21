@@ -50,18 +50,16 @@ class PrimeTime():
 
                 if cell is not None:
                     cell = cell.lstrip("(").rstrip(")")
-                if total == "N/A":
-                    total = None
 
                 info = {
                     "indent": len(line) - len(line.lstrip(' ')),
                     "id": line_num,
                     "name": name,
                     "cell": cell,
-                    "internal": internal,
-                    "switching": switching,
-                    "leakage": leakage,
-                    "total": total,
+                    "internal": None if internal == "N/A" else float(internal),
+                    "switching": None if switching == "N/A" else float(switching),
+                    "leakage": None if leakage == "N/A" else float(leakage),
+                    "total": None if total == "N/A" else float(total),
                 }
 
                 while len(hier) > 0 and info["indent"] <= hier[-1]["indent"]:
