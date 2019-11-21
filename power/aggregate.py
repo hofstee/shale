@@ -233,7 +233,7 @@ def tile_breakdown(tilename, df):
         groups[k] = filter_ancestors(groups[k])
         covers[k] = get_cover(get_intervals(groups[k]))
 
-        with open(f"reports/{k}.csv", "w") as f:
+        with open(f"{args.report_dir}/{k}.csv", "w") as f:
             f.write(cells[cells["id"].isin(covers[k])].to_csv())
 
     for k in groups:
