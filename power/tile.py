@@ -52,7 +52,7 @@ def parse_placement(filename):
     return placement, name_to_id
 
 
-# mapped.json -> {tile: op}
+# mapped.json, design.place -> {tile: op}
 def get_tile_ops(design, placement):
     placement = parse_placement(placement)
     with open(design) as f:
@@ -98,8 +98,3 @@ def group_tiles_by_op(tiles):
         op_mapping[op] = op_mapping.get(op, []) + [tile]
 
     return op_mapping
-
-
-print(get_tile_ops("/home/teguhhofstee/aha/temp/mapped.json"))
-print(get_active_tiles("/home/teguhhofstee/aha/temp/design.route"))
-print(group_tiles_by_op(get_tile_ops("/home/teguhhofstee/aha/temp/mapped.json")))
