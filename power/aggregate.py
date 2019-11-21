@@ -234,7 +234,7 @@ def tile_breakdown(tilename, df):
         covers[k] = get_cover(get_intervals(groups[k]))
 
         with open(f"{args.report_dir}/{k}.csv", "w") as f:
-            f.write(cells[cells["id"].isin(covers[k])].to_csv())
+            f.write(cells[cells["id"].isin(covers[k])].sort_values(by=['total'], ascending=False).to_csv())
 
     for k in groups:
         groups[k] = remove_covered(groups[k], covers)
