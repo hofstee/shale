@@ -412,7 +412,7 @@ if __name__ == "__main__":
     """)
 
     parser.add_argument("src", type=str)
-    parser.add_argument("--db", type=str, default="None")
+    parser.add_argument("--db", type=str, default=None)
     parser.add_argument("--source", type=str, default="PrimeTime")
     parser.add_argument("--report-dir", type=str, default="reports")
     parser.add_argument("--force", action="store_true")
