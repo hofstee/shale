@@ -5,7 +5,6 @@ import logging
 import numpy as np
 import os
 import pandas as pd
-import sqlite3
 import time
 import json
 
@@ -311,6 +310,7 @@ def main(args):
             raise NotImplementedError(f"Can't parse report from `{args.source}`")
         logging.info(f"Creating database took {time.time()-start:0.2f}s")
     else:
+        import sqlite3
         if args.force:
             if os.path.exists(args.db):
                 os.remove(args.db)

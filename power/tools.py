@@ -1,5 +1,4 @@
 import pandas as pd
-import sqlite3
 import time
 from util import get_labels
 
@@ -83,6 +82,7 @@ class PrimeTime():
 
 
     def create_db(self, rpt_file, db_file):
+        import sqlite3
         con = sqlite3.connect(db_file)
         # con.execute("PRAGMA foreign_keys = ON")
 
@@ -219,6 +219,7 @@ class Genus():
         pass
 
     def create_db(self, rpt_file, db_file):
+        import sqlite3
         con = sqlite3.connect(db_file)
         con.execute("PRAGMA foreign_keys = 1")
 
