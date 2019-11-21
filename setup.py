@@ -11,6 +11,7 @@ setup(
         "cocotb @ git+http://github.com/thofstee/cocotb.git@timescale#egg=cocotb",
         "genesis2",
         "numpy",
+        "pandas",
 #         "pycoreir",
     ],
 )
