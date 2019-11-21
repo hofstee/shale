@@ -668,6 +668,12 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     t_end = get_sim_time()
     # dut.TB_monitor_power = 0
 
+    with open("t_start", "w") as f:
+        f.write(f"{t_start}/ps")
+
+    with open("t_end", "w") as f:
+        f.write(f"{t_end}/ps")
+
     dut._log.info(f"{t_init}, {t_start}, {t_end}")
     with open("vcs_power_top.tcl", "w") as f:
         f.write(f\"\"\"

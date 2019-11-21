@@ -215,7 +215,7 @@ def pe_tile_groups(cells):
     return groups
 
 
-def tile_breakdown(tilename, df):
+def tile_breakdown(tilename, df, *, report_dir="reports"):
     top = df[df['name'] == tilename].iloc[0]
     cells = df[(df['id'] >= top['id']) & (df['id'] <= top['last'])]
 
@@ -233,8 +233,8 @@ def tile_breakdown(tilename, df):
         groups[k] = filter_ancestors(groups[k])
         covers[k] = get_cover(get_intervals(groups[k]))
 
-        with open(f"{args.report_dir}/{k}.csv", "w") as f:
-            f.write(cells[cells["id"].isin(covers[k])].to_csv())
+        with open(f"{report_dir}/{k}.csv", "w") as f:
+            f.write(cells[cells["id"].isin(covers[k])].sort_values(by=['total'], ascending=False).to_csv())
 
     for k in groups:
         groups[k] = remove_covered(groups[k], covers)
@@ -276,6 +276,7 @@ def tile_breakdown(tilename, df):
     #     'percent': '{:,.2%}'.format,
     # }))
 
+    return table
 
 
 # PE core	MEM core	GB	Interconnect	Other (processor, AXI)	DRAM
@@ -297,113 +298,55 @@ def tile_breakdown(tilename, df):
 # mem_tiles = df[df.name == "Tile_MemCore"]
 # config_regs[config_regs.parent.isin(mem_tiles.id)]
 
-def main(args):
-    if args.db is None:
+def analyze_tile(src, *, source="PrimeTime", db=None, top=None, force=False, report_dir="reports"):
+    if db is None:
         start = time.time()
-        if args.source == "PrimeTime":
-            df = PrimeTime().create_df(args.src, args.db)
+        if source == "PrimeTime":
+            df = PrimeTime().create_df(src, db)
         else:
-            raise NotImplementedError(f"Can't parse report from `{args.source}`")
+            raise NotImplementedError(f"Can't parse report from `{source}`")
         logging.info(f"Creating database took {time.time()-start:0.2f}s")
     else:
         import sqlite3
-        if args.force:
-            if os.path.exists(args.db):
-                os.remove(args.db)
+        if force:
+            if os.path.exists(db):
+                os.remove(db)
 
-        if args.db is ":memory:" or not os.path.exists(args.db):
+        if db is ":memory:" or not os.path.exists(db):
             start = time.time()
-            if args.source == "PrimeTime":
-                conn = PrimeTime().create_db(args.src, args.db)
-            elif args.source == "Genus":
-                conn = Genus().create_db(args.src, args.db)
+            if source == "PrimeTime":
+                conn = PrimeTime().create_db(src, db)
+            elif source == "Genus":
+                conn = Genus().create_db(src, db)
             else:
-                raise NotImplementedError(f"Can't parse report from `{args.source}`")
+                raise NotImplementedError(f"Can't parse report from `{source}`")
             logging.info(f"Creating database took {time.time()-start:0.2f}s")
         else:
-            conn = sqlite3.connect(args.db)
+            conn = sqlite3.connect(db)
 
         c = conn.cursor()
         df = pd.read_sql("SELECT * FROM nodes", conn)
+        conn.close()
+
 
     df.parent = df.parent.astype('Int64')
 
     # print(df.sort_values(by=['total'], ascending=False))
 
-    if args.top is None:
-        args.top = df[df["id"] == min(df["id"])].iloc[0]["name"]
+    if top is None:
+        top = df[df["id"] == min(df["id"])].iloc[0]["name"]
 
-    tile_breakdown(args.top, df)
-    assert False
-
-    op_map = group_tiles_by_op(get_tile_ops("mapped.json", "design.place"))
-    active_tiles = set()
-    for tiles in op_map.values():
-        active_tiles.update(tiles)
-
-    active_tiles = set("Interconnect_inst0_" + tile for tile in active_tiles)
-    print(active_tiles)
-
-    power_active = pd.DataFrame()
-    power_inactive = pd.DataFrame()
-    power_mem = pd.DataFrame()
-    power_pe = pd.DataFrame()
-
-    tiles_active = pd.DataFrame()
-    tiles_inactive = pd.DataFrame()
-    for _, tile in df.iterrows():
-        name = tile["name"]
-        cell = tile["cell"]
-
-        if cell == "(Tile_MemCore)":
-            results = tile
-            # results = mem_tile_breakdown(name)
-            power_mem = power_mem.append(results, ignore_index=True)
-        elif cell == "(Tile_PE)":
-            results = tile
-            # results = pe_tile_breakdown(name)
-            power_pe = power_pe.append(results, ignore_index=True)
-        else:
-            raise NotImplementedError(name, cell)
+    return tile_breakdown(top, df, report_dir=report_dir)
 
 
-        if name in active_tiles:
-            power_active = power_active.append(results, ignore_index=True)
-        else:
-            power_inactive = power_inactive.append(results, ignore_index=True)
-
-    print(power_active)
-    print(power_inactive)
-    print(power_pe)
-    print(power_mem)
-
-    active_pe = pd.merge(power_pe, power_active, how="inner", left_on="name", right_on="name")
-    inactive_pe = pd.merge(power_pe, power_inactive, how="inner", left_on="name", right_on="name")
-    active_mem = pd.merge(power_mem, power_active, how="inner", left_on="name", right_on="name")
-    inactive_mem = pd.merge(power_mem, power_inactive, how="inner", left_on="name", right_on="name")
-
-    with open("temp/aggregate.csv", "w") as f:
-        f.write(active_pe.to_csv())
-        f.write(inactive_pe.to_csv())
-        f.write(active_mem.to_csv())
-        f.write(inactive_mem.to_csv())
-
-    with open("temp/power_active.csv", "w") as f:
-        f.write(power_active.to_csv())
-
-    with open("temp/power_inactive.csv", "w") as f:
-        f.write(power_inactive.to_csv())
-
-    with open("temp/power_mem.csv", "w") as f:
-        f.write(power_mem.to_csv())
-
-    with open("temp/power_pe.csv", "w") as f:
-        f.write(power_pe.to_csv())
-
-    assert False
-
-
-    conn.close()
+def main(args):
+    analyze_tile(
+        args.src,
+        source=args.source,
+        db=args.db,
+        top=args.top,
+        force=args.force,
+    )
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="""
