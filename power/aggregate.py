@@ -255,8 +255,8 @@ def tile_breakdown(tilename, df):
     for a, b in itertools.combinations(groups, 2):
         overlap = covers[a] & covers[b]
         if not len(overlap) == 0:
-            logging.warn(f"`{a}` and `{b}` have {len(overlap)} overlapping cells. Double-counting.")
-            logging.warn(cells[cells["id"].isin(list(overlap))])
+            logging.warning(f"`{a}` and `{b}` have {len(overlap)} overlapping cells. Double-counting.")
+            logging.warning(cells[cells["id"].isin(list(overlap))])
 
     total_power = sum(top["total"])
     table = {}
