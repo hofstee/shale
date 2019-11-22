@@ -17,8 +17,8 @@ def analyze_app(args):
 
     for x,y in tile_ops:
         tilename = f"Tile_X{x:02X}_Y{y:02X}"
-        os.makedirs(f"reports/{tilename}", exist_ok=True)
-        breakdowns[(x,y)] = analyze_tile(f"{args.reports}/{tilename}/hierarchy.rpt", report_dir=f"reports/{tilename}")
+        os.makedirs(f"reports/{app.rsplit('/')[-1]}/{tilename}", exist_ok=True)
+        breakdowns[(x,y)] = analyze_tile(f"{args.reports}/{tilename}/hierarchy.rpt", report_dir=f"reports/{app.rsplit('/')[-1]}/{tilename}")
 
         if y == 0:
             tile_metadata[(x,y)]["type"] = "io"
