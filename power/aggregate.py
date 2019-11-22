@@ -130,6 +130,12 @@ def mem_tile_groups(cells):
         ]))
     ]
 
+    groups["clock"] = cells[
+        cells["name"].str.contains("|".join([
+            "CTS",
+        ]))
+    ]
+
     groups["dbuf_ctrl"] = cells[
         cells["name"].str.contains("|".join([
             "range",
@@ -233,9 +239,6 @@ def tile_breakdown(tilename, df, *, report_dir="reports"):
         groups[k] = filter_ancestors(groups[k])
         covers[k] = get_cover(get_intervals(groups[k]))
 
-        with open(f"{report_dir}/{k}.csv", "w") as f:
-            f.write(cells[cells["id"].isin(covers[k])].sort_values(by=['total'], ascending=False).to_csv())
-
     for k in groups:
         groups[k] = remove_covered(groups[k], covers)
         covers[k] = get_cover(get_intervals(groups[k]))
@@ -251,6 +254,11 @@ def tile_breakdown(tilename, df, *, report_dir="reports"):
     groups["other"] = cells[cells["id"].isin(uncovered)]
     groups["other"] = filter_ancestors(groups["other"])
     covers["other"] = get_cover(get_intervals(groups["other"]))
+
+    for k in groups:
+        with open(f"{report_dir}/{k}.csv", "w") as f:
+            f.write(cells[cells["id"].isin(covers[k])].sort_values(by=['total'], ascending=False).to_csv())
+
 
     for a, b in itertools.combinations(groups, 2):
         overlap = covers[a] & covers[b]
@@ -346,6 +354,7 @@ def main(args):
         db=args.db,
         top=args.top,
         force=args.force,
+        report_dir=args.report_dir,
     )
 
 if __name__ == "__main__":
