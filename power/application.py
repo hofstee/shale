@@ -11,7 +11,7 @@ def analyze_app(args):
     active_tiles = get_active_tiles(f"{args.app}/bin/design.route")
     tile_ops = get_tile_ops(f"{args.app}/bin/mapped.json", f"{args.app}/bin/design.place")
     tile_ops = {tile: tile_ops.get(tile, "passthrough") for tile in active_tiles}
-    tile_ops = {tile: tile_ops.get(tile, "inactive") for tile in itertools.product(range(args.width), range(args.height+1))}
+    tile_ops = {tile: tile_ops.get(tile, "inactive") for tile in itertools.product(range(args.width), range(1,args.height+1))}
     tile_metadata = {tile: {"op": tile_ops[tile]} for tile in tile_ops}
     breakdowns = {}
 
