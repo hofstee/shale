@@ -1,0 +1,37 @@
+{"top":"global.DesignTop",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DesignTop":{
+        "type":["Record",[
+          ["in",["Record",[["arg_1",["Array",1,["Array",1,["Array",16,"BitIn"]]]]]]],
+          ["reset","BitIn"],
+          ["in_en","BitIn"],
+          ["out",["Array",3,["Array",1,["Array",1,["Array",16,"Bit"]]]]],
+          ["valid","Bit"]
+        ]],
+        "instances":{
+          "gb_input":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",3600], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",3600], "dimensionality":["Int",2], "stride_0":["Int",1], "range_0":["Int",60], "stride_1":["Int",60], "range_1":["Int",60], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          },
+          "gb_output_0":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",3364], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",3364], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",3364], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          },
+          "gb_output_1":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",3364], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",3364], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",3364], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          },
+          "gb_output_2":{
+            "genref":"commonlib.unified_buffer",
+            "genargs":{"width":["Int",16], "depth":["Int",3364], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",3364], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",3364], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
+          }
+        },
+        "connections":[
+        ]
+      }
+    }
+  }
+}
+}
