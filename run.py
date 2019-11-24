@@ -1,4 +1,5 @@
 import argparse
+import csv
 import logging
 import os
 from pathlib import Path
@@ -7,6 +8,7 @@ import subprocess
 import sys
 from util.apps import gather_apps
 from util.generate_bitstreams import generate_bitstreams as gen_bitstreams
+from power.estimate import analyze_app
 
 parser = argparse.ArgumentParser()
 parser.add_argument("apps", nargs="*")
@@ -298,6 +300,15 @@ else:
     generate_testbenches(args.apps)
 
     if not args.dry_run:
+        with open(f"{args.app_root}/power.csv", "w") as f:
+            w = csv.DictWriter(f, fieldnames=["name", "power"])
+            w.writeheader()
+
+            for app in args.apps:
+                power = analyze_app(app, width=args.width, height=args.height)
+                print(app.parts[-1])
+                w.writerow({"name": app.parts[-1], "power": sum(power.values())})
+
         # We want garnet to be on the flow branch for running testbenches
         # because of the extra Verilog stubs
         subprocess.run(
