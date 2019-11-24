@@ -1,0 +1,33 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "8192",
+            "num_inactive": "0",
+            "file": "16_16_32_input.raw",
+            "trace": "in.trace"
+        },
+        {
+            "name": "weights",
+            "instance": "gb_weights",
+            "location": "1",
+            "num_active": "288",
+            "num_inactive": "0",
+            "file": "16_16_32_weights.raw",
+            "trace": "wt.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output",
+            "instance": "gb_output",
+            "location": "2",
+            "file": "16_16_32_gold.raw",
+            "trace": "out.trace"
+        }
+    ],
+    "trace": [
+    ]
+}
