@@ -13,5 +13,6 @@ setup(
         "numpy",
         "pandas",
 #         "pycoreir",
+        "tabulate",
     ],
 )

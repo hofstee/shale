@@ -128,11 +128,12 @@ def mem_power(active=False):
             + power["mem_ctrl_sram"]
             + power["mem_other"])
 
-print(f"ic_power        {ic_power(1, 1):.3e}W")
-print(f"pe_power        {pe_power(True):.3e}W")
-print(f"mem_power       {mem_power(True):.3e}W")
+# print(f"ic_power        {ic_power(1, 1):.3e}W")
+# print(f"pe_power        {pe_power(True):.3e}W")
+# print(f"mem_power       {mem_power(True):.3e}W")
 
-print(f"total_power     {mem_power(True) + ic_power(1, 1):.3e}W")
+# print(f"total_power     {mem_power(True) + ic_power(1, 1):.3e}W")
+
 # print(f"total_power  {total_power:.3e}W")
 
 
@@ -153,23 +154,32 @@ def analyze_app(app, *, width=32, height=16):
 
 
     power = {}
+    categories = {
+        "interconnect": 0,
+        "pe": 0,
+        "mem": 0,
+    }
     for tile, metadata in tile_metadata.items():
         power[tile] = 0
         is_active = not metadata["op"] in ["passthrough", "inactive"]
 
         # TODO: get better interconnect numbers
         power[tile] += ic_power(1, 0)
+        categories["interconnect"] += ic_power(1, 0)
 
         if metadata["type"] == "pe":
             power[tile] += pe_power(is_active)
+            categories["pe"] += pe_power(is_active)
         elif metadata["type"] == "mem":
             power[tile] += mem_power(is_active)
+            categories["mem"] += mem_power(is_active)
         else:
             raise NotImplementedError(tile, metadata)
         # print(tile)
 
     print(app, f"{sum(power.values()):.3e}W")
-    return power
+    print(categories)
+    return power, categories
 
 
 if __name__ == "__main__":

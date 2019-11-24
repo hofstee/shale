@@ -301,13 +301,26 @@ else:
 
     if not args.dry_run:
         with open(f"{args.app_root}/power.csv", "w") as f:
-            w = csv.DictWriter(f, fieldnames=["name", "power"])
+            w = csv.DictWriter(f, fieldnames=[
+                "name",
+                "total",
+                "interconnect",
+                "pe",
+                "mem"
+            ])
             w.writeheader()
 
             for app in args.apps:
                 power = analyze_app(app, width=args.width, height=args.height)
                 print(app.parts[-1])
-                w.writerow({"name": app.parts[-1], "power": sum(power.values())})
+                info = {
+                    "name": app.parts[-1],
+                    "total": sum(power.values()),
+                    "interconnect": categories["interconnect"],
+                    "pe": categories["pe"],
+                    "mem": categories["mem"],
+                }
+                w.writerow(info)
 
         # We want garnet to be on the flow branch for running testbenches
         # because of the extra Verilog stubs
