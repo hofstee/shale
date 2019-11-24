@@ -1,0 +1,38 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "64",
+            "num_inactive": "0",
+            "file": "camera_pipeline_input.raw",
+            "trace": "in.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output0",
+            "instance": "gb_output_0",
+            "location": "1",
+            "file": "camera_pipeline_gold0.raw",
+            "trace": "out0.trace"
+        },
+        {
+            "name": "output1",
+            "instance": "gb_output_1",
+            "location": "2",
+            "file": "camera_pipeline_gold1.raw",
+            "trace": "out1.trace"
+        },
+        {
+            "name": "output2",
+            "instance": "gb_output_2",
+            "location": "3",
+            "file": "camera_pipeline_gold2.raw",
+            "trace": "out2.trace"
+        }
+    ],
+    "trace": [
+    ]
+}

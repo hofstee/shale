@@ -1,0 +1,40 @@
+{
+    "inputs": [
+        {
+            "name": "input",
+            "instance": "gb_input",
+            "location": "0",
+            "num_active": "64",
+            "num_inactive": "0",
+            "file": "multiply_input.raw",
+            "trace": "in.trace"
+        },
+        {
+            "name": "weights",
+            "instance": "gb_weight",
+            "location": "1",
+            "num_active": "64",
+            "num_inactive": "0",
+            "file": "multiply_weights.raw",
+            "trace": "wt.trace"
+        }
+    ],
+    "outputs": [
+        {
+            "name": "output0",
+            "instance": "gb_output_0",
+            "location": "2",
+            "file": "multiply_gold0.raw",
+            "trace": "out0.trace"
+        },
+        {
+            "name": "output1",
+            "instance": "gb_output_1",
+            "location": "3",
+            "file": "multiply_gold1.raw",
+            "trace": "out1.trace"
+        }
+    ],
+    "trace": [
+    ]
+}
