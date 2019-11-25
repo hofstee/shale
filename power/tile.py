@@ -82,7 +82,7 @@ def get_tile_ops(design, placement):
                 tiles[(x, y)] = "io"
             elif params.get("genref", None) == "coreir.reg":
                 pass
-            elif params.get("genref", None) == "corebit.reg":
+            elif params.get("modref", None) == "corebit.reg":
                 pass
             else:
                 logging.warning(f"Not Implemented: `{params}`")

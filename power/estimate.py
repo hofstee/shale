@@ -33,27 +33,29 @@ power = {
 }
 
 pull_power = {
-    "other": (power["ic_base"]
-              + 2 * power["ic_track"] # addr lines
-              + 2 * power["ic_track"] # data lines
-              ),
+    "interconnect": (power["ic_base"]
+                     + 2 * power["ic_track"] # addr lines
+                     + 2 * power["ic_track"] # data lines
+                     ),
     "sram": (power["mem_base"]
              + power["mem_srams"]
               # + power["mem_clock"] # This was for the registers mainly...?
              + power["mem_other"]),
     # And we also burn a PE tile in the pull configuration
-    "pe": (power["pe_base"]
-           + power["pe_active"]
-           + 6 * power["reg16"] # extra stride registers
-           + 6 * power["reg16"] # extra range registers
-           + power["mem_clock"] / 4 # clock tree will be in PE?
-           ),
+    "pe": 2 * (power["ic_base"]
+               + power["ic_track"] # addr line
+               + power["pe_base"]
+               + power["pe_active"]
+               + 6 * power["reg16"] # extra stride registers
+               + 6 * power["reg16"] # extra range registers
+               + power["mem_clock"] / 4 # clock tree will be in PE?
+               ),
 }
 
 push_power = {
-    "other": (power["ic_base"]
-              + 2 * power["ic_track"] # data lines
-              ),
+    "interconnect": (power["ic_base"]
+                     + 2 * power["ic_track"] # data lines
+                     ),
     "sram": (power["mem_base"]
              + power["mem_srams"]
              + power["mem_other"]),
@@ -65,9 +67,9 @@ push_power = {
 }
 
 lb_power = {
-    "other": (power["ic_base"]
-              + 2 * power["ic_track"] # data lines
-              ),
+    "interconnect": (power["ic_base"]
+                     + 2 * power["ic_track"] # data lines
+                     ),
     "sram": (power["mem_base"]
              + power["mem_srams"]
              + power["mem_other"]),
@@ -76,9 +78,9 @@ lb_power = {
 }
 
 lbdb_power = {
-    "other": (power["ic_base"]
-              + 2 * power["ic_track"] # data lines
-              ),
+    "interconnect": (power["ic_base"]
+                     + 2 * power["ic_track"] # data lines
+                     ),
     "sram": (power["mem_base"]
              + power["mem_srams"]
              + power["mem_other"]),
@@ -90,9 +92,9 @@ lbdb_power = {
 }
 
 ub_power = {
-    "other": (power["ic_base"]
-              + 2 * power["ic_track"] # data lines
-              ),
+    "interconnect": (power["ic_base"]
+                     + 2 * power["ic_track"] # data lines
+                     ),
     "sram": (power["mem_base"]
              + power["mem_srams"]
              + power["mem_other"]),
