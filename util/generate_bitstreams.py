@@ -83,15 +83,23 @@ def generate_bitstreams(args):
                             "--output-file", f"{entry.resolve()}/bin/{name}.bs",
                         ],
                         cwd="deps/garnet",
-                        stdout=subprocess.PIPE,
+                        capture_output=True,
                         text=True,
                     )
 
                     with open (f"{entry.resolve()}/bin/garnet.log", "w") as log:
                         log.write(p.stdout)
 
+                    with open (f"{entry.resolve()}/bin/garnet.err", "w") as log:
+                        log.write(p.stderr)
+
+                    for line in p.stderr.split("\n"):
+                        if "WARN" in line:
+                            logging.warning(line)
+
                     if p.returncode:
                         logging.error(f"Garnet failed to map `{name}`")
+                        logging.error(p.stderr)
                         logging.debug(p.stdout)
                     else:
                         for collateral in os.scandir("deps/garnet/temp"):
