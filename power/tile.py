@@ -1,5 +1,6 @@
 from canal.pnr_io import __parse_raw_routing_result
 import json
+import logging
 
 
 def get_loc(node_str: str):
@@ -81,8 +82,11 @@ def get_tile_ops(design, placement):
                 tiles[(x, y)] = "io"
             elif params.get("genref", None) == "coreir.reg":
                 pass
+            elif params.get("genref", None) == "corebit.reg":
+                pass
             else:
-                raise NotImplementedError(params)
+                logging.warning(f"Not Implemented: `{params}`")
+                # raise NotImplementedError(params)
 
     for tile in tiles:
         if tiles[tile] in ("mult_0", "mult_1", "mult_2"):
