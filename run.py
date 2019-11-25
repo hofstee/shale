@@ -79,9 +79,9 @@ def generate_garnet():
         up_to_date = False
 
     if up_to_date:
-        print(f"INFO: `garnet.v` is already up to date.")
+        logging.info("`garnet.v` is already up to date.")
     else:
-        print(f"INFO: Generating `garnet.v`...")
+        logging.info("Generating `garnet.v`...")
         extra_args = []
         if args.power:
             extra_args += [
@@ -315,7 +315,6 @@ else:
                     continue
 
                 power, categories = analyze_app(app, width=args.width, height=args.height)
-                print(app.parts[-1])
                 info = {
                     "name": app.parts[-1],
                     "total": sum(power.values()),

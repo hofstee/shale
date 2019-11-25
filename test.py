@@ -9,7 +9,6 @@ import itertools
 import json
 import os
 from pathlib import Path
-from pprint import pprint
 import textwrap
 
 from commands import *
@@ -117,8 +116,8 @@ def process_inst(inst):
     if num_bits != 16:
         raise NotImplementedError("Non 16-bit inputs are not supported.")
 
-    for k,v in args.items():
-        print(k, v)
+    # for k,v in args.items():
+    #     print(k, v)
 
     dims = []
     for k in range(args['dimensionality'][1]):
@@ -142,8 +141,8 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     with open(f"{args.app}/map.json", "r") as f2:
         mapping = json.load(f2)
 
-    print(mapping['inputs'])
-    print(mapping['outputs'])
+    # print(mapping['inputs'])
+    # print(mapping['outputs'])
 
     instances = js['namespaces']['global']['modules']['DesignTop']['instances']
 
@@ -243,7 +242,6 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
     from cocotb.drivers.amba import AXI4LiteMaster
     from cocotb.result import ReturnValue, TestSuccess
     from cocotb.utils import get_sim_time
-    from pprint import pprint
     import numpy as np
     import csv
 
@@ -738,14 +736,14 @@ with open(f"{args.app}/bin/global_buffer.json", "r") as f:
         trace = np.array(read_csv(f"{args.app}/{i['trace']}"), dtype=np.uint8)
         gold = [data[k] for k in index(i['dims'])]
 
-        print(f"Validating {i['name']}...")
+        logging.info(f"Validating {i['name']}...")
         if len(gold) != len(trace):
-            print(f"ERROR: Expected {len(gold)} values but got {len(trace)} instead.")
+            logging.error(f"Expected {len(gold)} values but got {len(trace)} instead.")
 
         for k in range(len(trace)):
             if gold[k] != trace[k]:
-                print(f"ERROR ({k}): Expected {hex(gold[k])} but got {hex(trace[k])}.")
-        print("Done.")
+                logging.error(f"({k}): Expected {hex(gold[k])} but got {hex(trace[k])}.")
+        logging.info("Validation complete.")
 
     if args.verify_trace:
         for i in inputs:
