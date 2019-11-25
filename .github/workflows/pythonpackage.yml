@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: debug
-        path: .
+        path: apps
     - name: Report application utilization
       run: |
         cat apps/utilization.csv | column -t -s ',' -n
