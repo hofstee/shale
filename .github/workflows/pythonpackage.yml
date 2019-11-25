@@ -40,6 +40,9 @@ jobs:
     - name: Report application utilization
       run: |
         cat apps/utilization.csv | column -t -s ',' -n
+    - name: Report power
+      run: |
+        cat apps/power.csv | column -t -s ',' -n
     - name: Upload artifact
       uses: actions/upload-artifact@master
       with:
