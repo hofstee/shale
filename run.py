@@ -311,7 +311,12 @@ else:
             w.writeheader()
 
             for app in args.apps:
+                logging.info(f"Estimating power for `{app}`...")
+
                 if not os.path.exists(f"{app}/bin/design.place"):
+                    continue
+
+                if not os.path.exists(f"{app}/bin/design.route"):
                     continue
 
                 power, categories = analyze_app(app, width=args.width, height=args.height)
