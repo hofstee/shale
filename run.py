@@ -311,7 +311,7 @@ else:
             w.writeheader()
 
             for app in args.apps:
-                power = analyze_app(app, width=args.width, height=args.height)
+                power, categories = analyze_app(app, width=args.width, height=args.height)
                 print(app.parts[-1])
                 info = {
                     "name": app.parts[-1],
