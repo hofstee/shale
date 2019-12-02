@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import textwrap
+import logging
 
 from commands import *
 
