@@ -32,6 +32,98 @@ If you specified any signals to be traced in the CoreIR
 `design_top.json` for an application, these will be output to
 `{signal_name}.csv` in the test directory of the application.
 
+### Running Gate-Level Power Analysis
+
+> :warning: This requires access to the TSMC16 techlib, so all the
+  following steps should be done on a machine with those files
+  present.
+
+> :warning: These steps only work with VCS currently.
+
+#### Prerequisites
+
+Before we can generate the switching activity files we need for power
+analysis, we'll need to have done a few things first:
+
+- Generate testbenches for applications you are interested
+  in. `apps/conv_3_3/conv_3_3_opt` is a good default if you don't have
+  one in mind. This can be done by doing `python run.py --width 12
+  --height 4 apps/conv_3_3/conv_3_3_opt --force`, for example.
+
+- Run a top-level simulation on an application using shale. It should
+  be as simple as running `make SIM=vcs` in the application test
+  directory (e.g. `apps/conv_3_3/conv_3_3_opt/test`) after the
+  testbench is created. This should generate CSV files for each of the
+  tiles in the CGRA, and also a files named `t_start` and `t_end`,
+  which mark the start and end times of the application running after
+  configuration has completed.
+
+- Have synthesized (and ideally placed+routed) netlists of the
+  `Tile_MemCore` and/or the `Tile_PE` from Garnet. For best results,
+  we want to have SPEF (parasitics) and SDF (delay annotation) files
+  for the design as well.
+
+#### Gate-Level Simulation
+
+```
+module load base vcs
+```
+
+> :warning: `make SIM=vcs clean` first. If you don't then VCS will not
+work as expected here, since we are changing the toplevel in the
+simulation.
+
+Here's an example of a command that will run gate-level simulation
+with SDF annotation:
+
+```
+# Set these to the design and the trace you are interested in running
+export TILETYPE=Tile_MemCore
+export TILE=Tile_X03_Y01
+
+# Oh boy...
+make SIM=vcs \
+     TESTCASE="test_tile" \
+     TOPLEVEL="$TILETYPE" \
+     TRACE="$TILE.csv" \
+     VERILOG_SOURCES="/sim/latest/garnet/tapeout_16/synth/$TILETYPE/pnr.v" \
+     COMPILE_ARGS="
+         +vcs+dumpvars+$TILE.vcd
+         -sdf max:$TILETYPE:'/sim/latest/garnet/tapeout_16/synth/$TILETYPE/final.sdf'
+         +sdfverbose +overlap +multisource_int_delays +neg_tchk -negdelay
+         `find /tsmc16/TSMCHOME/digital/Front_End/verilog/ -name '*.v' | grep -v "pwr" | sed -e 's/^/-v /' | xargs`
+         `find /sim/ajcars/mc -name '*.v' | grep -v pwr | sed -e 's/^/-v /' | xargs`"
+```
+
+#### Power Analysis
+
+The previous step should have generated a VCD file with the name of
+the trace you set. Following the example, this should be
+`Tile_X03_Y01.vcd`.
+
+The power analysis scripts are located in the `power` directory at the
+root of shale. We'll want to change to that directory (`cd power`). In
+this directory there is a script `run.sh` which will perform power
+analysis.
+
+Here's an example on running it:
+
+```
+env BASE=absolute/path/to/apps/conv_3_3/conv_3_3_opt/test \
+    APP=Tile_X03_Y01 \
+    DESIGN=Tile_MemCore \
+    T_0=$(cat absolute/path/to/apps/conv_3_3/conv_3_3_opt/test/t_start) \
+    T_1=$(cat absolute/path/to/apps/conv_3_3/conv_3_3_opt/test/t_end) \
+    ./run.sh
+```
+
+Results should be in `reports/Tile_X03_Y00/` after it completes. The
+most informative files are probably:
+
+- `switching.rpt` toggle rates for each net in the design.
+
+- `hierarchy.rpt` a power breakdown for all cells in the design.
+
 ### Creating a `map.json` for your application
 
 As an example, the `map.json` for conv_3_3 looks like this:
@@ -115,6 +207,9 @@ then increment the next dimension of the loop if one exists.
 
 #### Tracing application signals
 
+> :warning: Currently, all tiles in the application are traced by
+  default, regardless of how the `trace` field is specified.
+
 The `trace` field is a list of signals from the `design_top.json` that
 should be monitored during application execution. By default they are
 saved to `{signal_name}.csv`. These are used when generating tile
@@ -125,7 +220,7 @@ specific tile in the CGRA it is much faster to just simulate the
 tile. More information can be found in the section in this readme
 about 'Generating Tile Power Reports'.
 
-### Generating Tile Power Reports (SAIF/VCD)
+### Generating Tile-Level Switching Activity (SAIF/VCD)
 
 #### VCS
 
