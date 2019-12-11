@@ -3,7 +3,7 @@
 
 ## Setup Instructions
 ```
-git clone --recurse-submodules git@github.com:THofstee/shale.git
+git clone --recurse-submodules git@github.com:hofstee/shale.git
 pip install -r deps/garnet/requirements.txt
 pip install --ignore-installed deps/jmapper-0.1.19-cp37-cp37m-manylinux1_x86_64.whl
 pip install -e .
