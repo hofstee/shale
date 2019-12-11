@@ -1,5 +1,5 @@
 # shale
-[![Actions Status](https://github.com/thofstee/shale/workflows/Python%20package/badge.svg)](https://github.com/thofstee/shale/actions)
+[![Actions Status](https://github.com/hofstee/shale/workflows/Python%20package/badge.svg)](https://github.com/hofstee/shale/actions)
 
 ## Setup Instructions
 ```
