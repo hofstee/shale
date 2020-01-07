@@ -29,7 +29,7 @@
             "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "linebuffer_bank_0_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "linebuffer_bank_0_0_flush":{
@@ -37,7 +37,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "linebuffer_bank_0_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "linebuffer_bank_0_1_flush":{
@@ -45,7 +45,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "linebuffer_base":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",512], "dimensionality":["Int",5], "init":["Json",{"init":[0]}], "iter_cnt":["Int",5376], "logical_size":["Json",{"capacity":[512]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",3], "range_1":["Int",2], "range_2":["Int",16], "range_3":["Int",4], "range_4":["Int",14], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",16], "stride_1":["Int",256], "stride_2":["Int",1], "stride_3":["Int",0], "stride_4":["Int",16], "stride_5":["Int",0], "width":["Int",16]}
           },
           "linebuffer_base_flush":{
@@ -86,7 +86,7 @@
             "genargs":{"iterations":["Int",6], "width":["Int",16]}
           },
           "kernela0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",72], "dimensionality":["Int",5], "iter_cnt":["Int",4704], "logical_size":["Json",{"capacity":[72]}], "num_input_ports":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",3], "range_1":["Int",2], "range_2":["Int",14], "range_3":["Int",4], "range_4":["Int",14], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",3], "stride_1":["Int",9], "stride_2":["Int",0], "stride_3":["Int",18], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16],"init":["Json",{"init":[0]}]}
           },
           "kernela0_flush":{
@@ -94,7 +94,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "kernela0$1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",72], "dimensionality":["Int",5], "iter_cnt":["Int",4704], "logical_size":["Json",{"capacity":[72]}], "num_input_ports":["Int",1], "output_starting_addrs":["Json",{"output_start":[1]}], "range_0":["Int",3], "range_1":["Int",2], "range_2":["Int",14], "range_3":["Int",4], "range_4":["Int",14], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",3], "stride_1":["Int",9], "stride_2":["Int",0], "stride_3":["Int",18], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16],"init":["Json",{"init":[0]}]}
          },
           "kernela0$1_flush":{
@@ -102,7 +102,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "kernela0$2":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",72], "dimensionality":["Int",5], "iter_cnt":["Int",4704], "logical_size":["Json",{"capacity":[72]}], "num_input_ports":["Int",1], "output_starting_addrs":["Json",{"output_start":[2]}], "range_0":["Int",3], "range_1":["Int",2], "range_2":["Int",14], "range_3":["Int",4], "range_4":["Int",14], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",3], "stride_1":["Int",9], "stride_2":["Int",0], "stride_3":["Int",18], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16],"init":["Json",{"init":[0]}]}
           },
           "kernela0$2_flush":{

@@ -12,15 +12,15 @@
         ]],
         "instances":{
           "gb_input":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"width":["Int",16], "depth":["Int",8192], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",8192], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",8192], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           },
           "gb_weights":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"width":["Int",16], "depth":["Int",288], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",288], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",288], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           },
            "gb_output":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"width":["Int",16], "depth":["Int",196], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",196], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",196], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "stride_3":["Int",0], "range_3":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "starting_addr":["Int",0], "init":["Json",{"init":[0]}]}
           }
         },

@@ -12,7 +12,7 @@
                  ]],
                  "instances":{
                      "ub_weight":{
-                         "genref":"commonlib.unified_buffer",
+                         "genref":"lakelib.unified_buffer",
                          "genargs":{"width":["Int",16], "depth":["Int",16], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",16], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",16], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "output_starting_addrs":["Json",{"output_start":[0]}], "init":["Json",{"init":[0]}], "logical_size":["Json",{"capacity":[16]}]}
                      },
                      "ub_weight_flush":{
@@ -20,7 +20,7 @@
                          "modargs":{"value":["Bool",false]}
                      },
                      "ub_input":{
-                         "genref":"commonlib.unified_buffer",
+                         "genref":"lakelib.unified_buffer",
                          "genargs":{"width":["Int",16], "depth":["Int",16], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",256], "dimensionality":["Int",2], "stride_0":["Int",1], "range_0":["Int",16], "stride_1":["Int",0], "range_1":["Int",16], "stride_2":["Int",0], "range_2":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "output_starting_addrs":["Json",{"output_start":[0]}], "init":["Json",{"init":[0]}], "logical_size":["Json",{"capacity":[16]}]}
                      },
                      "ub_input_flush":{
@@ -28,7 +28,7 @@
                          "modargs":{"value":["Bool",false]}
                      },
                      "ub_output":{
-                         "genref":"commonlib.unified_buffer",
+                         "genref":"lakelib.unified_buffer",
                          "genargs":{"width":["Int",16], "depth":["Int",16], "rate_matched":["Bool",false], "stencil_width":["Int",0], "iter_cnt":["Int",16], "dimensionality":["Int",1], "stride_0":["Int",1], "range_0":["Int",16], "stride_1":["Int",0], "range_1":["Int",0], "stride_2":["Int",0], "range_2":["Int",0], "chain_en":["Bool",false], "chain_idx":["Int",0], "output_starting_addrs":["Json",{"output_start":[0]}], "init":["Json",{"init":[0]}], "logical_size":["Json",{"capacity":[16]}]}
                      },
                      "ub_output_flush":{

@@ -337,7 +337,7 @@
             "modargs":{"value":["Bool",true]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_0_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_0_0_0":{
@@ -368,7 +368,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_0_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_0_1_0":{
@@ -396,7 +396,7 @@
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_1_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_1_0_0":{
@@ -414,7 +414,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_1_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_1_1_0":{
@@ -442,7 +442,7 @@
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_2_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_2_0_0":{
@@ -460,7 +460,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_2_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_2_1_0":{
@@ -488,7 +488,7 @@
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_3_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_3_0_0":{
@@ -506,7 +506,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_3_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",6], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",6], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",6], "logical_size":["Json",{"capacity":[6]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",3], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_bank_3_1_0":{
@@ -534,7 +534,7 @@
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'hxxxx"]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",1024], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",1024], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",1344], "logical_size":["Json",{"capacity":[1024]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",6], "range_1":["Int",16], "range_2":["Int",14], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",4], "stride_1":["Int",64], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_0_flush":{
@@ -542,7 +542,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",1024], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",1024], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",1344], "logical_size":["Json",{"capacity":[1024]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[1]}], "range_0":["Int",6], "range_1":["Int",16], "range_2":["Int",14], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",4], "stride_1":["Int",64], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_1_flush":{
@@ -550,7 +550,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_2":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",1024], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",1024], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",1344], "logical_size":["Json",{"capacity":[1024]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[2]}], "range_0":["Int",6], "range_1":["Int",16], "range_2":["Int",14], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",4], "stride_1":["Int",64], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_2_flush":{
@@ -558,7 +558,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_3":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",1024], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",1024], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",1344], "logical_size":["Json",{"capacity":[1024]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[3]}], "range_0":["Int",6], "range_1":["Int",16], "range_2":["Int",14], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",4], "stride_1":["Int",64], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_input_stencil_update_streamlinebuffer_base_bank_3_flush":{
@@ -582,7 +582,7 @@
             "modargs":{"value":["Bool",true]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_0_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_0_0_flush":{
@@ -590,7 +590,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_0_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_0_1_flush":{
@@ -598,7 +598,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_16_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_16_0_flush":{
@@ -606,7 +606,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_16_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_16_1_flush":{
@@ -614,7 +614,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_17_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_17_0_flush":{
@@ -622,7 +622,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_17_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_17_1_flush":{
@@ -630,7 +630,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_18_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_18_0_flush":{
@@ -638,7 +638,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_18_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_18_1_flush":{
@@ -646,7 +646,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_19_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_19_0_flush":{
@@ -654,7 +654,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_19_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_19_1_flush":{
@@ -662,7 +662,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_1_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_1_0_flush":{
@@ -670,7 +670,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_1_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_1_1_flush":{
@@ -678,7 +678,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_2_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_2_0_flush":{
@@ -686,7 +686,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_2_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_2_1_flush":{
@@ -694,7 +694,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_32_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_32_0_flush":{
@@ -702,7 +702,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_32_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_32_1_flush":{
@@ -710,7 +710,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_33_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_33_0_flush":{
@@ -718,7 +718,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_33_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_33_1_flush":{
@@ -726,7 +726,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_34_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_34_0_flush":{
@@ -734,7 +734,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_34_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_34_1_flush":{
@@ -742,7 +742,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_35_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_35_0_flush":{
@@ -750,7 +750,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_35_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_35_1_flush":{
@@ -758,7 +758,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_3_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",0], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_3_0_flush":{
@@ -766,7 +766,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_3_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",56], "dimensionality":["Int",1], "init":["Json",{"init":[0]}], "input_range_0":["Int",56], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",56], "logical_size":["Json",{"capacity":[56]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",56], "range_1":["Int",0], "range_2":["Int",0], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",true], "stencil_width":["Int",1], "stride_0":["Int",1], "stride_1":["Int",0], "stride_2":["Int",0], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_bank_3_1_flush":{
@@ -774,7 +774,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_0":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[0]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_0_flush":{
@@ -782,11 +782,11 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_1":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[1]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_10":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[34]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_10_flush":{
@@ -794,7 +794,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_11":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[35]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_11_flush":{
@@ -806,7 +806,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_2":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[2]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_2_flush":{
@@ -814,7 +814,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_3":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[3]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_3_flush":{
@@ -822,7 +822,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_4":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[16]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_4_flush":{
@@ -830,7 +830,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_5":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[17]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_5_flush":{
@@ -838,7 +838,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_6":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[18]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_6_flush":{
@@ -846,7 +846,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_7":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[19]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_7_flush":{
@@ -854,7 +854,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_8":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[32]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_8_flush":{
@@ -862,7 +862,7 @@
             "modargs":{"value":["Bool",false]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_9":{
-            "genref":"commonlib.unified_buffer",
+            "genref":"lakelib.unified_buffer",
             "genargs":{"chain_en":["Bool",false], "chain_idx":["Int",0], "depth":["Int",192], "dimensionality":["Int",3], "init":["Json",{"init":[0]}], "input_range_0":["Int",192], "input_range_1":["Int",0], "input_range_2":["Int",0], "input_range_3":["Int",0], "input_range_4":["Int",0], "input_range_5":["Int",0], "input_starting_addrs":["Json",{"input_start":[0]}], "input_stride_0":["Int",1], "input_stride_1":["Int",0], "input_stride_2":["Int",0], "input_stride_3":["Int",0], "input_stride_4":["Int",0], "input_stride_5":["Int",0], "iter_cnt":["Int",896], "logical_size":["Json",{"capacity":[192]}], "num_input_ports":["Int",1], "num_output_ports":["Int",1], "num_reduction_iter":["Int",1], "output_starting_addrs":["Json",{"output_start":[33]}], "range_0":["Int",4], "range_1":["Int",14], "range_2":["Int",16], "range_3":["Int",0], "range_4":["Int",0], "range_5":["Int",0], "rate_matched":["Bool",false], "stencil_width":["Int",0], "stride_0":["Int",0], "stride_1":["Int",0], "stride_2":["Int",4], "stride_3":["Int",0], "stride_4":["Int",0], "stride_5":["Int",0], "width":["Int",16]}
           },
           "ub_hw_kernel_stencil_update_streamlinebuffer_base_bank_9_flush":{
