@@ -154,6 +154,18 @@ def mem_tile_groups(cells):
         & ~cells.isin(groups["interconnect"]).all(1)
     ]
 
+    groups["dbuf_ctrl-config"] = groups["dbuf_ctrl"][
+        groups["dbuf_ctrl"]["cell"].str.contains("|".join([
+            "ConfigRegister",
+        ]))
+    ]
+
+    groups["dbuf_ctrl-other"] = groups["dbuf_ctrl"][
+        ~groups["dbuf_ctrl"]["cell"].str.contains("|".join([
+            "ConfigRegister",
+        ]))
+    ]
+
     groups["fifo_ctrl"] = cells[
         cells["name"].str.contains("|".join([
             "fifo_control",
@@ -192,6 +204,18 @@ def pe_tile_groups(cells):
     groups["interconnect"] = cells[
         cells["name"].str.contains("|".join([
             "CB",
+            "SB",
+        ]))
+    ]
+
+    groups["interconnect-CB"] = cells[
+        cells["name"].str.contains("|".join([
+            "CB",
+        ]))
+    ]
+
+    groups["interconnect-SB"] = cells[
+        cells["name"].str.contains("|".join([
             "SB",
         ]))
     ]

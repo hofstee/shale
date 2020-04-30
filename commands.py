@@ -10,6 +10,7 @@
 from inspect import currentframe
 import re
 import numpy as np
+import cocotb
 
 
 DMA = True
@@ -275,6 +276,10 @@ class WRITE_REG(Command):
 
         tester.step(2)
 
+    @cocotb.coroutine
+    def cocotb(dut, gc, db):
+        yield gc.write(self.addr, self.data)
+
     def compile(self, _globals):
         return f"*(volatile uint32_t*)(CGRA_REG_BASE + 0x{self.addr:08x}) = 0x{self.data:x};"
 
@@ -348,6 +353,11 @@ class READ_REG(Command):
         tester.eval()  # HACK
         tester.step(2)  # HACK
 
+    @cocotb.coroutine
+    def cocotb(dut, gc, db):
+        data = yield gc.read(self.addr)
+        raise ReturnValue(data)
+
     def compile(self, _globals):
         return f"errors += *(volatile uint32_t*)(CGRA_REG_BASE + 0x{self.addr:08x}) != 0x{self.data:x}"
 
@@ -405,6 +415,17 @@ class WRITE_DATA(Command):
             tester.poke(tester._circuit.soc_data_wr_strb, 0)
             tester.eval()
             tester.step(2)  # HACK
+
+    @cocotb.coroutine
+    def cocotb(dut, gc, db):
+        # TODO: no order guaranteed.
+        tasks = []
+        for k, x in enumerate(self.data.view(np.uint64)):
+            tasks.append(cocotb.fork(gb.write(self.addr, self.data)))
+        for task in tasks:
+            yield task.join()
+
+        yield gb.write(self.addr, self.data)
 
     def compile(self, _globals):
         data = self.data.view(np.uint64)
@@ -517,6 +538,12 @@ class READ_DATA(Command):
 
             # tester.expect(tester._circuit.soc_data_rd_data, self.data[k:k + 8])  # noqa
             tester.file_write(outfile, tester._circuit.soc_data_rd_data)
+
+    @cocotb.coroutine
+    def cocotb(dut, gc, db):
+        raise NotImplementedError()
+        data = yield gb.read(self.addr)
+        raise ReturnValue(data)
 
     def compile(self, _globals):
         if DMA:

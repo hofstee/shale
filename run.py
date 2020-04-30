@@ -231,70 +231,7 @@ def generate_testbenches(apps):
             os.symlink(f"{cwd}/extras/Makefile", f"{app}/test/Makefile")
 
 
-if args.garnet_flow:
-    raise NotImplementedError("Needs to be refactored.")
-
-    # We need a different version of Garnet than TBG, so we'll just
-    # generate our own.
-    generate_garnet()
-
-    # Grab CW_tap.v
-    if not os.path.exists("extras/CW_tap.v"):
-        cw_tap_f = "/cad/cadence/GENUS17.21.000.lnx86/share/synth/lib/chipware/sim/verilog/CW/CW_tap.v"
-        os.symlink(cw_tap_f, "extras/CW_tap.v")
-
-    # Create makefile
-    generate_makefile()
-
-    # Create bitstream
-    gen_bitstreams(args)
-
-    # Run testbenches
-    for app in args.apps:
-        # Symlink the GarnetFlow-generated bitstream
-        if not os.path.exists(f"{app}/bin/{app}.bs"):
-            os.symlink(f"/tmp/{app}.bs", f"{app}/bin/{app}.bs")
-
-        # Create testbench
-        subprocess.run(
-            [
-                "python",
-                "test.py",
-                app,
-                "--width", f"{args.width}",
-                "--garnet-flow",
-            ],
-        )
-
-        if os.path.islink(f"{app}/test/Makefile"):
-            os.remove(f"{app}/test/Makefile")
-
-        if not os.path.exists(f"{app}/test/Makefile"):
-            os.symlink(f"{cwd}/extras/Makefile", f"{app}/test/Makefile")
-
-        # Run top-level testbench
-        p = subprocess.run(
-            [
-                "make",
-                "SIM=vcs",
-            ],
-            cwd=f"{app}/test",
-        )
-
-        # Verify outputs
-        subprocess.run(
-            [
-                "python",
-                "test.py",
-                app,
-                "--verify-trace",
-                "--garnet-flow",
-            ],
-        )
 else:
-    if not args.skip_garnet:
-        generate_garnet()
-
     generate_makefile()
     generate_bitstreams()
     generate_testbenches(args.apps)

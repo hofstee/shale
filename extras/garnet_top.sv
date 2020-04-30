@@ -29,7 +29,8 @@ module Garnet_TB (
                   input         GB_rd_en,
                   input [31:0]  GB_wr_addr,
                   input [63:0]  GB_wr_data,
-                  input [7:0]   GB_wr_strb
+                  input [7:0]   GB_wr_strb,
+                  input         TB_monitor_power
                   );
 
    assign GC_BVALID = 1;

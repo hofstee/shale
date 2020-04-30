@@ -10,9 +10,14 @@ setup(
         "astor",
         "cocotb @ git+http://github.com/cocotb/cocotb.git#egg=cocotb",
         "genesis2",
+        "jmapper",
         "numpy",
         "pandas",
 #         "pycoreir",
+        "systemrdl-compiler",
         "tabulate",
     ],
+    entry_points = {
+        'console_scripts': ['shale=shale:main'],
+    },
 )

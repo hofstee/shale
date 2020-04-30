@@ -120,6 +120,7 @@ if __name__ == "__main__":
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--app-root", type=str, default="apps")
     parser.add_argument("--garnet-flow", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     args.apps = list(map(Path, args.apps))
     args.apps = list(map(lambda x: Path(args.app_root) / x, args.apps))
