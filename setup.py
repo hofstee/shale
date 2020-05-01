@@ -18,6 +18,6 @@ setup(
         "tabulate",
     ],
     entry_points = {
-        'console_scripts': ['shale=shale:main'],
+        'console_scripts': ['shale=shale.cli:main'],
     },
 )
