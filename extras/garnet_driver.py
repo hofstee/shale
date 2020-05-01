@@ -29,6 +29,7 @@ class GlobalBuffer(BusDriver):
 
         self.bus.wr_addr <= address
         self.bus.wr_data <= data
+        self.bus.wr_en <= 1
         self.bus.wr_strb <= byte_enable
 
         yield RisingEdge(self.clock)
@@ -55,10 +56,11 @@ class GlobalBuffer(BusDriver):
         self.bus.rd_en <= 0
         self.read_busy.release()
 
-         # 2 cycle read latency
-        yield RisingEdge(self.clock)
-
         yield ReadOnly()
+        while self.bus.rd_valid != 1:
+            yield RisingEdge(self.clock)
+            yield ReadOnly()
+
         data = self.bus.rd_data
 
         raise ReturnValue(data)
