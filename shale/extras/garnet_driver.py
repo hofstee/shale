@@ -57,7 +57,7 @@ class GlobalBuffer(BusDriver):
         self.read_busy.release()
 
         yield ReadOnly()
-        while self.bus.rd_valid != 1:
+        while self.bus.rd_data_valid != 1:
             yield RisingEdge(self.clock)
             yield ReadOnly()
 
