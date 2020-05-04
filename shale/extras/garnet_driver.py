@@ -4,8 +4,8 @@ from cocotb.drivers import BusDriver
 from cocotb.result import ReturnValue
 
 class GlobalBuffer(BusDriver):
-    _signals = ["rd_addr", "rd_data", "rd_en",
-                "wr_addr", "wr_data", "wr_strb"]
+    _signals = ["rd_addr", "rd_data", "rd_en", "rd_valid",
+                "wr_addr", "wr_data", "wr_en", "wr_strb"]
 
     def __init__(self, entity, name, clock):
         BusDriver.__init__(self, entity, name, clock)
