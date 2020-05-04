@@ -11,7 +11,12 @@ class GlobalBuffer(BusDriver):
         BusDriver.__init__(self, entity, name, clock)
 
         # Drive some sensible defaults (setimmediatevalue to avoid x asserts)
+        self.bus.rd_addr.setimmediatevalue(0)
         self.bus.rd_en.setimmediatevalue(0)
+
+        self.bus.wr_addr.setimmediatevalue(0)
+        self.bus.wr_data.setimmediatevalue(0)
+        self.bus.wr_en.setimmediatevalue(0)
         self.bus.wr_strb.setimmediatevalue(0)
 
         # Mutex for each channel that we master to prevent contention
