@@ -68,4 +68,4 @@ class GlobalBuffer(BusDriver):
 
         data = self.bus.rd_data
 
-        raise ReturnValue(data)
+        return data
