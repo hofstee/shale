@@ -24,48 +24,48 @@ class GlobalBuffer(BusDriver):
         self.read_busy = Lock("%s_rbusy" % name)
 
     @cocotb.coroutine
-    def write(self, address, data, byte_enable=0b11111111, sync=True):
+    async def write(self, address, data, byte_enable=0b11111111, sync=True):
         """Write a value to an address.
         """
         if sync:
-            yield RisingEdge(self.clock)
+            await RisingEdge(self.clock)
 
-        yield self.write_busy.acquire()
+        await self.write_busy.acquire()
 
         self.bus.wr_addr <= address
         self.bus.wr_data <= data
         self.bus.wr_en <= 1
         self.bus.wr_strb <= byte_enable
 
-        yield RisingEdge(self.clock)
+        await RisingEdge(self.clock)
 
         self.bus.wr_strb <= 0
         self.bus.wr_en <= 0
         self.write_busy.release()
 
     @cocotb.coroutine
-    def read(self, address, sync=True):
+    async def read(self, address, sync=True):
         """Read from an address.
         Returns:
             BinaryValue: The read data value.
         """
         if sync:
-            yield RisingEdge(self.clock)
+            await RisingEdge(self.clock)
 
-        yield self.read_busy.acquire()
+        await self.read_busy.acquire()
 
         self.bus.rd_addr <= address
         self.bus.rd_en <= 1
 
-        yield RisingEdge(self.clock)
+        await RisingEdge(self.clock)
 
         self.bus.rd_en <= 0
         self.read_busy.release()
 
-        yield ReadOnly()
+        await ReadOnly()
         while self.bus.rd_data_valid != 1:
-            yield RisingEdge(self.clock)
-            yield ReadOnly()
+            await RisingEdge(self.clock)
+            await ReadOnly()
 
         data = self.bus.rd_data
 
