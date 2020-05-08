@@ -65,8 +65,8 @@ class MyListener(RDLListener):
 # )
 
 files = [
-    "../garnet/global_controller/systemRDL/rdl_models/glc.rdl.final",
-    "../garnet/global_buffer/systemRDL/rdl_models/glb.rdl.final",
+    "/aha/garnet/global_controller/systemRDL/rdl_models/glc.rdl.final",
+    "/aha/garnet/global_buffer/systemRDL/rdl_models/glb.rdl.final",
 ]
 
 listener = MyListener()
