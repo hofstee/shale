@@ -23,7 +23,6 @@ class GlobalBuffer(BusDriver):
         self.write_busy = Lock("%s_wbusy" % name)
         self.read_busy = Lock("%s_rbusy" % name)
 
-    @cocotb.coroutine
     async def write(self, address, data, byte_enable=0b11111111, sync=True):
         """Write a value to an address.
         """
@@ -43,7 +42,6 @@ class GlobalBuffer(BusDriver):
         self.bus.wr_en <= 0
         self.write_busy.release()
 
-    @cocotb.coroutine
     async def read(self, address, sync=True):
         """Read from an address.
         Returns:
