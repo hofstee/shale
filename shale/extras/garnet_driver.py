@@ -40,6 +40,7 @@ class GlobalBuffer(BusDriver):
         yield RisingEdge(self.clock)
 
         self.bus.wr_strb <= 0
+        self.bus.wr_en <= 0
         self.write_busy.release()
 
     @cocotb.coroutine
