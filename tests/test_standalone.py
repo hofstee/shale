@@ -40,8 +40,11 @@ async def test_standalone(dut):
     dut.JTAG_TRSTn = 1
     dut.reset = 0
 
-    # stall cgra
-    await gc.write(gc_cfg_addr(rdl['glc.stall']), 0b11)
+    await gc.write(gc_cfg_addr(rdl['glc.global_reset']), 10)
+    await Timer(CLK_PERIOD * 20, 'ns')
+
+    # # stall cgra
+    # await gc.write(gc_cfg_addr(rdl['glc.stall']), 0b11)
 
     # for c in range(16):
     #     await gc.write(gb_cfg_addr(rdl['glb.ld_dma_header_0.start_addr'], controller=c), c)
@@ -117,6 +120,16 @@ async def test_standalone(dut):
     # wait for interrupt to clear
     await FallingEdge(dut.GC_interrupt)
 
+    # # verify configuration is as expected
+    # addrs = bitstream.view(np.uint32)[1::2]
+    # datas = bitstream.view(np.uint32)[0::2]
+    # for addr, gold in zip(addrs, datas):
+    #     await gc.write(gc_cfg_addr('glc.cgra_config.addr'), int(addr))
+    #     await gc.write(gc_cfg_addr('glc.cgra_config.read'), 1)
+    #     data = await gc.read(gc_cfg_addr('glc.cgra_config.rd_data'))
+    #     if data != int(gold):
+    #         dut._log.error("[0x{int(addr):08x}] Expected `0x{gold:08x}` but got `0x{data:08x}`")
+
     def load_image(filename):
         # image is stored as 8bpp raw binary data
         im = np.fromfile(filename, dtype=np.uint8)
@@ -170,7 +183,10 @@ async def test_standalone(dut):
     await gc.write(gc_cfg_addr(rdl['glc.strm_f2g_ier']), 0b100)
 
     # execute app
+    await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=0x1F),
+                   0b10 << 11)
     await gc.write(gc_cfg_addr(rdl['glc.stall']), 0b00)
+    await gc.write(gc_cfg_addr(rdl['glc.soft_reset']), 10)
     await gc.write(gc_cfg_addr(rdl['glc.stream_start_pulse']), 1)
 
     # wait for completion
