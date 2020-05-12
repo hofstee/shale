@@ -1,4 +1,4 @@
-# from pprint import pprint
+from pprint import pprint
 import subprocess
 from systemrdl import RDLCompiler, RDLWalker, RDLListener
 import tempfile
@@ -65,8 +65,8 @@ class MyListener(RDLListener):
 # )
 
 files = [
-    "/aha/garnet/global_controller/systemRDL/rdl_models/glc.rdl.final",
-    "/aha/garnet/global_buffer/systemRDL/rdl_models/glb.rdl.final",
+    "../garnet/global_controller/systemRDL/rdl_models/glc.rdl.final",
+    "../garnet/global_buffer/systemRDL/rdl_models/glb.rdl.final",
 ]
 
 listener = MyListener()
@@ -76,3 +76,4 @@ for f in files:
     RDLWalker(unroll=True).walk(root_node, listener)
 
 defs = listener.defs
+pprint(defs)

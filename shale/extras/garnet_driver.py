@@ -1,9 +1,40 @@
 import cocotb
-from cocotb.triggers import RisingEdge, ReadOnly, Lock
+from cocotb.clock import Clock
 from cocotb.drivers import BusDriver
+from cocotb.triggers import RisingEdge, ReadOnly, Lock
 from cocotb.result import ReturnValue
+from shale.util.rdl import defs as rdl
 
-class GlobalBuffer(BusDriver):
+
+class GlobalController:
+    def __init__(self, dut=None, mode="cocotb"):
+        self.mode = mode
+        if mode == "cocotb":
+            self.dut = dut
+            self.driver = AXI4LiteMaster(dut, "GC", dut.clk)
+        else:
+            pass
+
+    def _addr(self, reg_name, controller=0):
+        offset = rdl[reg_name]
+        if reg_name.startswith("glc"):
+            return offset
+        elif reg_name.startswith("glb"):
+            return int(f"0b1{controller:04b}{offset:08b}", 2)
+        raise NotImplementedError(reg_name)
+
+    async def write(self, reg_name, data):
+        addr = self._addr(reg_name)
+        if self.mode == "cocotb":
+            await self.driver.write(addr, data)
+        else:
+            print("WRITE", hex(addr), hex(data))
+
+    async def read(self, reg_name):
+        return await self.driver.read(_addr(rdl[reg_name]))
+
+
+class GlobalBufferDriver(BusDriver):
     _signals = ["rd_addr", "rd_data", "rd_data_valid", "rd_en",
                 "wr_addr", "wr_data", "wr_en", "wr_strb"]
 
@@ -68,3 +99,69 @@ class GlobalBuffer(BusDriver):
         data = self.bus.rd_data
 
         return data
+
+
+class GlobalBuffer:
+    def __init__(self, dut=None, mode="cocotb"):
+        self.mode = mode
+        if mode == "cocotb":
+            self.dut = dut
+            self.driver = GlobalBufferDriver(dut, "GC", dut.clk)
+        else:
+            pass
+
+    def _addr(self, offset):
+        return offset
+
+    async def write(self, offset, data):
+        addr = self._addr(offset)
+        if self.mode == "cocotb":
+            await self.driver.write(addr, data)
+        else:
+            print("WRITE", hex(addr), hex(data))
+
+    async def read(self, addr):
+        if self.mode == "cocotb":
+            return await self.driver.read(_addr(addr))
+        else:
+            print("READ", hex(addr))
+
+
+class Garnet:
+    def __init__(self, dut=None, mode="cocotb"):
+        self.mode = mode
+        self.dut = dut
+        self.gc = GlobalController(dut=dut, mode=mode)
+        self.gb = GlobalBuffer(dut=dut, mode=mode)
+
+        if mode == "cocotb":
+            cocotb.fork(Clock(self.dut.clk, CLK_PERIOD, 'ns').start())
+
+    async def reset(self):
+        # reset
+        cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ns').start())
+        self.dut.JTAG_TCK = 0
+        self.dut.JTAG_TDI = 0
+        self.dut.JTAG_TMS = 0
+        self.dut.JTAG_TRSTn = 1
+        self.dut.reset = 0
+        self.dut.GC_ARADDR = 0
+        self.dut.GC_AWADDR = 0
+        self.dut.GC_WDATA = 0
+        self.dut.GC_WSTRB = 0
+        await Timer(CLK_PERIOD * 10, 'ns')
+        self.dut.JTAG_TRSTn = 0
+        self.dut.reset = 1
+        await Timer(CLK_PERIOD * 10, 'ns')
+        self.dut.JTAG_TRSTn = 1
+        self.dut.reset = 0
+
+        await gc.write(gc_cfg_addr(rdl['glc.global_reset']), 10)
+        await Timer(CLK_PERIOD * 20, 'ns')
+
+
+    def log(self, *args):
+        if self.mode == "cocotb":
+            self.dut._log.info(*args)
+        else:
+            print(*args)
