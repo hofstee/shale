@@ -1,9 +1,9 @@
 from pathlib import Path
 
 def generate_makefile(garnet_dir):
-    extras_dir = (Path(__file__) / "../extras").resolve()
+    extras_dir = (Path(__file__) / "../../extras").resolve()
 
-    with open("extras/Makefile", "w") as f:
+    with open(extras_dir/"Makefile", "w") as f:
         f.write(rf"""
 VERILOG_SOURCES ?= \
     {garnet_dir}/tests/AO22D0BWP16P90.sv \
