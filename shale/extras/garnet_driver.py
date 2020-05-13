@@ -23,15 +23,19 @@ class GlobalController:
             return int(f"0b1{controller:04b}{offset:08b}", 2)
         raise NotImplementedError(reg_name)
 
-    async def write(self, reg_name, data):
-        addr = self._addr(reg_name)
+    async def write(self, reg_name, data, controller=0):
+        addr = self._addr(reg_name, controller)
         if self.mode == "cocotb":
             await self.driver.write(addr, data)
         else:
-            print("WRITE", hex(addr), hex(data))
+            print("GC WRITE", hex(addr), hex(data))
 
-    async def read(self, reg_name):
-        return await self.driver.read(_addr(rdl[reg_name]))
+    async def read(self, reg_name, controller=0):
+        addr = self._addr(reg_name, controller)
+        if self.mode == "cocotb":
+            return await self.driver.read(addr)
+        else:
+            print("GC READ", hex(addr))
 
 
 class GlobalBufferDriver(BusDriver):
@@ -118,13 +122,13 @@ class GlobalBuffer:
         if self.mode == "cocotb":
             await self.driver.write(addr, data)
         else:
-            print("WRITE", hex(addr), hex(data))
+            print("GB WRITE", hex(addr), hex(data))
 
     async def read(self, addr):
         if self.mode == "cocotb":
             return await self.driver.read(_addr(addr))
         else:
-            print("READ", hex(addr))
+            print("GB READ", hex(addr))
 
 
 class Garnet:
@@ -159,9 +163,16 @@ class Garnet:
         await gc.write(gc_cfg_addr(rdl['glc.global_reset']), 10)
         await Timer(CLK_PERIOD * 20, 'ns')
 
+    # TODO: this is definitely not a great way of doing this
+    async def wait(self, reg_name, value):
+        if self.mode =="cocotb":
+            await RisingEdge(self.dut.GC_interrupt)
+            await self.gc.write(reg_name, value)
+            await FallingEdge(self.dut.GC_interrupt)
 
     def log(self, *args):
         if self.mode == "cocotb":
             self.dut._log.info(*args)
         else:
-            print(*args)
+            pass
+            print("//", *args)
