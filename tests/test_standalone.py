@@ -2,12 +2,14 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.drivers.amba import AXI4LiteMaster
 from cocotb.result import TestFailure
-from cocotb.triggers import Timer, First, Combine, Join, RisingEdge, FallingEdge, with_timeout
+from cocotb.triggers import Timer, First, Combine, Join, RisingEdge, FallingEdge, ReadOnly, with_timeout
+import csv
 import json
 import numpy as np
 from pathlib import Path
 from shale.extras.garnet_driver import GlobalBuffer
 from shale.util.rdl import defs as rdl
+from shale.util.trace import get_inputs
 
 CLK_PERIOD = 10
 
@@ -17,11 +19,33 @@ def gc_cfg_addr(offset):
 def gb_cfg_addr(offset, controller=0):
     return int(f"0b1{controller:04b}{offset:08b}", 2)
 
+async def monitor(inst, ports):
+    ports.remove("clk")
+    with open(str(inst) + ".csv", "w") as f:
+        w = csv.DictWriter(f, fieldnames=ports)
+        w.writeheader()
+        while True:
+            await RisingEdge(inst.clk)
+            await ReadOnly()
+
+            step = {}
+            for port in ports:
+                try:
+                    step[port] = int(inst.port)
+                except:
+                    step[port] = 0
+            w.writerow(step)
+
+
 @cocotb.test()
 async def test_standalone(dut):
     should_fail = False
     gc = AXI4LiteMaster(dut, "GC", dut.clk)
     gb = GlobalBuffer(dut, "GB", dut.clk)
+
+    instance = "Tile_X01_Y03"
+    inst = getattr(dut.DUT.Interconnect_inst0, instance)
+    cocotb.fork(monitor(inst, get_inputs("/aha/garnet/garnet.v", instance)))
 
     # reset
     cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ns').start())
