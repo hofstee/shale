@@ -76,3 +76,24 @@ for f in files:
     RDLWalker(unroll=True).walk(root_node, listener)
 
 defs = listener.defs
+
+def format_def(d):
+    return d.upper().replace(".", "_")
+
+def gen_c_header():
+    header = []
+    glc_defs = [d for d in defs if d.startswith("glc.")]
+    glb_defs = [d for d in defs if d.startswith("glb.")]
+
+    header += [
+        "#pragma once",
+    ]
+
+    for glc_def in glc_defs:
+        header.append(f"#define {format_def(glc_def)} {hex(defs[glc_def])}")
+
+    for tile in range(16):
+        for glb_def in glb_defs:
+            header.append(f"#define GLB_TILE{tile}_{format_def(glb_def)[4:]} {hex(defs[glb_def] | tile << 8)}")
+
+    return "\n".join(header)
