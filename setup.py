@@ -14,6 +14,7 @@ setup(
         "numpy",
         "pandas",
 #         "pycoreir",
+        "pyvcd",
         "systemrdl-compiler",
         "tabulate",
     ],

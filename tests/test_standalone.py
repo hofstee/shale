@@ -2,14 +2,17 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.drivers.amba import AXI4LiteMaster
 from cocotb.result import TestFailure
-from cocotb.triggers import Timer, First, Combine, Join, RisingEdge, FallingEdge, ReadOnly, with_timeout
+from cocotb.triggers import Timer, First, Combine, Join, RisingEdge, FallingEdge, Edge, ReadOnly, with_timeout
+from cocotb.utils import get_sim_time
 import csv
 import json
 import numpy as np
 from pathlib import Path
+import sys
 from shale.extras.garnet_driver import GlobalBuffer
 from shale.util.rdl import defs as rdl
 from shale.util.trace import get_inputs
+from vcd import VCDWriter
 
 CLK_PERIOD = 10
 
@@ -19,9 +22,32 @@ def gc_cfg_addr(offset):
 def gb_cfg_addr(offset, controller=0):
     return int(f"0b1{controller:04b}{offset:08b}", 2)
 
-async def monitor(inst, ports):
+async def monitor_vcd(entity, signals, filename=None):
+    with open(filename, "w") as f:
+        with VCDWriter(f) as writer:
+            vcd_vars = {}
+            triggers = []
+            for signal in signals:
+                handle = getattr(entity, signal)
+                vcd_vars[signal] = writer.register_var(
+                    str(entity),
+                    signal,
+                    "wire",
+                    size=len(handle),
+                )
+                triggers.append(Edge(handle))
+
+            while True:
+                await First(*triggers)
+
+                time = get_sim_time()
+                for signal in signals:
+                    writer.change(vcd_vars[signal], time, getattr(entity, signal).value.binstr)
+
+async def monitor_csv(inst, ports, filename=None):
     ports.remove("clk")
-    with open(str(inst) + ".csv", "w") as f:
+    if filename is None: filename = str(inst) + ".csv"
+    with open(filename, "w") as f:
         w = csv.DictWriter(f, fieldnames=ports)
         w.writeheader()
         while True:
@@ -45,7 +71,8 @@ async def test_standalone(dut):
 
     instance = "Tile_X01_Y03"
     inst = getattr(dut.DUT.Interconnect_inst0, instance)
-    cocotb.fork(monitor(inst, get_inputs("/aha/garnet/garnet.v", instance)))
+    # cocotb.fork(monitor_vcd(inst, get_inputs("/aha/garnet/garnet.v", instance), filename="Tile_X01_Y03.vcd"))
+    cocotb.fork(monitor_csv(inst, get_inputs("/aha/garnet/garnet.v", instance), filename="Tile_X01_Y03.csv"))
 
     # reset
     cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ns').start())
