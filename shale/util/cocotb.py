@@ -1,4 +1,53 @@
 from pathlib import Path
+import sys
+from cocotb.monitors import Monitor
+from cocotb.utils import get_sim_time
+from vcd import VCDWriter
+
+
+class VcdMonitor(Monitor):
+    def __init__(self, entity, signals, file=sys.stdout):
+        self.entity = entity
+        self.signals = signals
+        self.file = file
+
+    async def _monitor_recv(self):
+        with VCDWriter(self.file) as writer:
+            vcd_vars = {}
+            for signal in self.signals:
+                vcd_vars[signal] = writer.register_var(
+                    str(self.entity),
+                    signal,
+                    "wire",
+                    size=???,
+                )
+
+            triggers = [Edge(getattr(self.entity, signal)) for signal in self.signals]
+            await First(triggers)
+            time = get_sim_time()
+
+            for signal in self.signals:
+                writer.change(vcd_vars[signal], time, getattr(self.entity, signal).binstr)
+
+
+async def monitor(instance, signals, file=sys.stdout):
+    with VCDWriter(self.file) as writer:
+        vcd_vars = {}
+        for signal in self.signals:
+            vcd_vars[signal] = writer.register_var(
+                str(self.entity),
+                signal,
+                "wire",
+                size=???,
+            )
+
+        triggers = [Edge(getattr(self.entity, signal)) for signal in self.signals]
+        await First(triggers)
+        time = get_sim_time()
+
+        for signal in self.signals:
+            writer.change(vcd_vars[signal], time, getattr(self.entity, signal).binstr)
+
 
 def generate_makefile(garnet_dir):
     extras_dir = (Path(__file__) / "../../extras").resolve()
@@ -64,10 +113,10 @@ VERILOG_SOURCES ?= \
     {extras_dir}/garnet.sv \
     {extras_dir}/garnet_top.sv
 
-TESTCASE?=test_app
+TESTCASE?=test_standalone
 TOPLEVEL?=Garnet_TB
 TOPLEVEL_LANG=verilog
-MODULE=tb
+MODULE=test_standalone
 COCOTB_HDL_TIMEPRECISION=1ps
 COCOTB_HDL_TIMESTEP=1ps
 
