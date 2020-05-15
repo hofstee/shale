@@ -71,8 +71,9 @@ async def test_standalone(dut):
 
     instance = "Tile_X01_Y03"
     inst = getattr(dut.DUT.Interconnect_inst0, instance)
-    # cocotb.fork(monitor_vcd(inst, get_inputs("/aha/garnet/garnet.v", instance), filename="Tile_X01_Y03.vcd"))
-    cocotb.fork(monitor_csv(inst, get_inputs("/aha/garnet/garnet.v", instance), filename="Tile_X01_Y03.csv"))
+    signals = get_inputs(f"{__file__}/../../shale/extras/garnet.v", instance)
+    # cocotb.fork(monitor_vcd(inst, signals, filename="Tile_X01_Y03.vcd"))
+    cocotb.fork(monitor_csv(inst, signals, filename="Tile_X01_Y03.csv"))
 
     # reset
     cocotb.fork(Clock(dut.clk, CLK_PERIOD, 'ns').start())
@@ -278,3 +279,6 @@ async def test_standalone(dut):
 
     # wait a bit
     await Timer(CLK_PERIOD * 100, 'ns')
+
+    # avoid vcs segfault (wtf?)
+    await RisingEdge(dut.clk)
