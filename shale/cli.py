@@ -9,6 +9,7 @@ from .util.cocotb import generate_makefile
 # Functionality
 # - generate testbenches from collateral
 # - run them
+# - log vcd files if necessary
 # - capture runtime traces on io ports of a tile
 # - do power analysis on the results
 # - might just assume that aha commands exist
@@ -18,6 +19,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--garnet", default=os.environ.get("GARNET_HOME"))
     parser.add_argument("-s", "--simulator", default="incisive")
+    parser.add_argument("--dump-vcd", action="store_true")
     args = parser.parse_args()
 
     if not args.garnet:
@@ -25,6 +27,15 @@ def main():
 
     args.garnet = Path(args.garnet).resolve()
     generate_makefile(args.garnet)
+
+    os.symlink(
+        args.garnet / "global_controller/systemRDL/rdl_models/glc.rdl.final",
+        "shale/extras/glc.rdl"
+    )
+    os.symlink(
+        args.garnet / "global_buffer/systemRDL/rdl_models/glb.rdl.final",
+        "shale/extras/glb.rdl"
+    )
 
     shutil.copy2("shale/extras/Makefile", "tests/Makefile")
 
@@ -45,5 +56,13 @@ def main():
             ],
             cwd="tests",
             env=env,
+            text=True,
+        )
+    elif args.simulator == "vcs":
+        subprocess.run(
+            [
+                "make", "SIM=vcs",
+            ],
+            cwd="tests",
             text=True,
         )

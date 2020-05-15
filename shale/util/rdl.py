@@ -1,3 +1,4 @@
+from pathlib import Path
 # from pprint import pprint
 import subprocess
 from systemrdl import RDLCompiler, RDLWalker, RDLListener
@@ -65,8 +66,8 @@ class MyListener(RDLListener):
 # )
 
 files = [
-    "/aha/garnet/global_controller/systemRDL/rdl_models/glc.rdl.final",
-    "/aha/garnet/global_buffer/systemRDL/rdl_models/glb.rdl.final",
+    Path(__file__) / "../../extras/glc.rdl",
+    Path(__file__) / "../../extras/glb.rdl",
 ]
 
 listener = MyListener()

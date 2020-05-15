@@ -99,11 +99,7 @@ MODULE=test_standalone
 COCOTB_HDL_TIMEPRECISION=1ps
 COCOTB_HDL_TIMESTEP=1ps
 
-ifeq ($(SIM), vcs)
-    override COMPILE_ARGS += -LDFLAGS -Wl,--no-as-needed
-    override COMPILE_ARGS += -top $(TOPLEVEL)
-else ifeq ($(SIM), ius)
-else ifeq ($(SIM), xcelium)
+ifeq ($(SIM), xcelium)
     SHM_RESET_DEFAULTS=1
 endif
 
