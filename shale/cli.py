@@ -1,6 +1,9 @@
 import argparse
+import copy
 import os
 from pathlib import Path
+import shutil
+import subprocess
 from .util.cocotb import generate_makefile
 
 # Functionality
@@ -23,5 +26,24 @@ def main():
     args.garnet = Path(args.garnet).resolve()
     generate_makefile(args.garnet)
 
+    shutil.copy2("shale/extras/Makefile", "tests/Makefile")
+
     if args.simulator == "incisive":
-        "LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+        env = copy.copy(os.environ)
+        env["LD_PRELOAD"] = "/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+
+        tcl_commands = [
+            "database -open -vcd vcddb -into test.vcd -default -timescale ps",
+            "probe -create -all -vcd -depth all",
+            "run",
+            "quit",
+        ]
+
+        subprocess.run(
+            [
+                "make", "SIM=ius",
+            ],
+            cwd="tests",
+            env=env,
+            text=True,
+        )

@@ -5,48 +5,27 @@ from cocotb.utils import get_sim_time
 from vcd import VCDWriter
 
 
-class VcdMonitor(Monitor):
-    def __init__(self, entity, signals, file=sys.stdout):
-        self.entity = entity
-        self.signals = signals
-        self.file = file
-
-    async def _monitor_recv(self):
-        with VCDWriter(self.file) as writer:
+async def monitor(entity, signals, filename=None):
+    with open(filename, "w") as f:
+        with VCDWriter(f) as writer:
             vcd_vars = {}
-            for signal in self.signals:
+            triggers = []
+            for signal in signals:
+                handle = getattr(entity, signal)
                 vcd_vars[signal] = writer.register_var(
-                    str(self.entity),
+                    str(entity),
                     signal,
                     "wire",
-                    size=???,
+                    size=len(handle),
                 )
+                triggers.append(Edge(handle))
 
-            triggers = [Edge(getattr(self.entity, signal)) for signal in self.signals]
-            await First(triggers)
-            time = get_sim_time()
+            while True:
+                await First(*triggers)
 
-            for signal in self.signals:
-                writer.change(vcd_vars[signal], time, getattr(self.entity, signal).binstr)
-
-
-async def monitor(instance, signals, file=sys.stdout):
-    with VCDWriter(self.file) as writer:
-        vcd_vars = {}
-        for signal in self.signals:
-            vcd_vars[signal] = writer.register_var(
-                str(self.entity),
-                signal,
-                "wire",
-                size=???,
-            )
-
-        triggers = [Edge(getattr(self.entity, signal)) for signal in self.signals]
-        await First(triggers)
-        time = get_sim_time()
-
-        for signal in self.signals:
-            writer.change(vcd_vars[signal], time, getattr(self.entity, signal).binstr)
+                time = get_sim_time()
+                for signal in signals:
+                    writer.change(vcd_vars[signal], time, getattr(entity, signal).value.binstr)
 
 
 def generate_makefile(garnet_dir):
@@ -124,7 +103,6 @@ ifeq ($(SIM), vcs)
     override COMPILE_ARGS += -LDFLAGS -Wl,--no-as-needed
     override COMPILE_ARGS += -top $(TOPLEVEL)
 else ifeq ($(SIM), ius)
-    LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 else ifeq ($(SIM), xcelium)
     SHM_RESET_DEFAULTS=1
 endif
