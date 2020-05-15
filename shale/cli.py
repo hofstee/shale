@@ -28,14 +28,16 @@ def main():
     args.garnet = Path(args.garnet).resolve()
     generate_makefile(args.garnet)
 
-    os.symlink(
-        args.garnet / "global_controller/systemRDL/rdl_models/glc.rdl.final",
-        "shale/extras/glc.rdl"
-    )
-    os.symlink(
-        args.garnet / "global_buffer/systemRDL/rdl_models/glb.rdl.final",
-        "shale/extras/glb.rdl"
-    )
+    if not os.path.exists("shale/extras/glc.rdl"):
+        os.symlink(
+            args.garnet / "global_controller/systemRDL/rdl_models/glc.rdl.final",
+            "shale/extras/glc.rdl"
+        )
+    if not os.path.exists("shale/extras/glb.rdl"):
+        os.symlink(
+            args.garnet / "global_buffer/systemRDL/rdl_models/glb.rdl.final",
+            "shale/extras/glb.rdl"
+        )
 
     shutil.copy2("shale/extras/Makefile", "tests/Makefile")
 
