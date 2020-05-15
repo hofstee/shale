@@ -71,7 +71,7 @@ async def test_standalone(dut):
 
     instance = "Tile_X01_Y03"
     inst = getattr(dut.DUT.Interconnect_inst0, instance)
-    signals = get_inputs(f"{__file__}/../../shale/extras/garnet.v", instance)
+    signals = get_inputs(Path(__file__)/"../../shale/extras/garnet.v", instance)
     # cocotb.fork(monitor_vcd(inst, signals, filename="Tile_X01_Y03.vcd"))
     cocotb.fork(monitor_csv(inst, signals, filename="Tile_X01_Y03.csv"))
 
