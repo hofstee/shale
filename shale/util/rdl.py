@@ -66,8 +66,8 @@ class MyListener(RDLListener):
 # )
 
 files = [
-    Path(__file__) / "../../extras/glc.rdl",
-    Path(__file__) / "../../extras/glb.rdl",
+    (Path(__file__) / "../../extras/glc.rdl").resolve(),
+    (Path(__file__) / "../../extras/glb.rdl").resolve(),
 ]
 
 listener = MyListener()
