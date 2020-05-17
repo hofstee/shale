@@ -193,13 +193,15 @@ async def test_app(dut):
     golds = [(int(out['location']), load_image(test / out['file'])) for out in info['outputs']]
 
     for k, inp in inputs:
-        await glb_cfg_ld(k * 0x40000, len(inp), controller=k)
-        await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=k),
+        cid = 2 * k
+        await glb_cfg_ld(k * 0x40000, len(inp), controller=cid)
+        await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=cid),
                        0b01 << 6 | 0b01<<2)
 
     for k, gold in golds:
-        await glb_cfg_st(k * 0x40000, len(gold), controller=k)
-        await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=k),
+        cid = 2 * k
+        await glb_cfg_st(k * 0x40000, len(gold), controller=cid)
+        await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=cid),
                        0b01 << 8 | 0b10<<4)
 
     dut._log.info("Loading input into glb")
