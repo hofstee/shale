@@ -64,7 +64,7 @@ async def monitor_csv(inst, ports, filename=None):
 
 
 @cocotb.test()
-async def test_standalone(dut):
+async def test_app(dut):
     should_fail = False
     gc = AXI4LiteMaster(dut, "GC", dut.clk)
     gb = GlobalBuffer(dut, "GB", dut.clk)

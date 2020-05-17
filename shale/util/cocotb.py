@@ -28,7 +28,7 @@ async def monitor(entity, signals, filename=None):
                     writer.change(vcd_vars[signal], time, getattr(entity, signal).value.binstr)
 
 
-def generate_makefile(garnet_dir):
+def generate_makefile(garnet_dir, test="test_standalone"):
     extras_dir = (Path(__file__) / "../../extras").resolve()
 
     with open(extras_dir/"Makefile", "w") as f:
@@ -92,10 +92,10 @@ VERILOG_SOURCES ?= \
     {extras_dir}/garnet.sv \
     {extras_dir}/garnet_top.sv
 
-TESTCASE?=test_standalone
+TESTCASE?=test_app
 TOPLEVEL?=Garnet_TB
 TOPLEVEL_LANG=verilog
-MODULE=test_standalone
+MODULE={test}
 COCOTB_HDL_TIMEPRECISION=1ps
 COCOTB_HDL_TIMESTEP=1ps
 

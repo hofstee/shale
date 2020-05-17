@@ -19,6 +19,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--garnet", default=os.environ.get("GARNET_HOME"))
     parser.add_argument("-s", "--simulator", default="incisive")
+    parser.add_argument("-t", "--test", default="test_standalone")
     parser.add_argument("--dump-vcd", action="store_true")
     args = parser.parse_args()
 
@@ -26,7 +27,7 @@ def main():
         raise Exception("Couldn't find garnet. Please specify '--garnet' or set $GARNET_HOME in your environment")
 
     args.garnet = Path(args.garnet).resolve()
-    generate_makefile(args.garnet)
+    generate_makefile(args.garnet, test=args.test)
 
     if not os.path.exists("shale/extras/garnet.sv"):
         os.symlink(
