@@ -58,10 +58,15 @@ def main():
             "quit",
         ]
 
+        command = [
+            "make", "SIM=ius",
+        ]
+
+        if args.dump_vcd:
+            command += ["EXTRA_ARGS='-input commands.tcl'"]
+
         subprocess.run(
-            [
-                "make", "SIM=ius",
-            ],
+            command,
             cwd="tests",
             env=env,
             text=True,
