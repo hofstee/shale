@@ -63,7 +63,7 @@ def main():
         ]
 
         if args.dump_vcd:
-            with open("commands.tcl", "w") as f:
+            with open("tests/commands.tcl", "w") as f:
                 f.write("\n".join(tcl_commands))
             command += ["EXTRA_ARGS='-input commands.tcl'"]
 

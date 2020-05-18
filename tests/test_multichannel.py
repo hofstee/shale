@@ -3,8 +3,10 @@ from cocotb.clock import Clock
 from cocotb.drivers.amba import AXI4LiteMaster
 from cocotb.result import TestFailure
 from cocotb.triggers import Timer, Combine, Join, RisingEdge, FallingEdge, with_timeout
+from functools import reduce
 import json
 import numpy as np
+import operator
 from pathlib import Path
 import sys
 from shale.extras.garnet_driver import GlobalBuffer
@@ -149,9 +151,13 @@ async def test_app(dut):
     #     await gc.write(gc_cfg_addr(rdl['glc.cgra_config.addr']), int(addr))
     #     await gc.write(gc_cfg_addr(rdl['glc.cgra_config.read']), 10)
     #     data = await gc.read(gc_cfg_addr(rdl['glc.cgra_config.rd_data']))
-    #     if data != int(gold):
+    #     try:
+    #         if data != int(gold):
+    #             should_fail = True
+    #             dut._log.error(f"[0x{int(addr):08x}] Expected `0x{int(gold):08x}` but got `0x{int(data):08x}`")
+    #     except:
     #         should_fail = True
-    #         dut._log.error(f"[0x{int(addr):08x}] Expected `0x{int(gold):08x}` but got `0x{int(data):08x}`")
+    #         dut._log.error(f"[0x{int(addr):08x}] Failed to read data.")
 
     if should_fail:
         await Timer(CLK_PERIOD * 100, 'ns')
@@ -192,15 +198,19 @@ async def test_app(dut):
     inputs = [(int(inp['location']), load_image(test / inp['file'])) for inp in info['inputs']]
     golds = [(int(out['location']), load_image(test / out['file'])) for out in info['outputs']]
 
+    g2f = []
     for k, inp in inputs:
         cid = 2 * k
-        await glb_cfg_ld(k * 0x40000, len(inp), controller=cid)
+        g2f.append(cid)
+        await glb_cfg_ld(cid * 0x40000, len(inp), controller=cid)
         await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=cid),
                        0b01 << 6 | 0b01<<2)
 
+    f2g = []
     for k, gold in golds:
         cid = 2 * k
-        await glb_cfg_st(k * 0x40000, len(gold), controller=cid)
+        f2g.append(cid)
+        await glb_cfg_st(cid * 0x40000, len(gold), controller=cid)
         await gc.write(gb_cfg_addr(rdl['glb.tile_ctrl'], controller=cid),
                        0b01 << 8 | 0b10<<4)
 
@@ -208,14 +218,16 @@ async def test_app(dut):
 
     # load data
     for ctrl, inp in inputs:
-        base_addr = ctrl * 0x40000
+        base_addr = ctrl * 2 * 0x40000
         for k, data in enumerate(inp.view(np.uint64)):
             addr = base_addr + k * 8
             await gb.write(addr, int(data))
 
     # enable interrupts
     await gc.write(gc_cfg_addr(rdl['glc.global_ier']), 0b001)
-    await gc.write(gc_cfg_addr(rdl['glc.strm_f2g_ier']), 0b100)
+
+    f2g_mask = reduce(operator.__or__, [1 << cid for cid in f2g])
+    await gc.write(gc_cfg_addr(rdl['glc.strm_f2g_ier']), f2g_mask)
 
     dut._log.info("Running application")
 
@@ -224,16 +236,18 @@ async def test_app(dut):
                    0b10 << 11)
     await gc.write(gc_cfg_addr(rdl['glc.stall']), 0b00)
     await gc.write(gc_cfg_addr(rdl['glc.soft_reset']), 17)
-    await gc.write(gc_cfg_addr(rdl['glc.stream_start_pulse']), 1)
+
+    g2f_mask = reduce(operator.__or__, [1 << cid for cid in g2f])
+    await gc.write(gc_cfg_addr(rdl['glc.stream_start_pulse']), g2f_mask)
 
     # wait for completion
-    await with_timeout(RisingEdge(dut.GC_interrupt), 50000, 'ns')
+    await with_timeout(RisingEdge(dut.GC_interrupt), 200000, 'ns')
 
     dut._log.info("Verifying output")
 
     # verify results
     for ctrl, gold in golds:
-        base_addr = ctrl * 0x40000
+        base_addr = ctrl * 2 * 0x40000
         for k, data in enumerate(gold.view(np.uint64)):
             addr = base_addr + k * 8
             res = await gb.read(addr)
