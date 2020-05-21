@@ -36,13 +36,6 @@ def generate_makefile(garnet_dir, test="test_standalone"):
 VERILOG_SOURCES ?= \
     {garnet_dir}/tests/AO22D0BWP16P90.sv \
     {garnet_dir}/tests/AN2D0BWP16P90.sv \
-    {garnet_dir}/genesis_verif/memory_core.sv \
-    {garnet_dir}/genesis_verif/mem_unq1.v \
-    {garnet_dir}/genesis_verif/sram_stub_unq1.v \
-    {garnet_dir}/genesis_verif/doublebuffer_control_unq1.sv \
-    {garnet_dir}/genesis_verif/fifo_control_unq1.sv \
-    {garnet_dir}/genesis_verif/linebuffer_control_unq1.sv \
-    {garnet_dir}/genesis_verif/sram_control_unq1.sv \
     {garnet_dir}/peak_core/DW_fp_mult.v \
     {garnet_dir}/peak_core/DW_fp_add.v \
     {garnet_dir}/global_buffer/rtl/cfg_ifc.sv \
