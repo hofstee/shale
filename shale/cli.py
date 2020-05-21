@@ -74,10 +74,15 @@ def main():
             text=True,
         )
     elif args.simulator == "vcs":
+        command = [
+            "make", "SIM=vcs",
+        ]
+
+        if args.dump_vcd:
+            command += ["EXTRA_ARGS='+vcs+dumpvars+test.vcd'"]
+
         subprocess.run(
-            [
-                "make", "SIM=vcs",
-            ],
+            command,
             cwd="tests",
             text=True,
         )
